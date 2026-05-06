@@ -347,20 +347,22 @@ footer{background:#111;padding:44px 40px 0}
 
 /* ── MOBILE ── */
 @media(max-width:768px){
+  .nav-links{display:none;position:fixed;top:60px;left:0;right:0;background:#fff;border-bottom:2px solid var(--red);flex-direction:column;padding:8px 0;z-index:199;box-shadow:0 4px 12px rgba(0,0,0,.1)}
+  .nav-links.open{display:flex}
+  .nav-links a{line-height:1;padding:14px 20px;border-bottom:1px solid #f0f0f0;font-size:.82rem}
+  .nav-links a:last-child{border-bottom:none}
+  .hamburger{display:flex;flex-direction:column;justify-content:center;gap:5px;width:32px;height:32px;cursor:pointer;padding:4px}
+  .hamburger span{display:block;height:2px;background:#111;border-radius:2px;transition:all .2s}
+  .nav-search .search-wrap{display:none}
+  #lvi-logo-ph,#lvi-logo-img-nav{display:none!important}
   nav{padding:0 16px;height:60px}
-  nav a{font-size:.65rem;padding:6px 8px;line-height:60px}
-  .nav-logo{font-size:1rem}
   .nav-logo img{height:28px!important}
-  .search-wrap input{width:120px;font-size:.75rem}
-  .search-wrap input:focus{width:150px}
-  #lvi-logo-ph,#nav-logo-ph{height:28px!important;font-size:.5rem!important}
   .page{padding-top:60px}
   .hero{min-height:420px;height:70vh}
   .hero h1{font-size:2rem!important;letter-spacing:-.5px}
   .hero-sub{font-size:.82rem}
   .hero-badge{font-size:.58rem;padding:5px 12px;letter-spacing:2px}
   .hero-content{padding:0 20px}
-  .hero-rule{margin:16px auto 0}
   .ph{padding:32px 18px 28px}
   .ph h1{font-size:1.6rem!important}
   .ph p{font-size:.82rem}
@@ -390,7 +392,7 @@ footer{background:#111;padding:44px 40px 0}
   .co-body{padding:14px 16px}
   .about-inner{padding:0}
   .loc-strip{padding:20px 16px}
-  .sdrop{width:280px;right:-60px}
+  .sdrop{width:calc(100vw - 32px);right:0;left:0}
   .cc-table th,.cc-table td{padding:7px 8px;font-size:.72rem}
   .cc-filters{flex-direction:column;align-items:stretch}
   .cc-select{min-width:100%}
@@ -411,6 +413,7 @@ footer{background:#111;padding:44px 40px 0}
   h2[style*="font-size:1.6rem"]{font-size:1.2rem!important}
   [style*="font-size:1.4rem;font-weight:900;color:#111;letter-spacing:2px"]{font-size:1.1rem!important}
 }
+.hamburger{display:none}
 </style>
 </head>
 <body>
@@ -452,23 +455,28 @@ footer{background:#111;padding:44px 40px 0}
     <img src="R2-logo-100 (1).png" alt="R2 Gaming" id="nav-logo-img" style="height:36px;display:inline-block;vertical-align:middle" onerror="this.style.display='none';document.getElementById('nav-logo-text').style.display='inline-flex'">
     <span id="nav-logo-text" style="display:none;align-items:center;justify-content:center;height:36px;padding:0 10px;background:#f5f5f5;border:2px dashed rgba(200,16,46,0.4);border-radius:3px;font-size:.6rem;letter-spacing:2px;color:rgba(200,16,46,0.6);font-weight:700;font-family:'Montserrat',sans-serif">LOGO HERE</span>
   </div>
-  <div class="nav-links">
-    <a href="#" id="nav-home" class="active" onclick="showPage('home');return false">Home</a>
-    <a href="#" id="nav-about" onclick="showPage('about');return false">About</a>
-    <a href="#" id="nav-products" onclick="showPage('products');return false">Products</a>
-    <a href="#" id="nav-services" onclick="showPage('services');return false">Services</a>
-    <a href="#" id="nav-parts" onclick="showPage('parts');return false">Parts</a>
+  <div class="nav-links" id="nav-links">
+    <a href="#" id="nav-home" class="active" onclick="showPage('home');closeMobileMenu();return false">Home</a>
+    <a href="#" id="nav-about" onclick="showPage('about');closeMobileMenu();return false">About</a>
+    <a href="#" id="nav-products" onclick="showPage('products');closeMobileMenu();return false">Products</a>
+    <a href="#" id="nav-services" onclick="showPage('services');closeMobileMenu();return false">Services</a>
+    <a href="#" id="nav-parts" onclick="showPage('parts');closeMobileMenu();return false">Parts</a>
   </div>
-  <div class="nav-search">
-    <div style="display:flex;align-items:center;gap:16px">
-    <div class="search-wrap">
-      <svg class="s-ico" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/></svg>
-      <input type="text" placeholder="Search…" oninput="doSearch(this.value)" onkeydown="if(event.key==='Escape')closeSearch()">
+  <div style="display:flex;align-items:center;gap:10px">
+    <div class="nav-search">
+      <div style="display:flex;align-items:center;gap:16px">
+      <div class="search-wrap">
+        <svg class="s-ico" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/></svg>
+        <input type="text" placeholder="Search…" oninput="doSearch(this.value)" onkeydown="if(event.key==='Escape')closeSearch()">
+      </div>
+      <img src="lvi-logo-transparent.png" alt="LVI" style="height:36px;display:inline-block;vertical-align:middle" onerror="this.style.display='none';document.getElementById('lvi-logo-ph').style.display='inline-flex'">
+      <span id="lvi-logo-ph" style="display:none;align-items:center;justify-content:center;height:36px;padding:0 10px;background:#f5f5f5;border:2px dashed rgba(200,16,46,0.4);border-radius:3px;font-size:.6rem;letter-spacing:2px;color:rgba(200,16,46,0.6);font-weight:700;font-family:'Montserrat',sans-serif">LVI LOGO</span>
+      </div>
+      <div class="sdrop" id="sdrop"></div>
     </div>
-    <img src="lvi-logo-transparent.png" alt="LVI" style="height:36px;display:inline-block;vertical-align:middle" onerror="this.style.display='none';document.getElementById('lvi-logo-ph').style.display='inline-flex'">
-    <span id="lvi-logo-ph" style="display:none;align-items:center;justify-content:center;height:36px;padding:0 10px;background:#f5f5f5;border:2px dashed rgba(200,16,46,0.4);border-radius:3px;font-size:.6rem;letter-spacing:2px;color:rgba(200,16,46,0.6);font-weight:700;font-family:'Montserrat',sans-serif">LVI LOGO</span>
+    <div class="hamburger" id="hamburger" onclick="toggleMobileMenu()">
+      <span></span><span></span><span></span>
     </div>
-    <div class="sdrop" id="sdrop"></div>
   </div>
 </nav>
 
@@ -890,6 +898,15 @@ function switchBrand(brand){
   document.getElementById('tab-novomatic').style.color = brand==='novomatic' ? '#fff' : '#111';
   document.getElementById('tab-segasammy').style.background = brand==='segasammy' ? 'var(--red)' : '#fff';
   document.getElementById('tab-segasammy').style.color = brand==='segasammy' ? '#fff' : '#111';
+}
+
+/* ── MOBILE MENU ── */
+function toggleMobileMenu(){
+  var nl=document.getElementById('nav-links');
+  nl.classList.toggle('open');
+}
+function closeMobileMenu(){
+  document.getElementById('nav-links').classList.remove('open');
 }
 
 /* ── NAVIGATION ── */
