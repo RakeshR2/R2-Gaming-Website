@@ -149,7 +149,7 @@ nav a.active{color:var(--red);border-bottom-color:var(--red)}
 .oem-sec{display:none;padding:0 18px 18px;border-top:1px solid #f0f0f0}
 .oem-sec.open{display:block}
 .oem-lbl{color:var(--red);font-family:'Montserrat',sans-serif;font-size:.58rem;letter-spacing:3px;text-transform:uppercase;margin:14px 0 11px;font-weight:800;display:block}
-.oem-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.oem-grid{display:grid;grid-template-columns:1fr;gap:13px}
 .oem-card{background:#fff;border:1.5px solid #e0e0e0;border-radius:3px;overflow:visible;transition:border-color .2s}
 .oem-card:hover{border-color:var(--red)}
 .oem-head{padding:13px 14px;display:flex;flex-direction:column;align-items:center;gap:6px;border-bottom:1px solid #f0f0f0;background:#f5f5f5}
@@ -342,74 +342,6 @@ footer{background:#111;padding:44px 40px 0}
 .li-btn:hover{background:#005885}
 .li-btn svg{width:11px;height:11px}
 
-/* ── DESKTOP ENHANCEMENTS (1200px+) ── */
-@media(min-width:1200px){
-  nav{height:80px;padding:0 60px}
-  nav a{font-size:.82rem;padding:10px 18px;line-height:80px}
-  .nav-logo{font-size:1.55rem}
-  .search-wrap input{width:200px}
-  .search-wrap input:focus{width:260px}
-  .page{padding-top:80px}
-  .hero h1{font-size:4.8rem}
-  .hero-sub{font-size:1.1rem}
-  .hero-badge{font-size:.72rem;padding:7px 22px}
-  .hero-content{max-width:1000px}
-  .nav-cards-sec{padding:88px 60px}
-  .nav-cards{max-width:1300px}
-  .nc-vis{height:160px;font-size:2.4rem}
-  .nc-lbl{font-size:.86rem}
-  .nc-sub{font-size:.8rem}
-  .sec-h2{font-size:2.8rem}
-  .sec-ey{font-size:.72rem}
-  .tech-grid{grid-template-columns:repeat(4,1fr);max-width:1300px}
-  .tech-strip{max-width:1100px}
-  .tech-strip h3{font-size:1.1rem}
-  .tech-strip p{font-size:.95rem}
-  .tc h3{font-size:.9rem}
-  .tc p{font-size:.92rem}
-  .prod-sec{padding:68px 60px}
-  .prod-grid{max-width:1300px;grid-template-columns:repeat(auto-fill,minmax(320px,1fr))}
-  .pch h3{font-size:.95rem}
-  .pcb p{font-size:.95rem}
-  .parts-overview{max-width:1300px;grid-template-columns:repeat(3,1fr)}
-  .po-card h3{font-size:.9rem}
-  .po-card p{font-size:.92rem}
-  .cab-catalog{max-width:1300px}
-  .cc-table td{font-size:.9rem}
-  .about-inner{max-width:960px}
-  .about-inner p{font-size:1.05rem}
-  .co-card{max-width:1100px}
-  .co-hd h3{font-size:1.05rem}
-  .co-body p{font-size:1rem}
-  .contact-layout{max-width:1300px;padding:68px 60px;gap:56px}
-  .footer-inner{max-width:1300px}
-  footer{padding:56px 60px 0}
-  .cta-strip{padding:88px 60px}
-  .cta-strip h2{font-size:2.4rem}
-  .cta-strip p{font-size:1rem;max-width:600px}
-  .btn-wh{padding:15px 42px;font-size:.88rem}
-  .ph{padding:68px 60px 56px}
-  .ph h1{font-size:3.6rem}
-  .ph p{font-size:1rem;max-width:680px}
-  .svc-panel{padding:68px 60px}
-  .brands-sec{padding:68px 60px}
-  .brand-chip{padding:10px 22px;font-size:.82rem}
-  .nav-cards-sec .sec-h2{font-size:2.6rem}
-  .footer-top{gap:48px}
-  .fcol a{font-size:.9rem}
-  .f-copy{font-size:.78rem}
-}
-
-/* ── LARGE DESKTOP (1600px+) ── */
-@media(min-width:1600px){
-  nav{padding:0 80px}
-  .nav-cards-sec,.prod-sec,.svc-panel,.ph,.about-sec,.co-sec,.brands-sec,.contact-layout,footer{padding-left:80px;padding-right:80px}
-  .nav-cards,.tech-grid,.prod-grid,.parts-overview,.cab-catalog,.footer-inner,.co-card,.about-inner,.tech-strip{max-width:1500px}
-  .contact-layout{max-width:1500px}
-  .hero h1{font-size:5.5rem}
-  .hero-content{max-width:1100px}
-}
-
 @media(max-width:900px){.nav-cards{grid-template-columns:1fr 1fr}.contact-layout{grid-template-columns:1fr;padding:36px 22px}.frow{grid-template-columns:1fr}.footer-top{grid-template-columns:1fr 1fr}.oem-grid{grid-template-columns:1fr}.prod-sec,.svc-panel,.ph,.about-sec,.co-sec,.brands-sec,.nav-cards-sec,.parts-overview{padding-left:22px;padding-right:22px}}
 @media(max-width:600px){.nav-cards{grid-template-columns:1fr}.modal-specs{grid-template-columns:1fr 1fr}.modal-in,.modal-hd{padding:18px}.modal-title{font-size:1.3rem}.footer-top{grid-template-columns:1fr}}
 </style>
@@ -450,10 +382,8 @@ footer{background:#111;padding:44px 40px 0}
 
 <nav>
   <div class="nav-logo" onclick="showPage('home')">
-    <!-- LOGO PLACEHOLDER: Replace img tag src with actual logo file -->
-    <img src="" alt="R2 Gaming" id="nav-logo-img" style="height:36px;display:none" onerror="this.style.display='none'">
-    <!-- Fallback text shown until logo is uploaded -->
-    <span id="nav-logo-text"><span>R2</span> Gaming</span>
+    <img src="R2-logo-100 (1).png" alt="R2 Gaming" id="nav-logo-img" style="height:36px;display:inline-block;vertical-align:middle" onerror="this.style.display='none';document.getElementById('nav-logo-text').style.display='inline-flex'">
+    <span id="nav-logo-text" style="display:none;align-items:center;justify-content:center;height:36px;padding:0 10px;background:#f5f5f5;border:2px dashed rgba(200,16,46,0.4);border-radius:3px;font-size:.6rem;letter-spacing:2px;color:rgba(200,16,46,0.6);font-weight:700;font-family:'Montserrat',sans-serif">LOGO HERE</span>
   </div>
   <div class="nav-links">
     <a href="#" id="nav-home" class="active" onclick="showPage('home');return false">Home</a>
@@ -476,7 +406,19 @@ footer{background:#111;padding:44px 40px 0}
   <section class="hero">
     <div class="hero-bg"></div><div class="hero-grid"></div>
 
-    <img src="slot-machine-2-700x400.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;opacity:0.6">
+    <!-- ══ VIDEO PLACEHOLDER ══
+         Replace the div below with:
+         <video autoplay muted loop playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;opacity:0.45">
+           <source src="YOUR_VIDEO_FILE.mp4" type="video/mp4">
+         </video>
+    -->
+    <div style="position:absolute;inset:0;z-index:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#1a1a1a,#0d0d0d)">
+      <div style="border:2px dashed rgba(200,16,46,0.4);border-radius:6px;padding:20px 36px;text-align:center;pointer-events:none">
+        <div style="font-size:2rem;margin-bottom:8px">🎬</div>
+        <p style="font-family:'Montserrat',sans-serif;font-size:.65rem;letter-spacing:3px;text-transform:uppercase;color:rgba(200,16,46,0.6);font-weight:700;margin:0">Video Placeholder</p>
+        <p style="font-family:'Montserrat',sans-serif;font-size:.58rem;color:rgba(255,255,255,0.25);margin:4px 0 0;letter-spacing:1px">Replace with background video on go-live</p>
+      </div>
+    </div>
 
     <div class="machines" style="opacity:.12">
       <div class="mach" style="height:175px"><div class="mlights"><div class="ml r"></div><div class="ml g"></div><div class="ml r"></div><div class="ml g"></div></div><div class="mscreen"><div class="reel"><div class="ri"><div class="sym">🍒</div><div class="sym">💎</div><div class="sym">7️⃣</div><div class="sym">⭐</div><div class="sym">🎰</div><div class="sym">🍒</div></div></div><div class="reel"><div class="ri"><div class="sym">7️⃣</div><div class="sym">🍒</div><div class="sym">⭐</div><div class="sym">💎</div><div class="sym">🍒</div><div class="sym">7️⃣</div></div></div><div class="reel"><div class="ri"><div class="sym">💎</div><div class="sym">⭐</div><div class="sym">🍒</div><div class="sym">7️⃣</div><div class="sym">💎</div><div class="sym">⭐</div></div></div></div><div class="mbtns"><div class="mbtn" style="background:#e00040"></div><div class="mbtn" style="background:#888"></div><div class="mbtn" style="background:var(--red)"></div></div><div class="mhandle"></div></div>
@@ -552,9 +494,9 @@ footer{background:#111;padding:44px 40px 0}
   <div class="prod-sec">
     <div class="prod-grid">
       <!-- SLOTS -->
-      <div class="prod-card prod-span"><div class="pch" onclick="toggleOEM('slots-oem')"><div class="pch-ico">🎰</div><div><h3>Slot Machines</h3><p>▸ Click to explore OEM partners</p></div></div>
+      <div class="prod-card"><div class="pch" onclick="toggleOEM('slots-oem')"><div class="pch-ico">🎰</div><div><h3>Slot Machines</h3><p>▸ Click to explore OEM partners</p></div></div>
         <!-- PHOTO PLACEHOLDER: Slot machines banner image -->
-        <div class="img-ph" style="height:140px;margin:0;border-radius:0;border-left:none;border-right:none;border-top:none"><div class="ph-ico">📷</div><p class="ph-lbl">Slot Machines Photo / Video</p><p class="ph-hint">e.g. casino floor with slot machines</p></div>
+        <div class="img-ph" style="height:110px;margin:0;border-radius:0;border-left:none;border-right:none;border-top:none"><div class="ph-ico">📷</div><p class="ph-lbl">Slot Machines Photo</p></div>
         <div class="pcb" onclick="toggleOEM('slots-oem')" style="margin-top:0"><p>The latest reel and video slot machines from the world's top OEM manufacturers.</p></div>
         <div class="oem-sec" id="slots-oem"><span class="oem-lbl">OEM Partners</span><div class="oem-grid">
           <div class="oem-card"><div class="oem-head">
@@ -583,9 +525,9 @@ footer{background:#111;padding:44px 40px 0}
         </div></div>
       </div>
       <!-- ETG -->
-      <div class="prod-card prod-span"><div class="pch" onclick="toggleOEM('etg-oem')"><div class="pch-ico">🃏</div><div><h3>Electronic Table Games</h3><p>▸ Click to explore ETG products</p></div></div>
+      <div class="prod-card"><div class="pch" onclick="toggleOEM('etg-oem')"><div class="pch-ico">🃏</div><div><h3>Electronic Table Games</h3><p>▸ Click to explore ETG products</p></div></div>
         <!-- PHOTO PLACEHOLDER: ETG banner image -->
-        <div class="img-ph" style="height:140px;margin:0;border-radius:0;border-left:none;border-right:none;border-top:none"><div class="ph-ico">📷</div><p class="ph-lbl">Electronic Table Games Photo / Video</p><p class="ph-hint">e.g. roulette ETG in action</p></div>
+        <div class="img-ph" style="height:110px;margin:0;border-radius:0;border-left:none;border-right:none;border-top:none"><div class="ph-ico">📷</div><p class="ph-lbl">Electronic Table Games Photo</p></div>
         <div class="pcb" onclick="toggleOEM('etg-oem')" style="margin-top:0"><p>Automated and electronic table solutions for roulette, blackjack, baccarat and more.</p></div>
         <div class="oem-sec" id="etg-oem"><span class="oem-lbl">Novomatic ETG — Roulette</span><div class="oem-grid"><div class="oem-card"><div class="oem-head">
           <!-- LOGO PLACEHOLDER: Novomatic ETG logo -->
