@@ -344,6 +344,73 @@ footer{background:#111;padding:44px 40px 0}
 
 @media(max-width:900px){.nav-cards{grid-template-columns:1fr 1fr}.contact-layout{grid-template-columns:1fr;padding:36px 22px}.frow{grid-template-columns:1fr}.footer-top{grid-template-columns:1fr 1fr}.oem-grid{grid-template-columns:1fr}.prod-sec,.svc-panel,.ph,.about-sec,.co-sec,.brands-sec,.nav-cards-sec,.parts-overview{padding-left:22px;padding-right:22px}}
 @media(max-width:600px){.nav-cards{grid-template-columns:1fr}.modal-specs{grid-template-columns:1fr 1fr}.modal-in,.modal-hd{padding:18px}.modal-title{font-size:1.3rem}.footer-top{grid-template-columns:1fr}}
+
+/* ── MOBILE ── */
+@media(max-width:768px){
+  nav{padding:0 16px;height:60px}
+  nav a{font-size:.65rem;padding:6px 8px;line-height:60px}
+  .nav-logo{font-size:1rem}
+  .nav-logo img{height:28px!important}
+  .search-wrap input{width:120px;font-size:.75rem}
+  .search-wrap input:focus{width:150px}
+  #lvi-logo-ph,#nav-logo-ph{height:28px!important;font-size:.5rem!important}
+  .page{padding-top:60px}
+  .hero{min-height:420px;height:70vh}
+  .hero h1{font-size:2rem!important;letter-spacing:-.5px}
+  .hero-sub{font-size:.82rem}
+  .hero-badge{font-size:.58rem;padding:5px 12px;letter-spacing:2px}
+  .hero-content{padding:0 20px}
+  .hero-rule{margin:16px auto 0}
+  .ph{padding:32px 18px 28px}
+  .ph h1{font-size:1.6rem!important}
+  .ph p{font-size:.82rem}
+  .nav-cards-sec{padding:36px 16px}
+  .nav-cards{grid-template-columns:1fr 1fr!important}
+  .nc-vis{height:90px;font-size:1.4rem}
+  .nc-lbl{font-size:.65rem}
+  .nc-sub{font-size:.62rem;padding:0 10px 12px}
+  [style*="grid-template-columns:repeat(3,1fr)"]{grid-template-columns:1fr!important}
+  [style*="grid-template-columns:repeat(4,1fr)"]{grid-template-columns:repeat(2,1fr)!important}
+  [style*="padding:52px 40px"]{padding:32px 16px!important}
+  [style*="padding:56px 40px"]{padding:32px 16px!important}
+  [style*="padding:60px 40px"]{padding:32px 16px!important}
+  [style*="padding:68px 40px"]{padding:36px 16px!important}
+  [style*="max-width:1100px"]{max-width:100%!important}
+  [style*="max-width:1300px"]{max-width:100%!important}
+  .contact-layout{padding:24px 16px!important;gap:24px}
+  .footer-top{grid-template-columns:1fr!important;gap:20px}
+  footer{padding:32px 16px 0}
+  .footer-bot{flex-direction:column;align-items:flex-start;gap:8px}
+  .cta-strip{padding:44px 16px}
+  .cta-strip h2{font-size:1.2rem}
+  .cta-strip p{font-size:.82rem}
+  .btn-wh{padding:10px 24px;font-size:.7rem}
+  .co-card{margin:0 0 12px}
+  .co-hd{padding:14px 16px}
+  .co-body{padding:14px 16px}
+  .about-inner{padding:0}
+  .loc-strip{padding:20px 16px}
+  .sdrop{width:280px;right:-60px}
+  .cc-table th,.cc-table td{padding:7px 8px;font-size:.72rem}
+  .cc-filters{flex-direction:column;align-items:stretch}
+  .cc-select{min-width:100%}
+  .cc-search-wrap{max-width:100%}
+  .modal-ov{padding:16px 10px}
+  .modal-title{font-size:1.1rem}
+  .req-box{max-width:100%}
+  [style*="display:grid;grid-template-columns:repeat(3,1fr)"]{display:grid!important;grid-template-columns:1fr!important}
+  [style*="display:grid;grid-template-columns:repeat(auto-fill,minmax(190"]{grid-template-columns:repeat(2,1fr)!important}
+  [style*="display:grid;grid-template-columns:repeat(auto-fill,minmax(200"]{grid-template-columns:repeat(2,1fr)!important}
+  [style*="display:grid;grid-template-columns:repeat(auto-fill,minmax(280"]{grid-template-columns:1fr!important}
+  [style*="display:grid;grid-template-columns:1fr 1.6fr"]{grid-template-columns:1fr!important}
+  .brand-row{gap:6px}
+  .brand-chip{padding:5px 10px;font-size:.62rem}
+  .cov-bar{gap:5px}
+  .cov-pill{font-size:.62rem;padding:4px 9px}
+  .locs-wrap .loc-pills{flex-direction:column}
+  h2[style*="font-size:1.6rem"]{font-size:1.2rem!important}
+  [style*="font-size:1.4rem;font-weight:900;color:#111;letter-spacing:2px"]{font-size:1.1rem!important}
+}
 </style>
 </head>
 <body>
@@ -412,13 +479,6 @@ footer{background:#111;padding:44px 40px 0}
 
     <img src="homepage.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;opacity:0.55">
 
-    <div class="machines" style="opacity:.12">
-      <div class="mach" style="height:175px"><div class="mlights"><div class="ml r"></div><div class="ml g"></div><div class="ml r"></div><div class="ml g"></div></div><div class="mscreen"><div class="reel"><div class="ri"><div class="sym">🍒</div><div class="sym">💎</div><div class="sym">7️⃣</div><div class="sym">⭐</div><div class="sym">🎰</div><div class="sym">🍒</div></div></div><div class="reel"><div class="ri"><div class="sym">7️⃣</div><div class="sym">🍒</div><div class="sym">⭐</div><div class="sym">💎</div><div class="sym">🍒</div><div class="sym">7️⃣</div></div></div><div class="reel"><div class="ri"><div class="sym">💎</div><div class="sym">⭐</div><div class="sym">🍒</div><div class="sym">7️⃣</div><div class="sym">💎</div><div class="sym">⭐</div></div></div></div><div class="mbtns"><div class="mbtn" style="background:#e00040"></div><div class="mbtn" style="background:#888"></div><div class="mbtn" style="background:var(--red)"></div></div><div class="mhandle"></div></div>
-      <div class="mach" style="height:210px"><div class="mlights"><div class="ml g"></div><div class="ml r"></div><div class="ml g"></div><div class="ml r"></div></div><div class="mscreen"><div class="reel"><div class="ri"><div class="sym">💎</div><div class="sym">7️⃣</div><div class="sym">🍒</div><div class="sym">🎰</div><div class="sym">⭐</div><div class="sym">💎</div></div></div><div class="reel"><div class="ri"><div class="sym">⭐</div><div class="sym">🍒</div><div class="sym">7️⃣</div><div class="sym">💎</div><div class="sym">🎰</div><div class="sym">⭐</div></div></div><div class="reel"><div class="ri"><div class="sym">🎰</div><div class="sym">💎</div><div class="sym">⭐</div><div class="sym">🍒</div><div class="sym">7️⃣</div><div class="sym">🎰</div></div></div></div><div class="mbtns"><div class="mbtn" style="background:var(--red)"></div><div class="mbtn" style="background:#888"></div><div class="mbtn" style="background:#e00040"></div></div><div class="mhandle"></div></div>
-      <div class="mach" style="height:235px"><div class="mlights"><div class="ml r"></div><div class="ml g"></div><div class="ml r"></div><div class="ml g"></div></div><div class="mscreen"><div class="reel"><div class="ri"><div class="sym">7️⃣</div><div class="sym">⭐</div><div class="sym">💎</div><div class="sym">🍒</div><div class="sym">🎰</div><div class="sym">7️⃣</div></div></div><div class="reel"><div class="ri"><div class="sym">🍒</div><div class="sym">💎</div><div class="sym">🎰</div><div class="sym">⭐</div><div class="sym">🍒</div><div class="sym">💎</div></div></div><div class="reel"><div class="ri"><div class="sym">⭐</div><div class="sym">🎰</div><div class="sym">🍒</div><div class="sym">7️⃣</div><div class="sym">💎</div><div class="sym">🍒</div></div></div></div><div class="mbtns"><div class="mbtn" style="background:#888"></div><div class="mbtn" style="background:var(--red)"></div><div class="mbtn" style="background:#e00040"></div></div><div class="mhandle"></div></div>
-      <div class="mach" style="height:210px"><div class="mlights"><div class="ml g"></div><div class="ml r"></div><div class="ml g"></div><div class="ml r"></div></div><div class="mscreen"><div class="reel"><div class="ri"><div class="sym">🎰</div><div class="sym">🍒</div><div class="sym">⭐</div><div class="sym">7️⃣</div><div class="sym">💎</div><div class="sym">🎰</div></div></div><div class="reel"><div class="ri"><div class="sym">💎</div><div class="sym">7️⃣</div><div class="sym">🎰</div><div class="sym">🍒</div><div class="sym">⭐</div><div class="sym">💎</div></div></div><div class="reel"><div class="ri"><div class="sym">🍒</div><div class="sym">⭐</div><div class="sym">7️⃣</div><div class="sym">💎</div><div class="sym">🎰</div><div class="sym">🍒</div></div></div></div><div class="mbtns"><div class="mbtn" style="background:var(--red)"></div><div class="mbtn" style="background:#e00040"></div><div class="mbtn" style="background:#888"></div></div><div class="mhandle"></div></div>
-      <div class="mach" style="height:175px"><div class="mlights"><div class="ml r"></div><div class="ml g"></div><div class="ml r"></div><div class="ml g"></div></div><div class="mscreen"><div class="reel"><div class="ri"><div class="sym">⭐</div><div class="sym">💎</div><div class="sym">🍒</div><div class="sym">🎰</div><div class="sym">7️⃣</div><div class="sym">⭐</div></div></div><div class="reel"><div class="ri"><div class="sym">🎰</div><div class="sym">⭐</div><div class="sym">7️⃣</div><div class="sym">💎</div><div class="sym">🍒</div><div class="sym">🎰</div></div></div><div class="reel"><div class="ri"><div class="sym">7️⃣</div><div class="sym">🍒</div><div class="sym">💎</div><div class="sym">⭐</div><div class="sym">🎰</div><div class="sym">7️⃣</div></div></div></div><div class="mbtns"><div class="mbtn" style="background:#888"></div><div class="mbtn" style="background:var(--red)"></div><div class="mbtn" style="background:#e00040"></div></div><div class="mhandle"></div></div>
-    </div>
     <div class="hero-floor"></div>
     <div class="hero-content">
       <div class="hero-badge">Established 2005</div>
@@ -470,7 +530,7 @@ footer{background:#111;padding:44px 40px 0}
       </div>
 
       <div style="background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.08);transition:transform .2s,box-shadow .2s" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 8px 24px rgba(0,0,0,.15)'" onmouseout="this.style.transform='';this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'">
-        <div style="height:140px;background:#222;display:flex;align-items:center;justify-content:center"><p style="font-family:'Montserrat',sans-serif;font-size:.7rem;color:rgba(255,255,255,.4);letter-spacing:2px">📷 Preventative Maintenance</p></div>
+        <div style="height:140px;overflow:hidden"><img src="preventive.jpg" style="width:100%;height:100%;object-fit:cover;display:block"></div>
         <div style="padding:18px 20px"><h3 style="font-family:'Montserrat',sans-serif;font-size:1.05rem;font-weight:800;color:#111;margin-bottom:8px">Preventative Maintenance</h3><p style="color:#888;font-size:.85rem;line-height:1.7">Scheduled PM programs to maximize uptime and extend equipment life.</p></div>
       </div>
 
@@ -694,32 +754,32 @@ footer{background:#111;padding:44px 40px 0}
     <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:52px">
 
       <div style="background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.08);transition:transform .2s,box-shadow .2s" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 8px 24px rgba(0,0,0,.15)'" onmouseout="this.style.transform='';this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'">
-        <div style="height:200px;background:#222;display:flex;align-items:center;justify-content:center"><p style="font-family:'Montserrat',sans-serif;font-size:.7rem;color:rgba(255,255,255,.4);letter-spacing:2px">📷 Bill Validators Photo</p></div>
+        <div style="height:140px;background:#222;display:flex;align-items:center;justify-content:center"><p style="font-family:'Montserrat',sans-serif;font-size:.7rem;color:rgba(255,255,255,.4);letter-spacing:2px">📷 Bill Validators Photo</p></div>
         <div style="padding:18px 20px"><h3 style="font-family:'Montserrat',sans-serif;font-size:1.05rem;font-weight:800;color:#111;margin-bottom:8px">Bill Validators &amp; Currency</h3><p style="color:#888;font-size:.85rem;line-height:1.7">OEM-grade parts for JCM Global, MEI, and other leading manufacturers.</p></div>
       </div>
 
       <div style="background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.08);transition:transform .2s,box-shadow .2s" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 8px 24px rgba(0,0,0,.15)'" onmouseout="this.style.transform='';this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'">
-        <div style="height:200px;background:#222;display:flex;align-items:center;justify-content:center"><p style="font-family:'Montserrat',sans-serif;font-size:.7rem;color:rgba(255,255,255,.4);letter-spacing:2px">📷 Ticket Printers Photo</p></div>
+        <div style="height:140px;background:#222;display:flex;align-items:center;justify-content:center"><p style="font-family:'Montserrat',sans-serif;font-size:.7rem;color:rgba(255,255,255,.4);letter-spacing:2px">📷 Ticket Printers Photo</p></div>
         <div style="padding:18px 20px"><h3 style="font-family:'Montserrat',sans-serif;font-size:1.05rem;font-weight:800;color:#111;margin-bottom:8px">Ticket Printers &amp; TITO</h3><p style="color:#888;font-size:.85rem;line-height:1.7">Printer heads, paper rolls, and full replacement units for all major TITO systems.</p></div>
       </div>
 
       <div style="background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.08);transition:transform .2s,box-shadow .2s" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 8px 24px rgba(0,0,0,.15)'" onmouseout="this.style.transform='';this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'">
-        <div style="height:200px;background:#222;display:flex;align-items:center;justify-content:center"><p style="font-family:'Montserrat',sans-serif;font-size:.7rem;color:rgba(255,255,255,.4);letter-spacing:2px">📷 Display Components Photo</p></div>
+        <div style="height:140px;background:#222;display:flex;align-items:center;justify-content:center"><p style="font-family:'Montserrat',sans-serif;font-size:.7rem;color:rgba(255,255,255,.4);letter-spacing:2px">📷 Display Components Photo</p></div>
         <div style="padding:18px 20px"><h3 style="font-family:'Montserrat',sans-serif;font-size:1.05rem;font-weight:800;color:#111;margin-bottom:8px">Display &amp; Monitor Components</h3><p style="color:#888;font-size:.85rem;line-height:1.7">LCD panels, touchscreens, backlights, and display assemblies for multiple OEM platforms.</p></div>
       </div>
 
       <div style="background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.08);transition:transform .2s,box-shadow .2s" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 8px 24px rgba(0,0,0,.15)'" onmouseout="this.style.transform='';this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'">
-        <div style="height:200px;background:#222;display:flex;align-items:center;justify-content:center"><p style="font-family:'Montserrat',sans-serif;font-size:.7rem;color:rgba(255,255,255,.4);letter-spacing:2px">📷 PCBs Photo</p></div>
+        <div style="height:140px;background:#222;display:flex;align-items:center;justify-content:center"><p style="font-family:'Montserrat',sans-serif;font-size:.7rem;color:rgba(255,255,255,.4);letter-spacing:2px">📷 PCBs Photo</p></div>
         <div style="padding:18px 20px"><h3 style="font-family:'Montserrat',sans-serif;font-size:1.05rem;font-weight:800;color:#111;margin-bottom:8px">PCBs &amp; Electronic Components</h3><p style="color:#888;font-size:.85rem;line-height:1.7">Printed circuit boards, power supply units, and logic boards to OEM spec.</p></div>
       </div>
 
       <div style="background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.08);transition:transform .2s,box-shadow .2s" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 8px 24px rgba(0,0,0,.15)'" onmouseout="this.style.transform='';this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'">
-        <div style="height:200px;background:#222;display:flex;align-items:center;justify-content:center"><p style="font-family:'Montserrat',sans-serif;font-size:.7rem;color:rgba(255,255,255,.4);letter-spacing:2px">📷 Locks & Security Photo</p></div>
+        <div style="height:140px;background:#222;display:flex;align-items:center;justify-content:center"><p style="font-family:'Montserrat',sans-serif;font-size:.7rem;color:rgba(255,255,255,.4);letter-spacing:2px">📷 Locks & Security Photo</p></div>
         <div style="padding:18px 20px"><h3 style="font-family:'Montserrat',sans-serif;font-size:1.05rem;font-weight:800;color:#111;margin-bottom:8px">Locks, Keys &amp; Security</h3><p style="color:#888;font-size:.85rem;line-height:1.7">Cabinet locks, key blanks, and security hardware for gaming machines and kiosks.</p></div>
       </div>
 
       <div style="background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.08);transition:transform .2s,box-shadow .2s" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 8px 24px rgba(0,0,0,.15)'" onmouseout="this.style.transform='';this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'">
-        <div style="height:200px;background:#222;display:flex;align-items:center;justify-content:center"><p style="font-family:'Montserrat',sans-serif;font-size:.7rem;color:rgba(255,255,255,.4);letter-spacing:2px">📷 Mechanical Parts Photo</p></div>
+        <div style="height:140px;background:#222;display:flex;align-items:center;justify-content:center"><p style="font-family:'Montserrat',sans-serif;font-size:.7rem;color:rgba(255,255,255,.4);letter-spacing:2px">📷 Mechanical Parts Photo</p></div>
         <div style="padding:18px 20px"><h3 style="font-family:'Montserrat',sans-serif;font-size:1.05rem;font-weight:800;color:#111;margin-bottom:8px">Mechanical Parts</h3><p style="color:#888;font-size:.85rem;line-height:1.7">Reels, stepper motors, hoppers, and coin mechanisms for slot and lottery equipment.</p></div>
       </div>
 
