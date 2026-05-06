@@ -345,16 +345,19 @@ footer{background:#111;padding:44px 40px 0}
 @media(max-width:900px){.nav-cards{grid-template-columns:1fr 1fr}.contact-layout{grid-template-columns:1fr;padding:36px 22px}.frow{grid-template-columns:1fr}.footer-top{grid-template-columns:1fr 1fr}.oem-grid{grid-template-columns:1fr}.prod-sec,.svc-panel,.ph,.about-sec,.co-sec,.brands-sec,.nav-cards-sec,.parts-overview{padding-left:22px;padding-right:22px}}
 @media(max-width:600px){.nav-cards{grid-template-columns:1fr}.modal-specs{grid-template-columns:1fr 1fr}.modal-in,.modal-hd{padding:18px}.modal-title{font-size:1.3rem}.footer-top{grid-template-columns:1fr}}
 
+.hamburger{display:none}
+
 /* ── MOBILE ── */
 @media(max-width:768px){
-  .nav-links{display:none;position:fixed;top:60px;left:0;right:0;background:#fff;border-bottom:2px solid var(--red);flex-direction:column;padding:8px 0;z-index:199;box-shadow:0 4px 12px rgba(0,0,0,.1)}
-  .nav-links.open{display:flex}
-  .nav-links a{line-height:1;padding:14px 20px;border-bottom:1px solid #f0f0f0;font-size:.82rem}
+  .nav-links{display:none!important;position:fixed;top:60px;left:0;right:0;background:#fff;border-bottom:2px solid var(--red);flex-direction:column;padding:8px 0;z-index:199;box-shadow:0 4px 12px rgba(0,0,0,.1)}
+  .nav-links.open{display:flex!important}
+  .nav-links a{line-height:1;padding:14px 20px;border-bottom:1px solid #f0f0f0;font-size:.9rem;width:100%}
   .nav-links a:last-child{border-bottom:none}
-  .hamburger{display:flex;flex-direction:column;justify-content:center;gap:5px;width:32px;height:32px;cursor:pointer;padding:4px}
-  .hamburger span{display:block;height:2px;background:#111;border-radius:2px;transition:all .2s}
-  .nav-search .search-wrap{display:none}
-  #lvi-logo-ph,#lvi-logo-img-nav{display:none!important}
+  .hamburger{display:flex!important;flex-direction:column;justify-content:center;align-items:center;gap:5px;width:36px;height:36px;cursor:pointer;background:none;border:none;padding:4px}
+  .hamburger span{display:block;width:22px;height:2px;background:#111;border-radius:2px}
+  .search-wrap{display:none!important}
+  img[src="lvi-logo-transparent.png"]{display:none!important}
+  #lvi-logo-ph{display:none!important}
   nav{padding:0 16px;height:60px}
   .nav-logo img{height:28px!important}
   .page{padding-top:60px}
@@ -379,7 +382,7 @@ footer{background:#111;padding:44px 40px 0}
   [style*="padding:68px 40px"]{padding:36px 16px!important}
   [style*="max-width:1100px"]{max-width:100%!important}
   [style*="max-width:1300px"]{max-width:100%!important}
-  .contact-layout{padding:24px 16px!important;gap:24px}
+  .contact-layout{padding:24px 16px!important;gap:24px;grid-template-columns:1fr!important}
   .footer-top{grid-template-columns:1fr!important;gap:20px}
   footer{padding:32px 16px 0}
   .footer-bot{flex-direction:column;align-items:flex-start;gap:8px}
@@ -409,11 +412,9 @@ footer{background:#111;padding:44px 40px 0}
   .brand-chip{padding:5px 10px;font-size:.62rem}
   .cov-bar{gap:5px}
   .cov-pill{font-size:.62rem;padding:4px 9px}
-  .locs-wrap .loc-pills{flex-direction:column}
   h2[style*="font-size:1.6rem"]{font-size:1.2rem!important}
   [style*="font-size:1.4rem;font-weight:900;color:#111;letter-spacing:2px"]{font-size:1.1rem!important}
 }
-.hamburger{display:none}
 </style>
 </head>
 <body>
