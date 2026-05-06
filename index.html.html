@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>R2 Gaming</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--red:#c8102e;--red-dark:#a00d24;--black:#111;--grey:#f5f5f5;--grey2:#ebebeb;--mid:#fafafa;--border:#e0e0e0;--text:#222;--muted:#999;--white:#fff}
+body{font-family:'Open Sans',sans-serif;background:#fff;color:#222;-webkit-font-smoothing:antialiased}
+
+/* NAV */
+nav{position:fixed;top:0;width:100%;z-index:200;background:#fff;border-bottom:2px solid var(--red);display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:68px;box-shadow:0 2px 12px rgba(0,0,0,.08)}
+.nav-logo{cursor:pointer;font-family:'Montserrat',sans-serif;font-size:1.35rem;font-weight:900;letter-spacing:2px;color:#111;text-transform:uppercase}
+.nav-logo span{color:var(--red)}
+.nav-links{display:flex;align-items:center}
+nav a{color:#333;text-decoration:none;padding:8px 13px;font-family:'Montserrat',sans-serif;font-size:.72rem;letter-spacing:1px;text-transform:uppercase;font-weight:700;transition:color .2s;border-bottom:3px solid transparent;line-height:68px}
+nav a:hover{color:var(--red)}
+nav a.active{color:var(--red);border-bottom-color:var(--red)}
+.nav-search{position:relative;display:flex;align-items:center}
+.search-wrap{position:relative}
+.search-wrap input{background:#f5f5f5;border:1.5px solid #e0e0e0;border-radius:3px;padding:7px 14px 7px 32px;color:#222;font-size:.8rem;width:170px;outline:none;transition:all .2s}
+.search-wrap input:focus{border-color:var(--red);width:210px;background:#fff}
+.search-wrap input::placeholder{color:#bbb}
+.s-ico{position:absolute;left:9px;top:50%;transform:translateY(-50%);width:13px;height:13px;stroke:#bbb;fill:none;stroke-width:2;stroke-linecap:round}
+.sdrop{display:none;position:absolute;top:calc(100% + 8px);right:0;width:340px;background:#fff;border:1px solid #e0e0e0;border-radius:4px;overflow:hidden;z-index:300;box-shadow:0 8px 28px rgba(0,0,0,.12)}
+.sdrop.open{display:block}
+.sdrop-hd{padding:7px 13px;background:#f5f5f5;border-bottom:1px solid #e0e0e0;font-size:.62rem;letter-spacing:2px;text-transform:uppercase;color:var(--red);font-family:'Montserrat',sans-serif;font-weight:700}
+.sdrop-item{padding:11px 13px;border-bottom:1px solid #f0f0f0;cursor:pointer;transition:background .15s}
+.sdrop-item:last-child{border:none}
+.sdrop-item:hover{background:#f5f5f5}
+.sdrop-lbl{font-size:.6rem;letter-spacing:2px;text-transform:uppercase;color:var(--red);margin-bottom:2px;font-weight:700;font-family:'Montserrat',sans-serif}
+.sdrop-title{color:#111;font-size:.83rem;font-weight:700;font-family:'Montserrat',sans-serif}
+.sdrop-snip{color:#999;font-size:.73rem;line-height:1.4;margin-top:1px}
+.sdrop-empty{padding:18px 13px;color:#bbb;font-size:.82rem;text-align:center}
+
+/* PAGES */
+.page{display:none;padding-top:68px}
+.page.active{display:block}
+
+/* HERO */
+.hero{position:relative;height:calc(100vh - 68px);min-height:540px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#111}
+.hero-bg{position:absolute;inset:0;background:linear-gradient(135deg,rgba(200,16,46,.14) 0,transparent 55%),linear-gradient(to bottom,rgba(0,0,0,.25),rgba(0,0,0,.7))}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(200,16,46,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(200,16,46,.05) 1px,transparent 1px);background-size:56px 56px}
+.hero-content{position:relative;z-index:2;text-align:center;padding:0 40px;max-width:800px}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:5px 18px;border:1.5px solid var(--red);border-radius:2px;font-family:'Montserrat',sans-serif;font-size:.62rem;letter-spacing:4px;text-transform:uppercase;color:var(--red);margin-bottom:22px;background:rgba(200,16,46,.07)}
+.hero h1{font-family:'Montserrat',sans-serif;font-size:clamp(2.2rem,5vw,4rem);font-weight:900;line-height:1.1;color:#fff;text-transform:uppercase;letter-spacing:-1px}
+.hero h1 em{font-style:normal;color:var(--red)}
+.hero-sub{margin-top:14px;font-size:.95rem;color:rgba(255,255,255,.6);font-family:'Montserrat',sans-serif}
+.hero-rule{width:56px;height:3px;background:var(--red);margin:24px auto 0}
+.hero-floor{position:absolute;bottom:0;left:0;right:0;height:150px;background:linear-gradient(to top,rgba(0,0,0,.9),transparent);pointer-events:none;z-index:1}
+.machines{position:absolute;bottom:0;left:0;right:0;display:flex;justify-content:center;align-items:flex-end;gap:18px;z-index:0;opacity:.28}
+.mach{width:84px;background:linear-gradient(175deg,#2a2a2a,#1a1a1a);border:1px solid rgba(200,16,46,.5);border-bottom:none;border-radius:8px 8px 0 0;display:flex;flex-direction:column;align-items:center;gap:4px;padding:7px 5px 0;position:relative}
+.mach::before{content:'';position:absolute;top:-5px;left:50%;transform:translateX(-50%);width:18px;height:5px;background:var(--red);border-radius:3px 3px 0 0}
+.mlights{display:flex;gap:3px;margin-bottom:2px}
+.ml{width:5px;height:5px;border-radius:50%}
+.ml.r{background:#ff2255;animation:blink 1.1s ease-in-out infinite}
+.ml.g{background:var(--red);animation:blink 1.1s ease-in-out infinite .55s}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+.mscreen{width:68px;height:52px;background:#050505;border:1px solid rgba(200,16,46,.4);border-radius:3px;display:flex;gap:2px;padding:3px;overflow:hidden}
+.reel{flex:1;overflow:hidden}
+.ri{display:flex;flex-direction:column;animation:spin 2.2s linear infinite}
+.reel:nth-child(2) .ri{animation-duration:1.7s}
+.reel:nth-child(3) .ri{animation-duration:2.6s}
+@keyframes spin{from{transform:translateY(0)}to{transform:translateY(-108px)}}
+.sym{height:18px;display:flex;align-items:center;justify-content:center;font-size:11px}
+.mbtns{display:flex;gap:3px;margin:3px 0}
+.mbtn{width:13px;height:5px;border-radius:2px}
+.mhandle{position:absolute;right:-9px;top:13px;width:3px;height:30px;background:linear-gradient(to bottom,#888,#444);border-radius:3px}
+.mhandle::after{content:'';display:block;width:11px;height:11px;border-radius:50%;background:var(--red);margin:20px 0 0 -4px}
+
+/* SHARED */
+.sec-ey{display:inline-block;font-family:'Montserrat',sans-serif;font-size:.62rem;letter-spacing:4px;text-transform:uppercase;color:var(--red);margin-bottom:9px;font-weight:700}
+.sec-h2{font-family:'Montserrat',sans-serif;font-size:clamp(1.5rem,3vw,2.3rem);font-weight:900;color:#111;text-transform:uppercase;letter-spacing:-.5px}
+.red-rule{width:46px;height:3px;background:var(--red);margin:12px auto 0}
+.tag{display:inline-block;padding:2px 9px;background:rgba(200,16,46,.06);border:1px solid rgba(200,16,46,.2);border-radius:2px;color:var(--red);font-size:.62rem;font-family:'Montserrat',sans-serif;font-weight:700;letter-spacing:.3px;margin:2px}
+.cta-strip{background:var(--red);padding:68px 40px;text-align:center}
+.cta-strip h2{font-family:'Montserrat',sans-serif;font-size:clamp(1.3rem,2.5vw,1.9rem);font-weight:900;color:#fff;margin-bottom:9px;text-transform:uppercase}
+.cta-strip p{color:rgba(255,255,255,.82);max-width:480px;margin:0 auto 24px;line-height:1.8;font-size:.88rem}
+.btn-wh{display:inline-block;padding:12px 32px;background:#fff;color:var(--red);border-radius:2px;font-family:'Montserrat',sans-serif;font-size:.75rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .2s;border:none;text-decoration:none}
+.btn-wh:hover{background:#111;color:#fff}
+
+/* HOME NAV CARDS */
+.nav-cards-sec{padding:68px 40px;background:#fff}
+.nav-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:0;max-width:1100px;margin:0 auto;border:1.5px solid #e0e0e0;border-radius:4px;overflow:hidden}
+.nav-card{cursor:pointer;text-decoration:none;display:block;background:#fff;border-right:1.5px solid #e0e0e0;transition:background .2s}
+.nav-card:last-child{border-right:none}
+.nav-card:hover{background:var(--red)}
+.nav-card:hover .nc-lbl,.nav-card:hover .nc-sub,.nav-card:hover .nc-ico-lbl{color:#fff}
+.nav-card:hover .nc-vis{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.15)}
+.nav-card:hover .nc-arr svg{stroke:#fff}
+.nav-card:hover .nc-arr{border-color:rgba(255,255,255,.3);background:rgba(255,255,255,.12)}
+.nc-vis{height:126px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;background:#f5f5f5;border-bottom:1.5px solid #e0e0e0;transition:all .2s;font-size:1.9rem}
+.nc-ico-lbl{font-size:.56rem;font-family:'Montserrat',sans-serif;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#bbb;transition:color .2s}
+.nc-label{padding:14px 16px 10px;display:flex;align-items:flex-start;justify-content:space-between;gap:6px}
+.nc-lbl{font-family:'Montserrat',sans-serif;font-size:.74rem;letter-spacing:1.5px;text-transform:uppercase;font-weight:800;color:#111;transition:color .2s}
+.nc-arr{width:24px;height:24px;border:1.5px solid #e0e0e0;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s}
+.nc-arr svg{width:10px;height:10px;stroke:var(--red);fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;transition:stroke .2s}
+.nc-sub{font-size:.7rem;color:#aaa;padding:0 16px 16px;line-height:1.5;transition:color .2s}
+
+/* BREADCRUMB */
+.bc{background:#f5f5f5;padding:9px 40px;border-bottom:1px solid #e8e8e8;display:flex;align-items:center;gap:5px}
+.bc span{color:#bbb;font-size:.7rem;font-family:'Montserrat',sans-serif}
+.bc a{color:var(--red);font-size:.7rem;text-decoration:none;cursor:pointer;font-family:'Montserrat',sans-serif;font-weight:700}
+.bc-sep{color:#ccc;font-size:.68rem}
+
+/* PAGE HERO */
+.ph{padding:52px 40px 44px;text-align:left;background:#111;position:relative;overflow:hidden}
+.ph::after{content:'';position:absolute;top:0;right:0;width:40%;height:100%;background:linear-gradient(to left,rgba(200,16,46,.1),transparent);pointer-events:none}
+.ph .ey{font-family:'Montserrat',sans-serif;font-size:.62rem;letter-spacing:4px;text-transform:uppercase;color:var(--red);margin-bottom:9px;display:block;font-weight:700}
+.ph h1{font-family:'Montserrat',sans-serif;font-size:clamp(1.9rem,4vw,2.9rem);font-weight:900;color:#fff;text-transform:uppercase;letter-spacing:-.5px;max-width:680px}
+.ph h1 em{font-style:normal;color:var(--red)}
+.ph p{margin-top:10px;color:rgba(255,255,255,.55);font-size:.88rem;max-width:560px;line-height:1.75}
+.ph-rule{width:46px;height:3px;background:var(--red);margin-top:18px}
+
+/* SERVICES */
+.svc-tabs{display:flex;border-bottom:2px solid #e0e0e0;background:#fff;padding:0 40px;position:sticky;top:68px;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.05);overflow-x:auto}
+.svc-tab{padding:15px 20px;font-family:'Montserrat',sans-serif;font-size:.7rem;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;color:#aaa;cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .2s;white-space:nowrap}
+.svc-tab:hover{color:var(--red)}
+.svc-tab.active{color:var(--red);border-bottom-color:var(--red)}
+.svc-panel{display:none;padding:56px 40px;background:#fafafa}
+.svc-panel.active{display:block}
+.tech-strip{background:#111;border-left:4px solid var(--red);padding:26px 32px;max-width:880px;margin:0 auto 36px;display:flex;align-items:center;gap:18px}
+.tech-strip-ico{font-size:2rem;flex-shrink:0}
+.tech-strip h3{font-family:'Montserrat',sans-serif;font-size:.95rem;font-weight:800;color:#fff;text-transform:uppercase;margin-bottom:6px}
+.tech-strip p{color:rgba(255,255,255,.58);font-size:.84rem;line-height:1.7}
+.tech-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1px;max-width:1100px;margin:0 auto;background:#e0e0e0;border:1px solid #e0e0e0;border-radius:4px;overflow:hidden}
+.tc{background:#fff;padding:22px;transition:background .15s}
+.tc:hover{background:#f5f5f5}
+.tc-ico{width:38px;height:38px;border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;margin-bottom:11px;background:#f5f5f5;border:1px solid #e0e0e0}
+.tc h3{font-family:'Montserrat',sans-serif;font-size:.78rem;font-weight:800;color:#111;margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px}
+.tc p{color:#888;font-size:.81rem;line-height:1.7}
+.cov-bar{display:flex;flex-wrap:wrap;gap:7px;max-width:880px;margin:28px auto 0;justify-content:center}
+.cov-pill{padding:5px 13px;border:1.5px solid #e0e0e0;border-radius:2px;font-size:.72rem;color:#888;background:#fff;font-family:'Montserrat',sans-serif;font-weight:600}
+
+/* PRODUCTS */
+.prod-sec{padding:52px 40px;background:#fafafa}
+.prod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:18px;max-width:1100px;margin:0 auto}
+.prod-card{background:#fff;border:1.5px solid #e0e0e0;border-radius:4px;overflow:hidden;transition:all .2s;cursor:pointer}
+.prod-card:hover{border-color:var(--red);box-shadow:0 6px 24px rgba(200,16,46,.09)}
+.prod-span{grid-column:1/-1}
+.pch{padding:18px 20px;display:flex;align-items:center;gap:11px;border-bottom:1px solid #f0f0f0;background:#f5f5f5}
+.pch-ico{width:40px;height:40px;border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:1.15rem;flex-shrink:0;background:#fff;border:1.5px solid #e0e0e0}
+.pch h3{font-family:'Montserrat',sans-serif;font-size:.82rem;font-weight:800;color:#111;text-transform:uppercase;letter-spacing:.5px}
+.pch p{font-size:.66rem;color:var(--red);margin-top:2px;font-weight:700;font-family:'Montserrat',sans-serif;text-transform:uppercase}
+.pcb{padding:14px 20px}
+.pcb p{color:#888;line-height:1.75;font-size:.83rem}
+.oem-sec{display:none;padding:0 18px 18px;border-top:1px solid #f0f0f0}
+.oem-sec.open{display:block}
+.oem-lbl{color:var(--red);font-family:'Montserrat',sans-serif;font-size:.58rem;letter-spacing:3px;text-transform:uppercase;margin:14px 0 11px;font-weight:800;display:block}
+.oem-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.oem-card{background:#fff;border:1.5px solid #e0e0e0;border-radius:3px;overflow:visible;transition:border-color .2s}
+.oem-card:hover{border-color:var(--red)}
+.oem-head{padding:13px 14px;display:flex;flex-direction:column;align-items:center;gap:6px;border-bottom:1px solid #f0f0f0;background:#f5f5f5}
+.oem-logo{width:116px;height:34px;background:#fff;border:1.5px solid #e0e0e0;border-radius:2px;display:flex;align-items:center;justify-content:center;font-family:'Montserrat',sans-serif;font-size:.65rem;font-weight:800;letter-spacing:2px;color:#111;text-transform:uppercase}
+.oem-head h4{font-family:'Montserrat',sans-serif;font-size:.75rem;font-weight:800;color:#111;text-transform:uppercase;letter-spacing:.5px}
+.oem-body{padding:11px 14px}
+.oem-body p{color:#888;font-size:.78rem;line-height:1.6;margin-bottom:5px}
+.oem-foot{padding:7px 14px;border-top:1px solid #f0f0f0;display:flex;justify-content:flex-end;background:#f5f5f5;cursor:pointer}
+.oem-foot:hover{background:#ebebeb}
+.oem-foot span{color:var(--red);font-family:'Montserrat',sans-serif;font-size:.64rem;letter-spacing:1.5px;text-transform:uppercase;font-weight:800}
+.cab-grid{display:none;padding:10px 12px;background:#fafafa;border-top:1px solid #e0e0e0;flex-wrap:wrap;gap:9px}
+.cab-grid.open{display:flex}
+.cab-thumb{width:130px;background:#fff;border:1.5px solid #e0e0e0;border-radius:3px;overflow:hidden;cursor:pointer;transition:all .2s;flex-shrink:0}
+.cab-thumb:hover{border-color:var(--red);transform:translateY(-2px);box-shadow:0 5px 14px rgba(200,16,46,.1)}
+.cab-img{height:80px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;background:#f5f5f5}
+.cab-img span:first-child{font-size:1.9rem}
+.cab-img span:last-child{font-size:.5rem;color:#bbb;letter-spacing:1px}
+.cab-name{padding:6px 8px;border-top:1px solid #e0e0e0}
+.cab-name p{font-family:'Montserrat',sans-serif;font-size:.54rem;color:var(--red);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:2px;font-weight:700}
+.cab-name h5{font-family:'Montserrat',sans-serif;font-size:.7rem;font-weight:800;color:#111;line-height:1.3}
+.brands-sec{padding:52px 40px;background:#fff;border-top:1px solid #e0e0e0}
+.brand-row{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.brand-chip{padding:7px 16px;background:#fff;border:1.5px solid #e0e0e0;border-radius:2px;color:#555;font-family:'Montserrat',sans-serif;font-size:.7rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;transition:all .2s}
+.brand-chip:hover{border-color:var(--red);color:var(--red)}
+
+/* PARTS PAGE */
+.parts-overview{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1px;max-width:1100px;margin:0 auto 40px;background:#e0e0e0;border:1px solid #e0e0e0;border-radius:4px;overflow:hidden}
+.po-card{background:#fff;padding:22px;transition:background .15s}
+.po-card:hover{background:#f5f5f5}
+.po-ico{width:38px;height:38px;border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;margin-bottom:11px;background:#f5f5f5;border:1px solid #e0e0e0}
+.po-card h3{font-family:'Montserrat',sans-serif;font-size:.78rem;font-weight:800;color:#111;margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px}
+.po-card p{color:#888;font-size:.81rem;line-height:1.7}
+/* Cabinet catalog */
+.cab-catalog{border:1.5px solid #e0e0e0;border-radius:4px;overflow:hidden;max-width:1100px;margin:0 auto}
+.cc-hdr{background:#111;padding:14px 22px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.cc-hdr-left p{font-family:'Montserrat',sans-serif;font-size:.52rem;letter-spacing:3px;text-transform:uppercase;color:var(--red);font-weight:700;margin:0 0 2px}
+.cc-hdr-left h3{font-family:'Montserrat',sans-serif;font-size:.86rem;font-weight:900;color:#fff;text-transform:uppercase;letter-spacing:.5px;margin:0}
+#cc-count{font-family:'Montserrat',sans-serif;font-size:.64rem;font-weight:600;color:rgba(255,255,255,.3);letter-spacing:1px;text-transform:uppercase}
+.cc-filters{padding:11px 18px;background:#f5f5f5;border-bottom:1px solid #e0e0e0;display:flex;gap:9px;flex-wrap:wrap;align-items:center}
+.cc-select{height:34px;padding:0 28px 0 11px;border:1.5px solid #e0e0e0;border-radius:2px;font-family:'Montserrat',sans-serif;font-size:.68rem;font-weight:700;color:#222;background:#fff;outline:none;cursor:pointer;appearance:none;min-width:190px;background-image:url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2210%22 height=%2210%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23c8102e%22 stroke-width=%222.5%22%3E%3Cpolyline points=%226 9 12 15 18 9%22/%3E%3C/svg%3E');background-repeat:no-repeat;background-position:right 9px center;text-transform:uppercase;letter-spacing:.5px}
+.cc-search-wrap{display:none;position:relative;flex:1;min-width:170px;max-width:340px}
+.cc-search-wrap svg{position:absolute;left:8px;top:50%;transform:translateY(-50%);width:12px;height:12px;stroke:#bbb;fill:none;stroke-width:2;stroke-linecap:round;pointer-events:none}
+.cc-search{width:100%;height:34px;padding:0 11px 0 28px;border:1.5px solid #e0e0e0;border-radius:2px;font-size:.8rem;font-family:'Open Sans',sans-serif;background:#fff;color:#222;outline:none}
+.cc-clear{display:none;height:34px;padding:0 13px;border:1.5px solid #e0e0e0;border-radius:2px;background:#fff;font-family:'Montserrat',sans-serif;font-size:.64rem;font-weight:700;color:#bbb;cursor:pointer;text-transform:uppercase;letter-spacing:.5px}
+.cc-prompt{padding:44px 22px;text-align:center;background:#fff}
+.cc-prompt-ico{width:42px;height:42px;background:#f5f5f5;border:1.5px solid #e0e0e0;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 11px;font-size:1rem}
+.cc-prompt p{font-family:'Montserrat',sans-serif;font-size:.72rem;font-weight:700;color:#ccc;text-transform:uppercase;letter-spacing:1px;margin:0}
+.cc-results{display:none}
+.cc-cab-hdr{display:flex;align-items:center;justify-content:space-between;padding:9px 22px;background:#f5f5f5;border-bottom:1px solid #e0e0e0;cursor:pointer;user-select:none;transition:background .15s}
+.cc-cab-hdr:hover{background:#ebebeb}
+.cc-cab-hdr h4{font-family:'Montserrat',sans-serif;font-size:.72rem;font-weight:800;color:#111;text-transform:uppercase;letter-spacing:.5px;margin:0}
+.cc-cab-hdr span{font-family:'Montserrat',sans-serif;font-size:.6rem;color:#bbb;font-weight:600;text-transform:uppercase}
+.cc-cab-body{display:none}
+.cc-cab-body.open{display:block}
+.cc-table{width:100%;border-collapse:collapse;table-layout:fixed}
+.cc-table thead tr{background:#f8f8f8}
+.cc-table th{padding:7px 14px;text-align:left;font-family:'Montserrat',sans-serif;font-size:.54rem;font-weight:800;color:#bbb;text-transform:uppercase;letter-spacing:1.5px;border-bottom:1px solid #e0e0e0}
+.cc-table td{padding:10px 14px;font-size:.8rem;border-bottom:1px solid #f0f0f0;vertical-align:middle}
+.cc-table tbody tr:last-child td{border-bottom:none}
+.cc-table tbody tr:hover td{background:rgba(200,16,46,.02)}
+.cc-pn{display:inline-block;background:#f5f5f5;border:1px solid #e0e0e0;border-radius:2px;padding:2px 7px;font-family:'Montserrat',sans-serif;font-size:.66rem;font-weight:700;color:#111;white-space:nowrap}
+.cc-req{padding:4px 10px;background:var(--red);color:#fff;border:none;border-radius:2px;font-family:'Montserrat',sans-serif;font-size:.6rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;cursor:pointer;white-space:nowrap}
+.cc-req:hover{background:var(--red-dark)}
+
+/* ABOUT */
+.about-sec{padding:60px 40px;background:#fff}
+.about-inner{max-width:800px;margin:0 auto}
+.about-inner p{font-size:.92rem;color:#777;line-height:1.9;margin-bottom:14px}
+.about-inner strong{color:var(--red);font-weight:600}
+.loc-strip{background:#f5f5f5;padding:26px 40px;border-top:1px solid #e0e0e0;border-bottom:1px solid #e0e0e0}
+.loc-strip p{text-align:center;font-family:'Montserrat',sans-serif;color:#bbb;font-size:.6rem;letter-spacing:4px;text-transform:uppercase;margin-bottom:11px;font-weight:700}
+.pills{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.pill{padding:5px 16px;border:1.5px solid #e0e0e0;border-radius:2px;color:#555;font-family:'Montserrat',sans-serif;font-size:.74rem;font-weight:600;background:#fff}
+.co-sec{padding:60px 40px;background:#fafafa}
+.co-card{max-width:920px;margin:0 auto 14px;background:#fff;border:1.5px solid #e0e0e0;border-radius:4px;overflow:hidden;transition:border-color .2s}
+.co-card:hover{border-color:var(--red)}
+.co-hd{padding:18px 26px;border-bottom:1px solid #f0f0f0;display:flex;align-items:center;gap:13px;background:#f5f5f5}
+.co-ico{width:42px;height:42px;border-radius:2px;background:#fff;border:1.5px solid #e0e0e0;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.co-hd h3{font-family:'Montserrat',sans-serif;font-size:.9rem;font-weight:800;color:#111;text-transform:uppercase;letter-spacing:.5px}
+.co-hd span{font-family:'Montserrat',sans-serif;font-size:.64rem;color:var(--red);letter-spacing:1.5px;text-transform:uppercase;margin-top:2px;display:block;font-weight:700}
+.co-body{padding:20px 26px}
+.co-body p{color:#888;line-height:1.85;font-size:.87rem;margin-bottom:10px}
+.lm-btn{display:inline-block;margin-top:4px;padding:7px 16px;border:2px solid var(--red);color:var(--red);border-radius:2px;font-family:'Montserrat',sans-serif;font-size:.66rem;letter-spacing:2px;text-transform:uppercase;text-decoration:none;font-weight:800;transition:all .2s;cursor:pointer}
+.lm-btn:hover{background:var(--red);color:#fff}
+.hl{background:#f5f5f5;border-left:3px solid var(--red);padding:13px 16px;margin-top:13px}
+.hl h4{color:var(--red);font-family:'Montserrat',sans-serif;font-size:.64rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;font-weight:800}
+.hl p{color:#888;font-size:.82rem;line-height:1.65;margin-bottom:5px}
+.broch{display:inline-block;margin-top:5px;margin-right:6px;padding:5px 12px;background:#fff;border:1.5px solid var(--red);color:var(--red);border-radius:2px;font-family:'Montserrat',sans-serif;font-size:.64rem;letter-spacing:1px;text-transform:uppercase;font-weight:700;transition:all .2s;text-decoration:none}
+.broch:hover{background:var(--red);color:#fff}
+
+/* CONTACT */
+.contact-layout{display:grid;grid-template-columns:1fr 1.6fr;gap:44px;max-width:1100px;margin:0 auto;padding:56px 40px}
+.ci{display:flex;flex-direction:column;gap:16px}
+.ci h2{font-family:'Montserrat',sans-serif;font-size:1.45rem;font-weight:900;color:#111;line-height:1.2;text-transform:uppercase;letter-spacing:-.3px}
+.ci-item{display:flex;align-items:center;gap:11px;padding:13px 14px;background:#fff;border:1.5px solid #e0e0e0;border-radius:2px;transition:border-color .2s}
+.ci-item:hover{border-color:var(--red)}
+.ci-ico{width:34px;height:34px;border-radius:2px;background:var(--red);display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0}
+.ci-text h4{font-family:'Montserrat',sans-serif;color:#111;font-size:.7rem;font-weight:800;letter-spacing:1px;text-transform:uppercase}
+.ci-text a,.ci-text p{color:#888;font-size:.8rem;text-decoration:none;transition:color .15s}
+.ci-text a:hover{color:var(--red)}
+.locs-wrap h4{font-family:'Montserrat',sans-serif;color:var(--red);font-size:.58rem;letter-spacing:3px;text-transform:uppercase;margin-bottom:8px;font-weight:800}
+.loc-pills{display:flex;flex-direction:column;gap:6px}
+.loc-pill{display:flex;align-items:center;gap:7px;padding:6px 11px;background:#fff;border:1.5px solid #e0e0e0;border-radius:2px;font-size:.78rem;color:#888;font-family:'Montserrat',sans-serif;font-weight:600}
+.form-wrap{background:#fff;border:1.5px solid #e0e0e0;border-radius:4px;padding:28px;box-shadow:0 4px 18px rgba(0,0,0,.05)}
+.form-wrap h3{font-family:'Montserrat',sans-serif;font-size:.9rem;font-weight:800;color:#111;margin-bottom:3px;text-transform:uppercase;letter-spacing:.5px}
+.form-wrap>p{color:#bbb;font-size:.78rem;margin-bottom:18px;line-height:1.55}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.fg{display:flex;flex-direction:column;gap:5px;margin-bottom:11px}
+.fg label{font-family:'Montserrat',sans-serif;color:#bbb;font-size:.6rem;letter-spacing:2px;text-transform:uppercase;font-weight:700}
+.fg input,.fg select,.fg textarea{background:#f5f5f5;border:1.5px solid #e0e0e0;border-radius:2px;padding:8px 11px;color:#222;font-size:.83rem;font-family:'Open Sans',sans-serif;outline:none;transition:all .2s;width:100%}
+.fg input::placeholder,.fg textarea::placeholder{color:#ccc}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--red);background:#fff}
+.fg select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='11' viewBox='0 0 24 24' fill='none' stroke='%23c8102e' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 9px center;padding-right:28px;cursor:pointer}
+.fg select option{background:#fff;color:#222}
+.fg textarea{resize:vertical;min-height:96px}
+.f-submit{width:100%;padding:11px;background:var(--red);color:#fff;border:none;border-radius:2px;font-family:'Montserrat',sans-serif;font-size:.76rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .2s;margin-top:3px}
+.f-submit:hover{background:var(--red-dark)}
+.f-success{display:none;text-align:center;padding:40px 14px}
+.f-success.show{display:block}
+.f-success h3{font-family:'Montserrat',sans-serif;color:#111;font-size:1rem;font-weight:800;margin-bottom:6px;text-transform:uppercase}
+.f-success p{color:#888;font-size:.84rem;line-height:1.7}
+.f-success .red{color:var(--red)}
+
+/* PRODUCT MODAL */
+.modal-ov{display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.65);backdrop-filter:blur(4px);align-items:flex-start;justify-content:center;padding:36px 18px;overflow-y:auto}
+.modal-ov.open{display:flex}
+.modal-box{background:#fff;border-radius:4px;width:100%;max-width:800px;position:relative;animation:mIn .2s ease;margin:auto;box-shadow:0 20px 70px rgba(0,0,0,.3);overflow:hidden}
+@keyframes mIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.modal-hd{background:#111;padding:22px 28px;position:relative}
+.modal-hd::after{content:'';position:absolute;bottom:0;left:0;width:72px;height:3px;background:var(--red)}
+.modal-x{position:absolute;top:13px;right:13px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;width:30px;height:30px;border-radius:2px;font-size:.85rem;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center}
+.modal-x:hover{background:var(--red);border-color:var(--red)}
+.modal-oem{font-family:'Montserrat',sans-serif;font-size:.56rem;letter-spacing:3px;text-transform:uppercase;color:var(--red);font-weight:700;margin-bottom:3px}
+.modal-title{font-family:'Montserrat',sans-serif;font-size:1.65rem;font-weight:900;color:#fff;line-height:1.15;text-transform:uppercase;letter-spacing:-.5px;max-width:88%}
+.modal-in{padding:26px 28px 28px}
+.modal-banner{width:100%;height:180px;border-radius:2px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;margin-bottom:20px;border:1.5px solid #e0e0e0;background:#f5f5f5}
+.modal-banner .big{font-size:3.5rem}
+.modal-banner .sub{font-family:'Montserrat',sans-serif;font-size:.6rem;letter-spacing:3px;color:#bbb;text-transform:uppercase;font-weight:700}
+.modal-desc{color:#888;font-size:.89rem;line-height:1.85;margin-bottom:20px}
+.modal-specs{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:1px;margin-bottom:18px;background:#e0e0e0;border:1px solid #e0e0e0;border-radius:2px;overflow:hidden}
+.spec-box{background:#fff;padding:11px 13px}
+.spec-box .sk{font-family:'Montserrat',sans-serif;font-size:.54rem;letter-spacing:2px;text-transform:uppercase;color:#bbb;margin-bottom:3px;font-weight:700}
+.spec-box .sv{font-family:'Montserrat',sans-serif;font-size:.84rem;font-weight:800;color:#111}
+.modal-tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:22px}
+.modal-cta{padding:10px 26px;background:var(--red);color:#fff;border:none;border-radius:2px;font-family:'Montserrat',sans-serif;font-size:.72rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .2s}
+.modal-cta:hover{background:var(--red-dark)}
+
+/* PARTS REQUEST MODAL */
+.req-ov{display:none;position:fixed;inset:0;z-index:600;background:rgba(0,0,0,.6);align-items:center;justify-content:center;padding:20px}
+.req-ov.open{display:flex}
+.req-box{background:#fff;border-radius:4px;width:100%;max-width:490px;overflow:hidden;box-shadow:0 14px 44px rgba(0,0,0,.28)}
+.req-hd{background:#111;padding:14px 20px;display:flex;align-items:center;justify-content:space-between}
+.req-hd-left p{font-family:'Montserrat',sans-serif;font-size:.52rem;letter-spacing:3px;text-transform:uppercase;color:var(--red);font-weight:700;margin:0 0 2px}
+.req-hd-left h4{font-family:'Montserrat',sans-serif;font-size:.82rem;font-weight:800;color:#fff;margin:0;text-transform:uppercase}
+.req-x{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;width:26px;height:26px;border-radius:2px;cursor:pointer;font-size:.8rem;display:flex;align-items:center;justify-content:center}
+.req-x:hover{background:var(--red)}
+.req-body{padding:18px 20px}
+.req-pn-box{background:#f5f5f5;border:1px solid #e0e0e0;border-radius:2px;padding:9px 13px;margin-bottom:14px}
+.req-pn-box p:first-child{font-family:'Montserrat',sans-serif;font-size:.54rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#bbb;margin:0 0 2px}
+.req-pn-box p:last-child{font-family:'Montserrat',sans-serif;font-size:.82rem;font-weight:800;color:#111;margin:0}
+.req-field{margin-bottom:10px}
+.req-field label{display:block;font-family:'Montserrat',sans-serif;font-size:.58rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#bbb;margin-bottom:4px}
+.req-field input,.req-field textarea{width:100%;height:34px;padding:0 10px;border:1.5px solid #e0e0e0;border-radius:2px;font-size:.81rem;font-family:'Open Sans',sans-serif;color:#222;background:#fff;outline:none}
+.req-field input:focus,.req-field textarea:focus{border-color:var(--red)}
+.req-field textarea{height:auto;min-height:64px;padding:8px 10px;resize:vertical}
+.req-err{display:none;background:#fff0f0;border:1px solid #fcc;border-radius:2px;padding:6px 10px;margin-bottom:10px;font-size:.76rem;color:#c00;font-family:'Montserrat',sans-serif;font-weight:700}
+.req-ok{display:none;background:#f0fff4;border:1px solid #b2f5c8;border-radius:2px;padding:13px;text-align:center;margin-bottom:10px}
+.req-ok p:first-child{font-family:'Montserrat',sans-serif;font-size:.8rem;font-weight:700;color:#1a7a3a;margin:0 0 3px}
+.req-ok p:last-child{font-size:.74rem;color:#2a8a4a;margin:0}
+.req-submit{width:100%;height:38px;background:var(--red);color:#fff;border:none;border-radius:2px;font-family:'Montserrat',sans-serif;font-size:.72rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;cursor:pointer}
+.req-submit:hover{background:var(--red-dark)}
+
+/* FOOTER */
+footer{background:#111;padding:44px 40px 0}
+.footer-inner{max-width:1100px;margin:0 auto}
+.footer-top{display:grid;grid-template-columns:1.7fr repeat(3,1fr);gap:32px;padding-bottom:32px;border-bottom:1px solid rgba(255,255,255,.1)}
+.fl-brand .fl-logo{font-family:'Montserrat',sans-serif;font-size:1.15rem;font-weight:900;letter-spacing:2px;color:#fff;text-transform:uppercase;margin-bottom:10px}
+.fl-brand .fl-logo span{color:var(--red)}
+.fl-brand p{color:rgba(255,255,255,.35);font-size:.8rem;line-height:1.7;max-width:240px}
+.fcol h4{font-family:'Montserrat',sans-serif;color:#fff;font-size:.6rem;letter-spacing:3px;text-transform:uppercase;margin-bottom:13px;padding-bottom:7px;border-bottom:1px solid rgba(255,255,255,.1);font-weight:800}
+.fcol ul{list-style:none}
+.fcol li{margin-bottom:8px}
+.fcol a{color:rgba(255,255,255,.38);text-decoration:none;font-size:.8rem;transition:color .2s}
+.fcol a:hover{color:var(--red)}
+.footer-bot{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;padding:16px 0}
+.f-contact a{color:rgba(255,255,255,.45);text-decoration:none;font-size:.76rem;transition:color .2s}
+.f-contact a:hover{color:var(--red)}
+.f-copy{color:rgba(255,255,255,.2);font-size:.68rem;font-family:'Montserrat',sans-serif}
+.li-btn{display:flex;align-items:center;gap:5px;background:#0077b5;color:#fff;padding:5px 9px;border-radius:2px;text-decoration:none;font-family:'Montserrat',sans-serif;font-size:.66rem;font-weight:700;transition:background .2s}
+.li-btn:hover{background:#005885}
+.li-btn svg{width:11px;height:11px}
+
+@media(max-width:900px){.nav-cards{grid-template-columns:1fr 1fr}.contact-layout{grid-template-columns:1fr;padding:36px 22px}.frow{grid-template-columns:1fr}.footer-top{grid-template-columns:1fr 1fr}.oem-grid{grid-template-columns:1fr}.prod-sec,.svc-panel,.ph,.about-sec,.co-sec,.brands-sec,.nav-cards-sec,.parts-overview{padding-left:22px;padding-right:22px}}
+@media(max-width:600px){.nav-cards{grid-template-columns:1fr}.modal-specs{grid-template-columns:1fr 1fr}.modal-in,.modal-hd{padding:18px}.modal-title{font-size:1.3rem}.footer-top{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<!-- PRODUCT MODAL -->
+<div class="modal-ov" id="prod-modal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-box">
+    <div class="modal-hd">
+      <button class="modal-x" onclick="closeModal()">✕</button>
+      <div class="modal-oem" id="m-oem"></div>
+      <div class="modal-title" id="m-title"></div>
+    </div>
+    <div class="modal-in" id="m-inner"></div>
+  </div>
+</div>
+
+<!-- PARTS REQUEST MODAL -->
+<div class="req-ov" id="req-modal" onclick="if(event.target===this)closeReq()">
+  <div class="req-box">
+    <div class="req-hd">
+      <div class="req-hd-left"><p>Parts Request</p><h4 id="req-title"></h4></div>
+      <button class="req-x" onclick="closeReq()">✕</button>
+    </div>
+    <div class="req-body">
+      <div class="req-pn-box"><p>Part Number</p><p id="req-pn"></p></div>
+      <div class="req-field"><label>Your Name *</label><input id="req-name" type="text" placeholder="Full name"></div>
+      <div class="req-field"><label>Email Address *</label><input id="req-email" type="email" placeholder="your@email.com"></div>
+      <div class="req-field"><label>Quantity</label><input id="req-qty" type="number" min="1" value="1" style="width:90px"></div>
+      <div class="req-field"><label>Notes</label><textarea id="req-notes" placeholder="Any additional details…"></textarea></div>
+      <div class="req-err" id="req-err"></div>
+      <div class="req-ok" id="req-ok"><p>Request Sent!</p><p>Our team will be in touch at sales@r2gaming.com</p></div>
+      <button class="req-submit" id="req-submit" onclick="submitReq()">Send Request → sales@r2gaming.com</button>
+    </div>
+  </div>
+</div>
+
+<nav>
+  <div class="nav-logo" onclick="showPage('home')">
+    <!-- LOGO PLACEHOLDER: Replace img tag src with actual logo file -->
+    <img src="" alt="R2 Gaming" id="nav-logo-img" style="height:36px;display:none" onerror="this.style.display='none'">
+    <!-- Fallback text shown until logo is uploaded -->
+    <span id="nav-logo-text"><span>R2</span> Gaming</span>
+  </div>
+  <div class="nav-links">
+    <a href="#" id="nav-home" class="active" onclick="showPage('home');return false">Home</a>
+    <a href="#" id="nav-about" onclick="showPage('about');return false">About</a>
+    <a href="#" id="nav-products" onclick="showPage('products');return false">Products</a>
+    <a href="#" id="nav-services" onclick="showPage('services');return false">Services</a>
+    <a href="#" id="nav-parts" onclick="showPage('parts');return false">Parts</a>
+  </div>
+  <div class="nav-search">
+    <div class="search-wrap">
+      <svg class="s-ico" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/></svg>
+      <input type="text" placeholder="Search…" oninput="doSearch(this.value)" onkeydown="if(event.key==='Escape')closeSearch()">
+    </div>
+    <div class="sdrop" id="sdrop"></div>
+  </div>
+</nav>
+
+<!-- ═══ HOME ═══ -->
+<div id="page-home" class="page active">
+  <section class="hero">
+    <div class="hero-bg"></div><div class="hero-grid"></div>
+
+    <!-- ══ VIDEO PLACEHOLDER ══
+         Replace the div below with:
+         <video autoplay muted loop playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;opacity:0.45">
+           <source src="YOUR_VIDEO_FILE.mp4" type="video/mp4">
+         </video>
+    -->
+    <div style="position:absolute;inset:0;z-index:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#1a1a1a,#0d0d0d)">
+      <div style="border:2px dashed rgba(200,16,46,0.4);border-radius:6px;padding:20px 36px;text-align:center;pointer-events:none">
+        <div style="font-size:2rem;margin-bottom:8px">🎬</div>
+        <p style="font-family:'Montserrat',sans-serif;font-size:.65rem;letter-spacing:3px;text-transform:uppercase;color:rgba(200,16,46,0.6);font-weight:700;margin:0">Video Placeholder</p>
+        <p style="font-family:'Montserrat',sans-serif;font-size:.58rem;color:rgba(255,255,255,0.25);margin:4px 0 0;letter-spacing:1px">Replace with background video on go-live</p>
+      </div>
+    </div>
+
+    <div class="machines" style="opacity:.12">
+      <div class="mach" style="height:175px"><div class="mlights"><div class="ml r"></div><div class="ml g"></div><div class="ml r"></div><div class="ml g"></div></div><div class="mscreen"><div class="reel"><div class="ri"><div class="sym">🍒</div><div class="sym">💎</div><div class="sym">7️⃣</div><div class="sym">⭐</div><div class="sym">🎰</div><div class="sym">🍒</div></div></div><div class="reel"><div class="ri"><div class="sym">7️⃣</div><div class="sym">🍒</div><div class="sym">⭐</div><div class="sym">💎</div><div class="sym">🍒</div><div class="sym">7️⃣</div></div></div><div class="reel"><div class="ri"><div class="sym">💎</div><div class="sym">⭐</div><div class="sym">🍒</div><div class="sym">7️⃣</div><div class="sym">💎</div><div class="sym">⭐</div></div></div></div><div class="mbtns"><div class="mbtn" style="background:#e00040"></div><div class="mbtn" style="background:#888"></div><div class="mbtn" style="background:var(--red)"></div></div><div class="mhandle"></div></div>
+      <div class="mach" style="height:210px"><div class="mlights"><div class="ml g"></div><div class="ml r"></div><div class="ml g"></div><div class="ml r"></div></div><div class="mscreen"><div class="reel"><div class="ri"><div class="sym">💎</div><div class="sym">7️⃣</div><div class="sym">🍒</div><div class="sym">🎰</div><div class="sym">⭐</div><div class="sym">💎</div></div></div><div class="reel"><div class="ri"><div class="sym">⭐</div><div class="sym">🍒</div><div class="sym">7️⃣</div><div class="sym">💎</div><div class="sym">🎰</div><div class="sym">⭐</div></div></div><div class="reel"><div class="ri"><div class="sym">🎰</div><div class="sym">💎</div><div class="sym">⭐</div><div class="sym">🍒</div><div class="sym">7️⃣</div><div class="sym">🎰</div></div></div></div><div class="mbtns"><div class="mbtn" style="background:var(--red)"></div><div class="mbtn" style="background:#888"></div><div class="mbtn" style="background:#e00040"></div></div><div class="mhandle"></div></div>
+      <div class="mach" style="height:235px"><div class="mlights"><div class="ml r"></div><div class="ml g"></div><div class="ml r"></div><div class="ml g"></div></div><div class="mscreen"><div class="reel"><div class="ri"><div class="sym">7️⃣</div><div class="sym">⭐</div><div class="sym">💎</div><div class="sym">🍒</div><div class="sym">🎰</div><div class="sym">7️⃣</div></div></div><div class="reel"><div class="ri"><div class="sym">🍒</div><div class="sym">💎</div><div class="sym">🎰</div><div class="sym">⭐</div><div class="sym">🍒</div><div class="sym">💎</div></div></div><div class="reel"><div class="ri"><div class="sym">⭐</div><div class="sym">🎰</div><div class="sym">🍒</div><div class="sym">7️⃣</div><div class="sym">💎</div><div class="sym">🍒</div></div></div></div><div class="mbtns"><div class="mbtn" style="background:#888"></div><div class="mbtn" style="background:var(--red)"></div><div class="mbtn" style="background:#e00040"></div></div><div class="mhandle"></div></div>
+      <div class="mach" style="height:210px"><div class="mlights"><div class="ml g"></div><div class="ml r"></div><div class="ml g"></div><div class="ml r"></div></div><div class="mscreen"><div class="reel"><div class="ri"><div class="sym">🎰</div><div class="sym">🍒</div><div class="sym">⭐</div><div class="sym">7️⃣</div><div class="sym">💎</div><div class="sym">🎰</div></div></div><div class="reel"><div class="ri"><div class="sym">💎</div><div class="sym">7️⃣</div><div class="sym">🎰</div><div class="sym">🍒</div><div class="sym">⭐</div><div class="sym">💎</div></div></div><div class="reel"><div class="ri"><div class="sym">🍒</div><div class="sym">⭐</div><div class="sym">7️⃣</div><div class="sym">💎</div><div class="sym">🎰</div><div class="sym">🍒</div></div></div></div><div class="mbtns"><div class="mbtn" style="background:var(--red)"></div><div class="mbtn" style="background:#e00040"></div><div class="mbtn" style="background:#888"></div></div><div class="mhandle"></div></div>
+      <div class="mach" style="height:175px"><div class="mlights"><div class="ml r"></div><div class="ml g"></div><div class="ml r"></div><div class="ml g"></div></div><div class="mscreen"><div class="reel"><div class="ri"><div class="sym">⭐</div><div class="sym">💎</div><div class="sym">🍒</div><div class="sym">🎰</div><div class="sym">7️⃣</div><div class="sym">⭐</div></div></div><div class="reel"><div class="ri"><div class="sym">🎰</div><div class="sym">⭐</div><div class="sym">7️⃣</div><div class="sym">💎</div><div class="sym">🍒</div><div class="sym">🎰</div></div></div><div class="reel"><div class="ri"><div class="sym">7️⃣</div><div class="sym">🍒</div><div class="sym">💎</div><div class="sym">⭐</div><div class="sym">🎰</div><div class="sym">7️⃣</div></div></div></div><div class="mbtns"><div class="mbtn" style="background:#888"></div><div class="mbtn" style="background:var(--red)"></div><div class="mbtn" style="background:#e00040"></div></div><div class="mhandle"></div></div>
+    </div>
+    <div class="hero-floor"></div>
+    <div class="hero-content">
+      <div class="hero-badge">Established 2005</div>
+      <h1>Canada's Full‑Service<br><em>Gaming Company</em></h1>
+      <p class="hero-sub">Operations &amp; Relations Covering Every Canadian Province</p>
+      <div class="hero-rule"></div>
+    </div>
+  </section>
+
+  <div style="background:#fff;padding:52px 40px 0;text-align:center">
+    <p style="font-family:'Montserrat',sans-serif;font-size:.58rem;letter-spacing:4px;text-transform:uppercase;color:var(--red);margin-bottom:6px;font-weight:700">Our Philosophy</p>
+    <h2 style="font-family:'Montserrat',sans-serif;font-size:clamp(1.4rem,3vw,2rem);font-weight:900;color:#111;text-transform:uppercase;letter-spacing:-.3px">Where the Customer <span style="color:var(--red)">Comes First</span></h2>
+    <div style="width:44px;height:3px;background:var(--red);margin:10px auto 0"></div>
+    <p style="color:#aaa;margin:10px auto 0;max-width:440px;font-size:.86rem;line-height:1.8">Your success is our mission — every province, every partner, every time.</p>
+  </div>
+
+  <section class="nav-cards-sec">
+    <div style="text-align:center;margin-bottom:36px"><span class="sec-ey">What We Do</span><br><h2 class="sec-h2">Products &amp; Services</h2><div class="red-rule"></div></div>
+    <div class="nav-cards">
+      <a href="#" class="nav-card" onclick="showPage('products');return false"><div class="nc-vis">🎰<span class="nc-ico-lbl">Gaming Machines</span></div><div class="nc-label"><span class="nc-lbl">Products</span><div class="nc-arr"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div></div><div class="nc-sub">Slot machines, ETGs &amp; peripherals</div></a>
+      <a href="#" class="nav-card" onclick="showPage('services');return false"><div class="nc-vis">🔧<span class="nc-ico-lbl">Field Services</span></div><div class="nc-label"><span class="nc-lbl">Services</span><div class="nc-arr"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div></div><div class="nc-sub">Technical services &amp; maintenance</div></a>
+      <a href="#" class="nav-card" onclick="showPage('parts');return false"><div class="nc-vis">⚙️<span class="nc-ico-lbl">Parts Supply</span></div><div class="nc-label"><span class="nc-lbl">Parts</span><div class="nc-arr"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div></div><div class="nc-sub">OEM &amp; aftermarket parts in stock</div></a>
+      <a href="#" class="nav-card" onclick="showPage('contact');return false"><div class="nc-vis">📞<span class="nc-ico-lbl">Get In Touch</span></div><div class="nc-label"><span class="nc-lbl">Contact</span><div class="nc-arr"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div></div><div class="nc-sub">Reach our team coast to coast</div></a>
+    </div>
+  </section>
+
+  <div style="background:#111;padding:0 40px"><div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.07)">
+    <div style="padding:30px 18px;text-align:center;background:#111"><div style="font-family:'Montserrat',sans-serif;font-size:1.9rem;font-weight:900;color:var(--red)">20+</div><div style="font-family:'Montserrat',sans-serif;font-size:.58rem;letter-spacing:2px;color:rgba(255,255,255,.3);text-transform:uppercase;margin-top:5px;font-weight:600">Years of Service</div></div>
+    <div style="padding:30px 18px;text-align:center;background:#111"><div style="font-family:'Montserrat',sans-serif;font-size:1.9rem;font-weight:900;color:var(--red)">13</div><div style="font-family:'Montserrat',sans-serif;font-size:.58rem;letter-spacing:2px;color:rgba(255,255,255,.3);text-transform:uppercase;margin-top:5px;font-weight:600">Provinces &amp; Territories</div></div>
+    <div style="padding:30px 18px;text-align:center;background:#111"><div style="font-family:'Montserrat',sans-serif;font-size:1.9rem;font-weight:900;color:var(--red)">3,500+</div><div style="font-family:'Montserrat',sans-serif;font-size:.58rem;letter-spacing:2px;color:rgba(255,255,255,.3);text-transform:uppercase;margin-top:5px;font-weight:600">Lottery Locations</div></div>
+    <div style="padding:30px 18px;text-align:center;background:#111"><div style="font-family:'Montserrat',sans-serif;font-size:1.9rem;font-weight:900;color:var(--red)">71,000+</div><div style="font-family:'Montserrat',sans-serif;font-size:.58rem;letter-spacing:2px;color:rgba(255,255,255,.3);text-transform:uppercase;margin-top:5px;font-weight:600">Pieces Managed</div></div>
+  </div></div>
+
+  <div class="cta-strip"><h2>Ready to Partner with R2?</h2><p>Our team has decades of experience supporting gaming operators across every Canadian province.</p><span class="btn-wh" onclick="showPage('contact')">Get In Touch</span></div>
+  <footer><div class="footer-inner"><div class="footer-top"><div class="fl-brand"><div class="fl-logo"><span>R2</span> Gaming</div><p>Canada's full-service gaming company. Established 2005. Operations covering every Canadian province.</p></div><div class="fcol"><h4>Products</h4><ul><li><a href="#" onclick="showPage('products');return false">Slot Machines</a></li><li><a href="#" onclick="showPage('products');return false">Electronic Table Games</a></li><li><a href="#" onclick="showPage('products');return false">Peripherals</a></li></ul></div><div class="fcol"><h4>Services</h4><ul><li><a href="#" onclick="showPage('services');return false">Technical Services</a></li><li><a href="#" onclick="showPage('parts');return false">Parts</a></li></ul></div><div class="fcol"><h4>Company</h4><ul><li><a href="#" onclick="showPage('about');return false">About Us</a></li><li><a href="#" onclick="showPage('contact');return false">Contact</a></li><li><a href="#">LVI</a></li></ul></div></div><div class="footer-bot"><div class="f-contact"><a href="tel:9059013108">(905) 901-3108</a> &nbsp;·&nbsp; <a href="mailto:info@r2gaming.com">info@r2gaming.com</a></div><div style="display:flex;align-items:center;gap:11px"><span class="f-copy">© 2026 R2 Gaming</span><a href="https://www.linkedin.com/company/r2gaming/" target="_blank" class="li-btn"><svg viewBox="0 0 24 24" fill="#fff"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a></div></div></div></footer>
+</div>
+
+<!-- ═══ SERVICES ═══ -->
+<div id="page-services" class="page">
+  <div class="bc"><a onclick="showPage('home')">Home</a><span class="bc-sep">›</span><span>Services</span></div>
+  <div class="ph"><span class="ey">What We Provide</span><h1>Technical <em>Services</em></h1><p>From field installation and preventative maintenance to emergency response and in-house electronics repair — R2 delivers end-to-end technical support across every Canadian province.</p><div class="ph-rule"></div></div>
+  <div class="svc-tabs"><div class="svc-tab active" id="tab-tech" onclick="switchTab('tech')">🔧 Technical Services</div></div>
+  <div class="svc-panel active" id="panel-tech">
+    <div class="tech-strip"><div class="tech-strip-ico">🔧</div><div><h3>End-to-End Technical Services</h3><p>R2 Gaming and Lang's Ventures Inc (LVI) together provide comprehensive technical services across Canada — from preventative maintenance programs to emergency field response, in-house electronics repair, and certified technician training.</p></div></div>
+    <div class="tech-grid">
+      <div class="tc"><div class="img-ph" style="height:100px;border-radius:2px;margin-bottom:12px"><div class="ph-ico">📷</div><p class="ph-lbl">Field Installation Photo</p></div><div class="tc-ico">🏗️</div><h3>Field Installation</h3><p>Professional installation across all provinces. Certified technicians ensure every machine is set up, tested, and compliant before go-live.</p><div style="margin-top:9px"><span class="tag">Certified Techs</span><span class="tag">All Provinces</span></div></div>
+      <div class="tc"><div class="img-ph" style="height:100px;border-radius:2px;margin-bottom:12px"><div class="ph-ico">📷</div><p class="ph-lbl">Preventative Maintenance Photo</p></div><div class="tc-ico">🛡️</div><h3>Preventative Maintenance</h3><p>Scheduled PM programs to maximize uptime and extend equipment life.</p><div style="margin-top:9px"><span class="tag">Scheduled PMs</span><span class="tag">Uptime Focus</span></div></div>
+      <div class="tc"><div class="img-ph" style="height:100px;border-radius:2px;margin-bottom:12px"><div class="ph-ico">📷</div><p class="ph-lbl">Emergency Response Photo</p></div><div class="tc-ico">⚡</div><h3>Emergency Field Response</h3><p>Rapid response technicians dispatched to resolve critical equipment failures.</p><div style="margin-top:9px"><span class="tag">Rapid Response</span><span class="tag">Priority SLA</span></div></div>
+      <div class="tc"><div class="img-ph" style="height:100px;border-radius:2px;margin-bottom:12px"><div class="ph-ico">📷</div><p class="ph-lbl">Electronic Repair Photo</p></div><div class="tc-ico">🔬</div><h3>In-House Electronic Repair</h3><p>Component-level repair for PCBs, bill validators, ticket printers, and gaming hardware.</p><div style="margin-top:9px"><span class="tag">PCB Repair</span><span class="tag">OEM Spec</span></div></div>
+      <div class="tc"><div class="img-ph" style="height:100px;border-radius:2px;margin-bottom:12px"><div class="ph-ico">📷</div><p class="ph-lbl">Technical Training Photo</p></div><div class="tc-ico">🎓</div><h3>Technical Training</h3><p>Hands-on training for operator technicians — on-site or at our facilities.</p><div style="margin-top:9px"><span class="tag">On-Site</span><span class="tag">Certification</span></div></div>
+      <div class="tc"><div class="img-ph" style="height:100px;border-radius:2px;margin-bottom:12px"><div class="ph-ico">📷</div><p class="ph-lbl">Staging & Assembly Photo</p></div><div class="tc-ico">📦</div><h3>Product Staging &amp; Assembly</h3><p>Full staging and assembly at our warehouse — products arrive floor-ready.</p><div style="margin-top:9px"><span class="tag">Warehouse</span><span class="tag">Floor-Ready</span></div></div>
+      <div class="tc"><div class="img-ph" style="height:100px;border-radius:2px;margin-bottom:12px"><div class="ph-ico">📷</div><p class="ph-lbl">LVI Field Services Photo</p></div><div class="tc-ico">🗺️</div><h3>Lottery Field Services (LVI)</h3><p>LVI manages 71,000+ pieces of lottery equipment across 3,500+ BC retailer locations.</p><div style="margin-top:9px"><span class="tag">71,000+ Units</span><span class="tag">3,500+ Locations</span></div></div>
+      <div class="tc"><div class="img-ph" style="height:100px;border-radius:2px;margin-bottom:12px"><div class="ph-ico">📷</div><p class="ph-lbl">Technology Testing Photo</p></div><div class="tc-ico">🔄</div><h3>Technology Testing &amp; Dev</h3><p>LVI creates and tests custom technology solutions for casino, lottery, and bingo.</p><div style="margin-top:9px"><span class="tag">Custom Solutions</span><span class="tag">QA Testing</span></div></div>
+    </div>
+    <div class="cov-bar"><div class="cov-pill">🏔 British Columbia</div><div class="cov-pill">🌾 Alberta</div><div class="cov-pill">🌿 Saskatchewan</div><div class="cov-pill">🌻 Manitoba</div><div class="cov-pill">🏙 Ontario</div><div class="cov-pill">⚜️ Quebec</div><div class="cov-pill">🌊 Atlantic Canada</div><div class="cov-pill">❄️ Northern Territories</div></div>
+  </div>
+  <div class="cta-strip"><h2>Need Technical Support?</h2><p>Our certified technicians are ready — from emergency field response to full PM programs across Canada.</p><span class="btn-wh" onclick="showPage('contact')">Contact Us</span></div>
+  <footer><div class="footer-inner"><div class="footer-top"><div class="fl-brand"><div class="fl-logo"><span>R2</span> Gaming</div><p>Canada's full-service gaming company. Established 2005.</p></div><div class="fcol"><h4>Services</h4><ul><li><a href="#" onclick="showPage('services');return false">Technical Services</a></li><li><a href="#" onclick="showPage('parts');return false">Parts</a></li></ul></div><div class="fcol"><h4>Company</h4><ul><li><a href="#" onclick="showPage('about');return false">About</a></li><li><a href="#" onclick="showPage('contact');return false">Contact</a></li></ul></div></div><div class="footer-bot"><div class="f-contact"><a href="tel:9059013108">(905) 901-3108</a> &nbsp;·&nbsp; <a href="mailto:info@r2gaming.com">info@r2gaming.com</a></div><div style="display:flex;align-items:center;gap:11px"><span class="f-copy">© 2026 R2 Gaming</span><a href="https://www.linkedin.com/company/r2gaming/" target="_blank" class="li-btn"><svg viewBox="0 0 24 24" fill="#fff"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a></div></div></div></footer>
+</div>
+
+<!-- ═══ PRODUCTS ═══ -->
+<div id="page-products" class="page">
+  <div class="bc"><a onclick="showPage('home')">Home</a><span class="bc-sep">›</span><span>Products</span></div>
+  <div class="ph"><span class="ey">What We Offer</span><h1>Our <em>Products</em></h1><p>Industry-leading gaming products delivered to operators across every Canadian province.</p><div class="ph-rule"></div></div>
+  <div class="prod-sec">
+    <div class="prod-grid">
+      <!-- SLOTS -->
+      <div class="prod-card prod-span"><div class="pch" onclick="toggleOEM('slots-oem')"><div class="pch-ico">🎰</div><div><h3>Slot Machines</h3><p>▸ Click to explore OEM partners</p></div></div>
+        <!-- PHOTO PLACEHOLDER: Slot machines banner image -->
+        <div class="img-ph" style="height:140px;margin:0;border-radius:0;border-left:none;border-right:none;border-top:none"><div class="ph-ico">📷</div><p class="ph-lbl">Slot Machines Photo / Video</p><p class="ph-hint">e.g. casino floor with slot machines</p></div>
+        <div class="pcb" onclick="toggleOEM('slots-oem')" style="margin-top:0"><p>The latest reel and video slot machines from the world's top OEM manufacturers.</p></div>
+        <div class="oem-sec" id="slots-oem"><span class="oem-lbl">OEM Partners</span><div class="oem-grid">
+          <div class="oem-card"><div class="oem-head">
+            <!-- LOGO PLACEHOLDER: Sega Sammy logo -->
+            <div class="logo-ph"><span>📷 Sega Sammy Logo</span></div>
+            <h4>Sega Sammy</h4></div><div class="oem-body"><p>World-class slot machines combining cutting-edge technology with immersive entertainment.</p><div style="margin-top:5px"><span class="tag">World Leader</span><span class="tag">Premium Tech</span></div></div><div class="oem-foot" onclick="toggleCabGrid('ss-cabs','ss-foot')"><span id="ss-foot">View Cabinets ›</span></div><div class="cab-grid" id="ss-cabs">
+            <div class="cab-thumb" onclick="openModal('genesis-atmos')">
+              <div class="cab-img" style="position:relative;background:#f0f0f0"><div class="img-ph" style="height:80px;border-radius:0;border:none"><p class="ph-lbl" style="font-size:.46rem">📷 Cabinet Photo</p></div></div>
+              <div class="cab-name"><p>Sega Sammy</p><h5>Genesis Atmos</h5></div>
+            </div>
+            <div class="cab-thumb" onclick="openModal('genesis-crest')">
+              <div class="cab-img" style="position:relative;background:#f0f0f0"><div class="img-ph" style="height:80px;border-radius:0;border:none"><p class="ph-lbl" style="font-size:.46rem">📷 Cabinet Photo</p></div></div>
+              <div class="cab-name"><p>Sega Sammy</p><h5>Genesis Crest</h5></div>
+            </div>
+          </div></div>
+          <div class="oem-card"><div class="oem-head">
+            <!-- LOGO PLACEHOLDER: Novomatic logo -->
+            <div class="logo-ph"><span>📷 Novomatic Logo</span></div>
+            <h4>Novomatic</h4></div><div class="oem-body"><p>One of the world's largest gaming technology companies — innovative slot solutions with proven global performance.</p><div style="margin-top:5px"><span class="tag">Global Leader</span><span class="tag">Proven Performance</span></div></div><div class="oem-foot" onclick="toggleCabGrid('nv-cabs','nv-foot')"><span id="nv-foot">View Cabinets ›</span></div><div class="cab-grid" id="nv-cabs">
+            <div class="cab-thumb" onclick="openModal('panthera-curve')"><div class="cab-img" style="background:#f0f0f0"><div class="img-ph" style="height:80px;border-radius:0;border:none"><p class="ph-lbl" style="font-size:.46rem">📷 Cabinet Photo</p></div></div><div class="cab-name"><p>Novomatic</p><h5>PANTHERA Curve 1.43</h5></div></div>
+            <div class="cab-thumb" onclick="openModal('panthera-vip-lounge')"><div class="cab-img" style="background:#f0f0f0"><div class="img-ph" style="height:80px;border-radius:0;border:none"><p class="ph-lbl" style="font-size:.46rem">📷 Cabinet Photo</p></div></div><div class="cab-name"><p>Novomatic</p><h5>Panthera V.I.P. Lounge Curve</h5></div></div>
+            <div class="cab-thumb" onclick="openModal('vip-royal')"><div class="cab-img" style="background:#f0f0f0"><div class="img-ph" style="height:80px;border-radius:0;border:none"><p class="ph-lbl" style="font-size:.46rem">📷 Cabinet Photo</p></div></div><div class="cab-name"><p>Novomatic</p><h5>V.I.P. Royal</h5></div></div>
+            <div class="cab-thumb" onclick="openModal('diamond-x-155j')"><div class="cab-img" style="background:#f0f0f0"><div class="img-ph" style="height:80px;border-radius:0;border:none"><p class="ph-lbl" style="font-size:.46rem">📷 Cabinet Photo</p></div></div><div class="cab-name"><p>Novomatic</p><h5>DIAMOND X™ 1.55J</h5></div></div>
+            <div class="cab-thumb" onclick="openModal('diamond-x-232')"><div class="cab-img" style="background:#f0f0f0"><div class="img-ph" style="height:80px;border-radius:0;border:none"><p class="ph-lbl" style="font-size:.46rem">📷 Cabinet Photo</p></div></div><div class="cab-name"><p>Novomatic</p><h5>DIAMOND X™ 2.32</h5></div></div>
+          </div></div>
+        </div></div>
+      </div>
+      <!-- ETG -->
+      <div class="prod-card prod-span"><div class="pch" onclick="toggleOEM('etg-oem')"><div class="pch-ico">🃏</div><div><h3>Electronic Table Games</h3><p>▸ Click to explore ETG products</p></div></div>
+        <!-- PHOTO PLACEHOLDER: ETG banner image -->
+        <div class="img-ph" style="height:140px;margin:0;border-radius:0;border-left:none;border-right:none;border-top:none"><div class="ph-ico">📷</div><p class="ph-lbl">Electronic Table Games Photo / Video</p><p class="ph-hint">e.g. roulette ETG in action</p></div>
+        <div class="pcb" onclick="toggleOEM('etg-oem')" style="margin-top:0"><p>Automated and electronic table solutions for roulette, blackjack, baccarat and more.</p></div>
+        <div class="oem-sec" id="etg-oem"><span class="oem-lbl">Novomatic ETG — Roulette</span><div class="oem-grid"><div class="oem-card"><div class="oem-head">
+          <!-- LOGO PLACEHOLDER: Novomatic ETG logo -->
+          <div class="logo-ph"><span>📷 Novomatic Logo</span></div>
+          <h4>Novomatic ETG</h4></div><div class="oem-body"><p>World-class electronic table game solutions for casino operators.</p><div style="margin-top:5px"><span class="tag">Roulette</span><span class="tag">Multi-Player</span></div></div><div class="oem-foot" onclick="toggleCabGrid('etg-cabs','etg-foot')"><span id="etg-foot">View Products ›</span></div><div class="cab-grid" id="etg-cabs">
+          <div class="cab-thumb" onclick="openModal('lotus-genius-8')"><div class="cab-img" style="background:#f0f0f0"><div class="img-ph" style="height:80px;border-radius:0;border:none"><p class="ph-lbl" style="font-size:.46rem">📷 Product Photo</p></div></div><div class="cab-name"><p>Novomatic</p><h5>LOTUS ROULETTE™ Genius 8</h5></div></div>
+          <div class="cab-thumb" onclick="openModal('lotus-genius')"><div class="cab-img" style="background:#f0f0f0"><div class="img-ph" style="height:80px;border-radius:0;border:none"><p class="ph-lbl" style="font-size:.46rem">📷 Product Photo</p></div></div><div class="cab-name"><p>Novomatic</p><h5>LOTUS ROULETTE™ Genius</h5></div></div>
+        </div></div></div></div>
+      </div>
+      <!-- OTHER PRODUCTS -->
+      <div class="prod-card"><div class="pch"><div class="pch-ico">🖥️</div><div><h3>Peripherals &amp; Systems</h3></div></div>
+        <div class="img-ph" style="height:110px;border-radius:0;border-left:none;border-right:none"><div class="ph-ico">📷</div><p class="ph-lbl">Peripherals Photo</p><p class="ph-hint">e.g. bill validator, printer</p></div>
+        <div class="pcb"><p>Ticket printers, bill validators, card readers, and gaming management systems.</p></div></div>
+      <div class="prod-card"><div class="pch"><div class="pch-ico">💺</div><div><h3>Casino Seating</h3></div></div>
+        <div class="img-ph" style="height:110px;border-radius:0;border-left:none;border-right:none"><div class="ph-ico">📷</div><p class="ph-lbl">Seating Photo</p><p class="ph-hint">e.g. casino chair product shot</p></div>
+        <div class="pcb"><p>Ergonomic, high-performance seating designed for casino environments.</p></div></div>
+      <div class="prod-card"><div class="pch"><div class="pch-ico">📺</div><div><h3>Signage</h3></div></div>
+        <div class="img-ph" style="height:110px;border-radius:0;border-left:none;border-right:none"><div class="ph-ico">📷</div><p class="ph-lbl">Signage Photo</p><p class="ph-hint">e.g. jackpot display screen</p></div>
+        <div class="pcb"><p>Jackpot displays, promotional screens and branded signage for your gaming floor.</p></div></div>
+    </div>
+  </div>
+  <div class="brands-sec">
+    <div style="text-align:center;margin-bottom:24px"><span class="sec-ey">Trusted Partners</span><br><h2 class="sec-h2">Our Brands</h2><div class="red-rule"></div></div>
+    <!-- LOGO PLACEHOLDERS: Replace each with <img src="logo.png" style="height:36px;width:auto;filter:grayscale(1);opacity:.6"> -->
+    <div class="brand-row">
+      <div class="logo-ph" style="min-width:130px;height:44px"><span>📷 Sega Sammy Logo</span></div>
+      <div class="logo-ph" style="min-width:130px;height:44px"><span>📷 JCM Global Logo</span></div>
+      <div class="logo-ph" style="min-width:130px;height:44px"><span>📷 Novomatic Logo</span></div>
+      <div class="logo-ph" style="min-width:130px;height:44px"><span>📷 CountR Logo</span></div>
+      <div class="logo-ph" style="min-width:130px;height:44px"><span>📷 Patir Logo</span></div>
+      <div class="logo-ph" style="min-width:150px;height:44px"><span>📷 Passport Technology Logo</span></div>
+    </div>
+  </div>
+  <div class="cta-strip"><h2>Looking for a Specific Product?</h2><p>Our team can source, stage and deliver the right solution for your floor anywhere in Canada.</p><span class="btn-wh" onclick="showPage('contact')">Enquire Now</span></div>
+  <footer><div class="footer-inner"><div class="footer-top"><div class="fl-brand"><div class="fl-logo"><span>R2</span> Gaming</div><p>Canada's full-service gaming company. Established 2005.</p></div><div class="fcol"><h4>Products</h4><ul><li><a href="#">Slot Machines</a></li><li><a href="#">Electronic Table Games</a></li><li><a href="#">Peripherals</a></li></ul></div><div class="fcol"><h4>Services</h4><ul><li><a href="#" onclick="showPage('services');return false">Technical Services</a></li><li><a href="#" onclick="showPage('parts');return false">Parts</a></li></ul></div><div class="fcol"><h4>Company</h4><ul><li><a href="#" onclick="showPage('about');return false">About</a></li><li><a href="#" onclick="showPage('contact');return false">Contact</a></li></ul></div></div><div class="footer-bot"><div class="f-contact"><a href="tel:9059013108">(905) 901-3108</a> &nbsp;·&nbsp; <a href="mailto:info@r2gaming.com">info@r2gaming.com</a></div><div style="display:flex;align-items:center;gap:11px"><span class="f-copy">© 2026 R2 Gaming</span><a href="https://www.linkedin.com/company/r2gaming/" target="_blank" class="li-btn"><svg viewBox="0 0 24 24" fill="#fff"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a></div></div></div></footer>
+</div>
+
+<!-- ═══ PARTS ═══ -->
+<div id="page-parts" class="page">
+  <div class="bc"><a onclick="showPage('home')">Home</a><span class="bc-sep">›</span><span>Parts</span></div>
+  <div class="ph"><span class="ey">Genuine Parts Supply</span><h1>Parts &amp; <em>Components</em></h1><p>R2 Gaming maintains an extensive inventory of OEM and aftermarket parts — ensuring fast fulfillment to keep your floor running.</p><div class="ph-rule"></div></div>
+  <div style="padding:56px 40px;background:#fafafa">
+    <div class="parts-overview">
+      <div class="po-card">
+        <div class="img-ph" style="height:110px;border-radius:2px;margin-bottom:12px"><div class="ph-ico">📷</div><p class="ph-lbl">Bill Validators Photo</p><p class="ph-hint">e.g. JCM validator unit</p></div>
+        <div class="po-ico">💵</div><h3>Bill Validators &amp; Currency</h3><p>OEM-grade parts for JCM Global, MEI, and other leading manufacturers.</p><div style="margin-top:9px"><span class="tag">JCM Global</span><span class="tag">MEI</span><span class="tag">In Stock</span></div>
+      </div>
+      <div class="po-card">
+        <div class="img-ph" style="height:110px;border-radius:2px;margin-bottom:12px"><div class="ph-ico">📷</div><p class="ph-lbl">Ticket Printers Photo</p><p class="ph-hint">e.g. TITO printer unit</p></div>
+        <div class="po-ico">🎫</div><h3>Ticket Printers &amp; TITO</h3><p>Printer heads, paper rolls, and full replacement units for all major TITO systems.</p><div style="margin-top:9px"><span class="tag">TITO</span><span class="tag">Fast Ship</span></div>
+      </div>
+      <div class="po-card">
+        <div class="img-ph" style="height:110px;border-radius:2px;margin-bottom:12px"><div class="ph-ico">📷</div><p class="ph-lbl">Display Components Photo</p><p class="ph-hint">e.g. LCD panel / touchscreen</p></div>
+        <div class="po-ico">🖥️</div><h3>Display &amp; Monitor Components</h3><p>LCD panels, touchscreens, backlights, and display assemblies for multiple OEM platforms.</p><div style="margin-top:9px"><span class="tag">LCD Panels</span><span class="tag">Touchscreens</span></div>
+      </div>
+      <div class="po-card">
+        <div class="img-ph" style="height:110px;border-radius:2px;margin-bottom:12px"><div class="ph-ico">📷</div><p class="ph-lbl">PCBs Photo</p><p class="ph-hint">e.g. circuit board / PSU</p></div>
+        <div class="po-ico">🔌</div><h3>PCBs &amp; Electronic Components</h3><p>Printed circuit boards, power supply units, and logic boards to OEM spec.</p><div style="margin-top:9px"><span class="tag">PCBs</span><span class="tag">PSUs</span></div>
+      </div>
+      <div class="po-card">
+        <div class="img-ph" style="height:110px;border-radius:2px;margin-bottom:12px"><div class="ph-ico">📷</div><p class="ph-lbl">Locks & Security Photo</p><p class="ph-hint">e.g. cabinet lock / key set</p></div>
+        <div class="po-ico">🔑</div><h3>Locks, Keys &amp; Security</h3><p>Cabinet locks, key blanks, and security hardware for gaming machines and kiosks.</p><div style="margin-top:9px"><span class="tag">Cabinet Locks</span><span class="tag">Key Blanks</span></div>
+      </div>
+      <div class="po-card">
+        <div class="img-ph" style="height:110px;border-radius:2px;margin-bottom:12px"><div class="ph-ico">📷</div><p class="ph-lbl">Mechanical Parts Photo</p><p class="ph-hint">e.g. reels / hopper / motor</p></div>
+        <div class="po-ico">⚙️</div><h3>Mechanical Parts</h3><p>Reels, stepper motors, hoppers, and coin mechanisms for slot and lottery equipment.</p><div style="margin-top:9px"><span class="tag">Reels</span><span class="tag">Hoppers</span></div>
+      </div>
+    </div>
+
+    <div style="margin:36px 0;text-align:center"><p style="font-family:'Montserrat',sans-serif;font-size:.58rem;letter-spacing:3px;text-transform:uppercase;color:#bbb;margin-bottom:11px;font-weight:700">Parts Available For</p><div class="brand-row"><div class="brand-chip">Sega Sammy</div><div class="brand-chip">JCM Global</div><div class="brand-chip">Novomatic</div><div class="brand-chip">CountR</div><div class="brand-chip">Passport Technology</div><div class="brand-chip">Aristocrat</div><div class="brand-chip">IGT</div><div class="brand-chip">Konami</div></div></div>
+
+    <!-- Cabinet Parts Catalog -->
+    <div class="cab-catalog">
+      <div class="cc-hdr">
+        <div class="cc-hdr-left"><p>OEM Parts Catalog</p><h3>Cabinet Parts</h3></div>
+        <span id="cc-count">Select a manufacturer to view parts</span>
+      </div>
+      <div class="cc-filters">
+        <select class="cc-select" id="cc-mfg" onchange="ccSelectMfg()">
+          <option value="">— Select Manufacturer —</option>
+          <option value="aristocrat">Aristocrat</option>
+          <option value="bally">Bally</option>
+          <option value="igt">IGT</option>
+          <option value="konami">Konami</option>
+          <option value="wms">WMS</option>
+          <option value="ainsworth">Ainsworth</option>
+          <option value="ags">AGS</option>
+          <option value="aruze">Aruze</option>
+        </select>
+        <div class="cc-search-wrap" id="cc-sw">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/></svg>
+          <input class="cc-search" id="cc-search" type="text" placeholder="Search part name or number…" oninput="ccSearch()">
+        </div>
+        <button class="cc-clear" id="cc-clear" onclick="ccClear()">✕ Clear</button>
+      </div>
+      <div class="cc-prompt" id="cc-prompt">
+        <div class="cc-prompt-ico">⚙️</div>
+        <p>Select a manufacturer above to browse cabinet parts</p>
+      </div>
+      <div class="cc-results" id="cc-results"></div>
+    </div>
+  </div>
+  <div class="cta-strip"><h2>Can't Find What You Need?</h2><p>Our team can source parts for virtually any gaming cabinet platform. Get in touch and we'll find it for you.</p><span class="btn-wh" onclick="showPage('contact')">Contact Us</span></div>
+  <footer><div class="footer-inner"><div class="footer-top"><div class="fl-brand"><div class="fl-logo"><span>R2</span> Gaming</div><p>Canada's full-service gaming company. Established 2005.</p></div><div class="fcol"><h4>Parts</h4><ul><li><a href="#">Bill Validators</a></li><li><a href="#">Ticket Printers</a></li><li><a href="#">PCBs &amp; Electronics</a></li><li><a href="#">Cabinet Parts</a></li></ul></div><div class="fcol"><h4>Services</h4><ul><li><a href="#" onclick="showPage('services');return false">Technical Services</a></li><li><a href="#" onclick="showPage('products');return false">Products</a></li></ul></div><div class="fcol"><h4>Company</h4><ul><li><a href="#" onclick="showPage('about');return false">About</a></li><li><a href="#" onclick="showPage('contact');return false">Contact</a></li></ul></div></div><div class="footer-bot"><div class="f-contact"><a href="tel:9059013108">(905) 901-3108</a> &nbsp;·&nbsp; <a href="mailto:info@r2gaming.com">info@r2gaming.com</a></div><div style="display:flex;align-items:center;gap:11px"><span class="f-copy">© 2026 R2 Gaming</span><a href="https://www.linkedin.com/company/r2gaming/" target="_blank" class="li-btn"><svg viewBox="0 0 24 24" fill="#fff"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a></div></div></div></footer>
+</div>
+
+<!-- ═══ ABOUT ═══ -->
+<div id="page-about" class="page">
+  <div class="bc"><a onclick="showPage('home')">Home</a><span class="bc-sep">›</span><span>About Us</span></div>
+  <div class="ph"><span class="ey">Our Story</span><h1>About <em>R2</em></h1><p>Built on Service. Driven by Partnership.</p><div class="ph-rule"></div></div>
+  <div class="about-sec"><div class="about-inner"><p>Customer Service is the cornerstone of the R2 Group of Companies. This foundational principle drives <strong>WHAT</strong> we do, <strong>HOW</strong> we do it, and most importantly <strong>WHY</strong> we do it.</p><p>We see ourselves as extensions of our partners' business — be it a manufacturer, supplier, or customer — bringing value to all sides of every relationship.</p><p>Today the R2 Group includes <strong>R2 Gaming</strong>, <strong>Lang's Ventures Inc</strong>, and <strong>R2 Technology Solutions</strong>. With offices in British Columbia, Alberta, and Ontario, the R2 Group provides support coast-to-coast.</p></div></div>
+  <div class="loc-strip"><p>Our Locations</p><div class="pills"><div class="pill">🏔 British Columbia</div><div class="pill">🌾 Alberta</div><div class="pill">🏙 Ontario</div><div class="pill">🍁 Coast-to-Coast Support</div></div></div>
+  <div class="co-sec"><div style="text-align:center;margin-bottom:36px"><span class="sec-ey">Group of Companies</span><br><h2 class="sec-h2">The R2 Group</h2><div class="red-rule"></div></div>
+    <div class="co-card"><div class="co-hd">
+      <!-- LOGO PLACEHOLDER: Replace div.co-ico with <img src="r2gaming-logo.png" style="height:42px;width:auto"> -->
+      <div class="co-ico" style="position:relative"><div style="position:absolute;inset:0;border:1.5px dashed rgba(200,16,46,0.3);border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:.42rem;font-family:'Montserrat',sans-serif;color:rgba(200,16,46,0.4);letter-spacing:1px;font-weight:700;text-align:center;line-height:1.2">LOGO</div>🎰</div>
+      <div><h3>R2 Gaming</h3><span>Founded 2005 · Pan-Canadian</span></div></div><div class="co-body"><p>R2 Gaming is a Canadian company which specializes in distribution and services to the Casino Gaming, Lottery and Bingo Industry across Canada. Founded in 2005, R2 Gaming provides product sales, field installation, preventative maintenance, technical training, product staging, warehousing, logistics, product assembly and in-house electronic repair services to Crown Agencies and Gaming Operators in all Provinces across Canada.</p>
+      <!-- PHOTO PLACEHOLDER: Company/team photo -->
+      <div class="ph-banner" style="height:160px"><div class="ph-ico">📷</div><p class="ph-lbl">Company Photo / Team Photo</p><p class="ph-hint">Replace with actual image on go-live</p></div>
+      <a href="#" class="lm-btn">Learn More</a></div></div>
+    <div class="co-card"><div class="co-hd">
+      <div class="co-ico" style="position:relative"><div style="position:absolute;inset:0;border:1.5px dashed rgba(200,16,46,0.3);border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:.42rem;font-family:'Montserrat',sans-serif;color:rgba(200,16,46,0.4);letter-spacing:1px;font-weight:700;text-align:center;line-height:1.2">LOGO</div>🔧</div>
+      <div><h3>Lang's Ventures Inc (LVI)</h3><span>Est. 1998 · Kamloops, British Columbia</span></div></div><div class="co-body"><p>Based in Kamloops BC, LVI specializes in creating and testing technology solutions, field installation, and repair of all equipment relating to the casino, lottery, and bingo industry. Servicing 3,500+ lottery retailer locations and managing over 71,000 pieces of lottery equipment in the field.</p>
+      <div class="ph-banner" style="height:160px"><div class="ph-ico">📷</div><p class="ph-lbl">LVI Office / Field Team Photo</p><p class="ph-hint">Replace with actual image on go-live</p></div>
+      <a href="#" class="lm-btn">Learn More</a></div></div>
+    <div class="co-card"><div class="co-hd">
+      <div class="co-ico" style="position:relative"><div style="position:absolute;inset:0;border:1.5px dashed rgba(200,16,46,0.3);border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:.42rem;font-family:'Montserrat',sans-serif;color:rgba(200,16,46,0.4);letter-spacing:1px;font-weight:700;text-align:center;line-height:1.2">LOGO</div>💡</div>
+      <div><h3>R2 Technology Solutions</h3><span>Strategic Partnership · North American Market</span></div></div><div class="co-body"><p>R2 Technology Solutions was formed through the strategic partnership between R2 and Eurocoin Components Inc. Bringing to the North American market custom and off-the-shelf technology solutions, as well as the supply of equipment, parts and supplies.</p><a href="#" class="lm-btn">Learn More</a><div class="hl"><h4>🃏 CHIPCO Casino Chips</h4><p>Casino chips manufactured in the USA by CHIPCO — Preferred Poker Chips of the World Poker Tour (WPT).</p><a href="#" class="broch">📄 CHIPCO Brochure</a></div><div class="hl"><h4>🔌 SitNCharge</h4><p>Let customers charge phones at gaming tables and bars. Cost-effective, easy to fit, successful worldwide.</p><a href="#" class="broch">📄 SitNCharge Brochure</a></div></div></div>
+  </div>
+
+  <!-- CONTACT SECTION -->
+  <div style="background:#fafafa;border-top:2px solid var(--red)">
+    <div style="padding:56px 40px 0;text-align:center"><span class="sec-ey">Get In Touch</span><br><h2 class="sec-h2">Contact <em style="font-style:normal;color:var(--red)">R2 Gaming</em></h2><div class="red-rule"></div><p style="color:#aaa;margin:10px auto 0;max-width:480px;font-size:.87rem;line-height:1.8">Whether you're looking for new products, technical support, or a long-term partnership — our team is ready to help.</p></div>
+    <div class="contact-layout">
+      <div class="ci">
+        <div class="ci-item"><div class="ci-ico">📞</div><div class="ci-text"><h4>Phone</h4><a href="tel:9059013108">(905) 901-3108</a></div></div>
+        <div class="ci-item"><div class="ci-ico">✉️</div><div class="ci-text"><h4>Email</h4><a href="mailto:info@r2gaming.com">info@r2gaming.com</a></div></div>
+        <div class="ci-item"><div class="ci-ico">📦</div><div class="ci-text"><h4>Parts Enquiries</h4><a href="mailto:sales@r2gaming.com">sales@r2gaming.com</a></div></div>
+        <div class="ci-item"><div class="ci-ico">💼</div><div class="ci-text"><h4>LinkedIn</h4><a href="https://www.linkedin.com/company/r2gaming/" target="_blank">R2 Gaming on LinkedIn</a></div></div>
+        <div class="locs-wrap"><h4>Our Locations</h4><div class="loc-pills"><div class="loc-pill">🏔 British Columbia</div><div class="loc-pill">🌾 Alberta</div><div class="loc-pill">🏙 Ontario</div><div class="loc-pill">🍁 Coast-to-Coast Support</div></div></div>
+      </div>
+      <div class="form-wrap">
+        <div id="f-inner">
+          <h3>Send Us a Message</h3><p>A member of our team will be in touch within one business day.</p>
+          <div class="frow"><div class="fg"><label>First Name</label><input type="text" id="f-fname" placeholder="John"></div><div class="fg"><label>Last Name</label><input type="text" id="f-lname" placeholder="Smith"></div></div>
+          <div class="fg"><label>Email Address</label><input type="email" id="f-email" placeholder="you@company.com"></div>
+          <div class="fg"><label>Phone</label><input type="tel" id="f-phone" placeholder="(000) 000-0000"></div>
+          <div class="fg"><label>Company / Organization</label><input type="text" id="f-company" placeholder="e.g. Great Canadian Entertainment"></div>
+          <div class="frow"><div class="fg"><label>Province</label><select id="f-province"><option value="" disabled selected>Select…</option><option>British Columbia</option><option>Alberta</option><option>Saskatchewan</option><option>Manitoba</option><option>Ontario</option><option>Quebec</option><option>New Brunswick</option><option>Nova Scotia</option><option>Prince Edward Island</option><option>Newfoundland &amp; Labrador</option><option>Yukon</option><option>Northwest Territories</option><option>Nunavut</option></select></div><div class="fg"><label>Area of Interest</label><select id="f-interest"><option value="" disabled selected>Select…</option><option>Technical Services</option><option>Parts</option><option>Slot Machines</option><option>Electronic Table Games</option><option>Peripherals &amp; Systems</option><option>Casino Seating</option><option>Signage</option><option>General Inquiry</option></select></div></div>
+          <div class="fg"><label>Message</label><textarea id="f-message" placeholder="Tell us how we can help…"></textarea></div>
+          <button class="f-submit" onclick="submitForm()">Send Message →</button>
+        </div>
+        <div class="f-success" id="f-success"><div style="font-size:2.4rem;margin-bottom:10px">✅</div><h3>Message Sent!</h3><p>Thank you for reaching out. A member of the <span class="red">R2 Gaming</span> team will be in touch within one business day.</p><br><button class="f-submit" style="max-width:180px;margin:0 auto;display:block" onclick="resetForm()">Send Another</button></div>
+      </div>
+    </div>
+  </div>
+
+  <footer><div class="footer-inner"><div class="footer-top"><div class="fl-brand"><div class="fl-logo"><span>R2</span> Gaming</div><p>Canada's full-service gaming company. Established 2005.</p></div><div class="fcol"><h4>Products</h4><ul><li><a href="#" onclick="showPage('products');return false">Slot Machines</a></li><li><a href="#" onclick="showPage('products');return false">Electronic Table Games</a></li></ul></div><div class="fcol"><h4>Services</h4><ul><li><a href="#" onclick="showPage('services');return false">Technical Services</a></li><li><a href="#" onclick="showPage('parts');return false">Parts</a></li></ul></div><div class="fcol"><h4>Contact</h4><ul><li><a href="tel:9059013108">(905) 901-3108</a></li><li><a href="mailto:info@r2gaming.com">info@r2gaming.com</a></li></ul></div></div><div class="footer-bot"><div class="f-contact"><a href="tel:9059013108">(905) 901-3108</a> &nbsp;·&nbsp; <a href="mailto:info@r2gaming.com">info@r2gaming.com</a></div><div style="display:flex;align-items:center;gap:11px"><span class="f-copy">© 2026 R2 Gaming</span><a href="https://www.linkedin.com/company/r2gaming/" target="_blank" class="li-btn"><svg viewBox="0 0 24 24" fill="#fff"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a></div></div></div></footer>
+</div>
+
+<script>
+/* ── NAVIGATION ── */
+function showPage(id){
+  document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});
+  document.querySelectorAll('nav a').forEach(function(a){a.classList.remove('active');});
+  document.getElementById('page-'+id).classList.add('active');
+  var n=document.getElementById('nav-'+id);
+  if(n)n.classList.add('active');
+  window.scrollTo(0,0);
+  closeSearch();
+}
+function switchTab(tab){
+  document.querySelectorAll('.svc-tab').forEach(function(t){t.classList.remove('active');});
+  document.querySelectorAll('.svc-panel').forEach(function(p){p.classList.remove('active');});
+  document.getElementById('tab-'+tab).classList.add('active');
+  document.getElementById('panel-'+tab).classList.add('active');
+}
+function toggleOEM(id){var s=document.getElementById(id);if(s)s.classList.toggle('open');}
+function toggleCabGrid(gid,fid){
+  var g=document.getElementById(gid),f=document.getElementById(fid);
+  if(!g)return;
+  var o=g.classList.toggle('open');
+  if(f)f.textContent=o?'Hide ‹':(fid==='etg-foot'?'View Products ›':'View Cabinets ›');
+}
+
+/* ── PRODUCT MODAL ── */
+var PRODS={
+  'genesis-atmos':{oem:'Sega Sammy',ico:'🎰',title:'Genesis Atmos',desc:'The Genesis Atmos is Sega Sammy\'s premium upright cabinet featuring a sweeping curved display and atmospheric LED lighting. It delivers a fully immersive playing environment combining a large curved screen, rich stereo audio, and dynamic LED surround effects.',specs:[{k:'Display',v:'Curved Widescreen'},{k:'Form Factor',v:'Upright'},{k:'Lighting',v:'Dynamic LED Surround'},{k:'Audio',v:'Rich Stereo'},{k:'Manufacturer',v:'Sega Sammy'},{k:'Market',v:'All Provinces'}],tags:['Curved Display','Immersive Lighting','Premium Upright']},
+  'genesis-crest':{oem:'Sega Sammy',ico:'🎰',title:'Genesis Crest',desc:'The Genesis Crest is Sega Sammy\'s top-of-range upright featuring an oversized display and signature crest topper. Built for high-visibility placement, combining maximum screen real estate with Sega Sammy\'s performance hardware.',specs:[{k:'Display',v:'Oversized Dual Screen'},{k:'Form Factor',v:'Premium Upright'},{k:'Topper',v:'Signature Crest'},{k:'Manufacturer',v:'Sega Sammy'},{k:'Market',v:'All Provinces'}],tags:['Dual Screen','Signature Topper','High Visibility']},
+  'panthera-curve':{oem:'Novomatic',ico:'🎰',title:'PANTHERA Curve 1.43',desc:'The PANTHERA Curve 1.43 features a stunning 1.43-metre curved display that wraps around the player for total visual immersion. Ergonomic design and premium build quality make it one of the most recognisable cabinets on any casino floor.',specs:[{k:'Display',v:'1.43m Curved Screen'},{k:'Form Factor',v:'Curved Upright'},{k:'Design',v:'Ergonomic Wrap'},{k:'Manufacturer',v:'Novomatic'},{k:'Market',v:'All Provinces'}],tags:['1.43m Curved','Ergonomic Design','Premium Build']},
+  'panthera-vip-lounge':{oem:'Novomatic',ico:'🎰',title:'Panthera V.I.P. Lounge Curve',desc:'The Panthera V.I.P. Lounge Curve is a luxury-grade curved cabinet tailored for VIP and high-limit areas. Sophisticated design, premium materials, and enhanced comfort features create an exclusive atmosphere for premium players.',specs:[{k:'Display',v:'Curved Premium'},{k:'Form Factor',v:'Luxury Lounge Upright'},{k:'Target',v:'VIP & High-Limit'},{k:'Manufacturer',v:'Novomatic'},{k:'Market',v:'All Provinces'}],tags:['VIP Design','Luxury Materials','High-Limit Floor']},
+  'vip-royal':{oem:'Novomatic',ico:'🎰',title:'V.I.P. Royal',desc:'The V.I.P. Royal represents Novomatic\'s pinnacle of luxury cabinet design — a regal, opulent gaming station crafted for the most exclusive areas of any property.',specs:[{k:'Display',v:'Premium Large Format'},{k:'Form Factor',v:'Luxury Upright'},{k:'Aesthetic',v:'Regal / Royal'},{k:'Manufacturer',v:'Novomatic'},{k:'Market',v:'All Provinces'}],tags:['Royal Aesthetic','VIP Exclusive','Luxury Finish']},
+  'diamond-x-155j':{oem:'Novomatic',ico:'🎰',title:'DIAMOND X™ 1.55J',desc:'The DIAMOND X™ 1.55J features a vivid 1.55-metre J-curved display. The J-curve geometry delivers an optimised viewing angle for every player, combining visual brilliance with a sleek, modern form factor.',specs:[{k:'Display',v:'1.55m J-Curved'},{k:'Form Factor',v:'Portrait Upright'},{k:'Curve Type',v:'J-Curve'},{k:'Manufacturer',v:'Novomatic'},{k:'Market',v:'All Provinces'}],tags:['1.55m Display','J-Curve Screen','Portrait Format']},
+  'diamond-x-232':{oem:'Novomatic',ico:'🎰',title:'DIAMOND X™ 2.32',desc:'The DIAMOND X™ 2.32 is a towering 2.32-metre display cabinet that commands the floor with sheer visual scale. Designed for maximum impact in high-traffic areas.',specs:[{k:'Display',v:'2.32m Large Format'},{k:'Form Factor',v:'Large Format Upright'},{k:'Impact',v:'Maximum Floor Presence'},{k:'Manufacturer',v:'Novomatic'},{k:'Market',v:'All Provinces'}],tags:['2.32m Giant Display','Maximum Impact','Floor Showstopper']},
+  'lotus-genius-8':{oem:'Novomatic',ico:'🎡',title:'LOTUS ROULETTE™ Genius 8',desc:'The LOTUS ROULETTE™ Genius 8 is a fully electronic multi-player roulette system with 8 individual player touchscreen terminals and a central automated roulette wheel. Supports both automated (RNG) and live ball operation.',specs:[{k:'Players',v:'Up to 8'},{k:'Wheel Type',v:'Auto / Live Ball'},{k:'Display',v:'Touchscreen Terminals'},{k:'Manufacturer',v:'Novomatic'},{k:'Market',v:'All Provinces'}],tags:['8 Player Terminals','RNG Certified','Live Ball Option','ETG']},
+  'lotus-genius':{oem:'Novomatic',ico:'🎡',title:'LOTUS ROULETTE™ Genius',desc:'The LOTUS ROULETTE™ Genius is Novomatic\'s flagship scalable multi-station electronic roulette platform with an elegant central automated wheel and premium player terminals.',specs:[{k:'Configuration',v:'Scalable'},{k:'Wheel Type',v:'Automated'},{k:'Operation',v:'Staff-Light'},{k:'Manufacturer',v:'Novomatic'},{k:'Market',v:'All Provinces'}],tags:['Flagship Model','Scalable Layout','High Throughput','ETG']}
+};
+function openModal(key){
+  var p=PRODS[key];if(!p)return;
+  document.getElementById('m-oem').textContent=p.oem;
+  document.getElementById('m-title').textContent=p.title;
+  var specs=p.specs.map(function(s){return '<div class="spec-box"><div class="sk">'+s.k+'</div><div class="sv">'+s.v+'</div></div>';}).join('');
+  var tags=p.tags.map(function(t){return '<span class="tag">'+t+'</span>';}).join('');
+  document.getElementById('m-inner').innerHTML='<div class="modal-banner"><span class="big">'+p.ico+'</span><span class="sub">'+p.title+'</span></div><div class="modal-desc">'+p.desc+'</div><div class="modal-specs">'+specs+'</div><div class="modal-tags">'+tags+'</div><button class="modal-cta" onclick="showPage(\'contact\');closeModal()">Enquire About This Product →</button>';
+  document.getElementById('prod-modal').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeModal(){document.getElementById('prod-modal').classList.remove('open');document.body.style.overflow='';}
+
+/* ── CABINET PARTS DATA ── */
+var CC_DATA={
+  aristocrat:{label:'Aristocrat',cabs:{'ARC':[{part:'Main Backplane Board',pn:'BPLN229',detail:'Gen8 platform; fits ARC, Helix, and Flame.'},{part:'13" Interactive LCD Button Deck',pn:'GFA04313-003-02',detail:'Often called the "iDeck" or dynamic button panel.'},{part:'LCD Button Unit (Single)',pn:'BTN220',detail:'Individual replacement unit for the button deck.'},{part:'Power Supply (Setec 400W)',pn:'433150',detail:'Standard Gen8 power supply.'},{part:'Graphics Card (GT430)',pn:'494077-02-GT430',detail:'Standard for many ARC configurations.'}],'HELIX XT':[{part:'Main Power Supply',pn:'433150 (Setec)',detail:'400W Gen8 Standard.'},{part:'Video Card (GT630)',pn:'439103',detail:'Used in Helix/Helix XT CPU assemblies.'},{part:'Backplane Board',pn:'BPLN229',detail:'Standard Gen8 Backplane.'},{part:'TCON Relay Board',pn:'TCON143',detail:'Specific for Helix XT / Mars X button decks.'},{part:'AD Board',pn:'029-KTC430DPA06-ADBD',detail:'For Kortek 43" XT-P displays.'}],'HELIX PLUS':[{part:'27" LCD Monitor (Main/Top)',pn:'KTK270DPA02',detail:'Kortek 27-inch P-CAP monitor.'},{part:'27" Touch Sensor',pn:'TM27HETMD',detail:'27" Projective Capacitive (P-CAP) sensor.'},{part:'AD Board',pn:'10-31090002H',detail:'WSXGA+ Lotus AD Board (Standard for Gen8).'},{part:'LCD Inverter',pn:'10-411300023',detail:'Kortek GH321A (Common for secondary power).'}]}},
+  bally:{label:'Bally',cabs:{'Wave':[{part:'40" Curved Monitor (Complete)',pn:'238549-00001 / 217392',detail:'Often model L4045S3HBY or Tovis equivalent.'},{part:'Monitor AD Board',pn:'223233-ADBD',detail:'Interface board specifically for the curved panel.'},{part:'40" P-CAP Touch Sensor',pn:'98-1100-0217-1',detail:'High-sensitivity sensor for the curved glass.'},{part:'Touch Controller',pn:'13-0010-00',detail:'3M MicroTouch Serial/USB controller.'}],'S9E':[{part:'Main CPU (Alpha 1)',pn:'127365732819 / CPU129',detail:'Standard S9E/S9000 CPU board.'},{part:'Backplane Board',pn:'PCA212344',detail:'Signal/Communication backplane.'},{part:'Power Supply (24V)',pn:'PSUP148 / 212385',detail:'Supplies power for the reels and CPU.'},{part:'Power Supply (5V/12V)',pn:'211028',detail:'Secondary power for lighting and logic.'},{part:'Communication Board',pn:'PCA212261',detail:'For SAS/Player Tracking interface.'}],'Alpha':[{part:'Alpha 1 MPU (CPU-1)',pn:'127365 / CPU129',detail:'Standard for Alpha 1 Steppers/Video.'},{part:'Backplane (Signal)',pn:'PCA212344-0-0',detail:'Main communication board.'},{part:'Backplane (Power)',pn:'PCA212319-0-0',detail:'Distribution board for cabinet power.'},{part:'Main Power Supply',pn:'212385 / PSUP148',detail:'400W universal Alpha supply.'}],'Alpha 2 V22/22':[{part:'Alpha 2 CPU (Complete)',pn:'264001 / 226458',detail:'Complete MPU assembly with 1GB or 2GB RAM.'},{part:'Alpha 2 Backplane',pn:'PCA210908-0-0',detail:'The main board that the CPU slides into.'},{part:'Video Topper Driver',pn:'PCA212710-0-0',detail:'Board for managing the external video topper.'},{part:'Main Power Supply',pn:'212385 / TMG-Z720-B',detail:'720W supply (Output: 5V, 12V, 24V).'},{part:'Video Card (MXM)',pn:'AMD E6760',detail:'High-performance card for Alpha 2 games.'}],'S9000':[{part:'Alpha 1 MPU Board',pn:'127365 / 208865',detail:'Standard CPU board (may require 512MB RAM).'},{part:'Backplane Board',pn:'PCA212344',detail:'Main signal hub for the Alpha 1 system.'},{part:'Power Supply (5V/12V)',pn:'211028',detail:'Powers the logic and low-voltage lights.'},{part:'Power Supply (24V)',pn:'212385 / PSUP148',detail:'Powers the reel motors and iDeck.'},{part:'Sound Amplifier Board',pn:'PCA211832',detail:'Located near the speakers; controls volume/output.'}]}},
+  igt:{label:'IGT',cabs:{'S2000':[{part:'Main MPU Board (502)',pn:'19630595',detail:'The most common "Non-Enhanced" board.'},{part:'Main MPU Board (504)',pn:'19630596',detail:'Standard board with legacy support.'},{part:'Enhanced MPU (960)',pn:'19631244',detail:'Requires a "Legacy Adapter" for older games.'},{part:'Backplane Board',pn:'19630594',detail:'The fixed board the MPU slides into.'},{part:'I/O Card (Door/Cabinet)',pn:'14930161',detail:'Manages buttons and switches.'}],'G20':[{part:'AVP 3.0 CPU (Brain Box)',pn:'50062001W / 102-G0193',detail:'Often marked with a Green sticker.'},{part:'Backplane Board',pn:'75832300W / 75832000W',detail:'The main signal interface board.'},{part:'Cabinet Controller PCB',pn:'75832302W',detail:'Formerly 75831530W.'},{part:'Main Power Supply',pn:'758310XX',detail:'Standard AVP 2.5/3.0 power unit.'},{part:'Top Box LCD Power Supply',pn:'400-121-00',detail:'150W dedicated supply for the upper monitor.'}],'SAVP':[{part:'AVP 3.0 CPU (Brain Box)',pn:'50062001W / 50062100W',detail:'Standard AVP 3.0 processing unit.'},{part:'S-AVP Backplane Board',pn:'75831401W / 91161001',detail:'Specific to the S-AVP/Stepper configuration.'},{part:'Video Card (AVP 3.0)',pn:'75608090W',detail:'Drives the digital displays/bonus screens.'},{part:'Main Power Supply',pn:'40012003W / YM-2441D',detail:'440W genuine IGT/Setec supply.'},{part:'AC Line Filter',pn:'50062200',detail:'120V/240V internal power filter.'}]}},
+  konami:{label:'Konami',cabs:{'KV2':[{part:'K2V Main MPU Board',pn:'230278 / 350100',detail:'The primary "Logic" board.'},{part:'Backplane Board',pn:'350105',detail:'The communication hub for the MPU.'},{part:'Power Supply (Main)',pn:'06-20098 / 350410',detail:'Standard 300W/400W dual-output unit.'},{part:'IO Board',pn:'350110',detail:'Manages button inputs and cabinet signals.'},{part:'Graphics Card (AGP/PCIe)',pn:'350100-GR',detail:'Varies by game complexity (Standard or High-Res).'}],'Podium':[{part:'KP3 CPU Board (MPU)',pn:'310436',detail:'Complete assembly; drop-in replacement.'},{part:'Backplane Board',pn:'530307 (GGFK3)',detail:'The "Motherboard" the CPU slides into.'},{part:'Video Card (MXM 2.0)',pn:'109-B34133-10',detail:'Radeon E2400 or E6760 (MXM style card).'},{part:'CPU Cooling Fan',pn:'R127010BU',detail:'Square 70mm x 10mm 3-wire fan.'},{part:'Main Power Supply',pn:'310287-U-C',detail:'TDK-Lambda 400W (GETT PN: PSUP172).'}],'Concerto':[{part:'Main KP3.5 CPU (MPU)',pn:'310859A / 310667',detail:'Standard Concerto "Brain Box."'},{part:'Video Card (MXM-II)',pn:'310669D (E8860)',detail:'High-definition card with "D001" sticker.'},{part:'Video Card Fan',pn:'530640A / GA51B2U',detail:'Apistek GPU cooling fan for E8860.'},{part:'Main Power Supply',pn:'192690 / 310610D',detail:'Standard for Concerto/Crescent cabinets.'},{part:'Backplane Board',pn:'530307 (GGFK3)',detail:'Standard interface (shared with some late KP3).'}]}},
+  wms:{label:'WMS',cabs:{'Blade':[{part:'NXT 3.2 MPU (CPU-3.2)',pn:'235122 / 212555',detail:'Standard for early Blade titles.'},{part:'NXT 3.3 MPU (CPU-3.3)',pn:'245661',detail:'Upgraded for high-res graphics.'},{part:'Backplane Board',pn:'225110-01',detail:'Signal hub for the NXT platform.'},{part:'Main Power Supply',pn:'223120 / PSUP175',detail:'400W-600W Multi-output unit.'},{part:'I/O Board (Upper)',pn:'225114-01',detail:'Manages lighting and cabinet signals.'}],'BB2':[{part:'NXT2 MPU Board',pn:'212555 / 222555',detail:'The "Brain Box" for BB2.'},{part:'Backplane Board',pn:'212110-01',detail:'Signal hub located behind the MPU.'},{part:'Main Power Supply',pn:'211120 / 223120',detail:'400W Delta or WMS-specific unit.'},{part:'I/O Board',pn:'212114-01',detail:'Controls button inputs and cabinet lights.'},{part:'Comm Board',pn:'212116-01',detail:'Handles SAS and player tracking signals.'}],'Blade Slant':[{part:'NXT 3.2 CPU Board',pn:'235122 / CPU-NXT3.2',detail:'Standard MPU for Blade Slant.'},{part:'NXT 3.5 MPU Board',pn:'CPU-NXT-3-5',detail:'High-performance upgrade.'},{part:'Main Power Supply',pn:'ARP-9016-05 / UNI-750',detail:'450W-750W Aras unit (shared with BB2).'},{part:'Backplane Board',pn:'225110-01',detail:'Signal interface for NXT 3 platforms.'},{part:'Video Card (MXM)',pn:'CT-MXM-I / 6901-019061',detail:'High-definition graphics card.'}],'Blade DX':[{part:'NXT 3.2 MPU (CPU Board)',pn:'A-029206-00-00',detail:'Standard "Brain Box" for Blade DX.'},{part:'NXT 3.2 Video Card',pn:'E4690 / 6901-019061',detail:'Radeon-based MXM card.'},{part:'NXT 3.3 Video Card',pn:'E6760',detail:'High-performance upgrade for DX titles.'},{part:'Main Power Supply (750W)',pn:'DPS-750AB-6A / 6765-1426591',detail:'Multi-output, Blue Label (Blade/BB3).'},{part:'Backplane Board',pn:'225110-01',detail:'Main interface for the NXT 3 series.'}]}},
+  ainsworth:{label:'Ainsworth',cabs:{'A560':[{part:'Main MPU Assembly',pn:'030170 / 117-AINSWORTH-A560',detail:'Complete assembly with Brain Box.'},{part:'Backplane Board',pn:'220-351-R / 117-220-351',detail:'The communication hub for the MPU.'},{part:'Power Control Board (PCB)',pn:'200739-01-A',detail:'Manages power distribution to components.'},{part:'Main Power Supply',pn:'APSM-460 / 220 279',detail:'460W (Output: +12V, +24V, +5VSB).'},{part:'Video Splitter Board',pn:'220-320',detail:'Distributes signal to dual monitor setups.'}]}},
+  ags:{label:'AGS',cabs:{'ICON':[{part:'Main MPU Logic Board',pn:'C020788 / 77215-1',detail:'Shared with AGS Orion Portrait.'},{part:'CPU Assembly (Complete)',pn:'00032D34F7D2',detail:'Standard refurbished CPU unit.'},{part:'Power Supply (120V/230V)',pn:'PSUP233 / gp305b-120-250',detail:'High-quality APD power brick kit.'},{part:'Backplane Board',pn:'C021045',detail:'Main interface for the Icon platform.'}]}},
+  aruze:{label:'Aruze',cabs:{'GENEX':[{part:'Main MPU Board',pn:'GENEX-MPU-200',detail:'The primary logic board for Genex titles.'},{part:'Backplane Board',pn:'BPL-GNX-01',detail:'Main communication interface.'},{part:'Power Supply (Main)',pn:'400-121-00 / PSUP154',detail:'Often a 300W-400W universal unit.'},{part:'I/O Board',pn:'IO-GNX-V1',detail:'Manages button inputs and lighting.'},{part:'Video Splitter Board',pn:'VSB-GNX-02',detail:'Distributes signals to dual monitors.'}]}}
+};
+
+var ccCurrentPart={};
+
+function ccSelectMfg(){
+  var mfg=document.getElementById('cc-mfg').value;
+  var prompt=document.getElementById('cc-prompt');
+  var results=document.getElementById('cc-results');
+  var sw=document.getElementById('cc-sw');
+  var clr=document.getElementById('cc-clear');
+  var cnt=document.getElementById('cc-count');
+  if(!mfg){
+    prompt.style.display='block';results.style.display='none';
+    sw.style.display='none';clr.style.display='none';
+    cnt.textContent='Select a manufacturer to view parts';return;
+  }
+  var d=CC_DATA[mfg];if(!d)return;
+  prompt.style.display='none';
+  sw.style.display='flex';clr.style.display='block';
+  document.getElementById('cc-search').value='';
+  var cabs=Object.keys(d.cabs);
+  var total=0;cabs.forEach(function(c){total+=d.cabs[c].length;});
+  cnt.textContent=d.label+' — '+total+' Parts · '+cabs.length+' Cabinet'+(cabs.length!==1?'s':'');
+  var html='';
+  cabs.forEach(function(cab){
+    var parts=d.cabs[cab];
+    var bid='ccb-'+mfg+'-'+cab.replace(/\W/g,'-');
+    html+='<div style="border-bottom:1px solid #e0e0e0">';
+    html+='<div class="cc-cab-hdr" onclick="var b=document.getElementById(\''+bid+'\');b.classList.toggle(\'open\')">';
+    html+='<h4>'+cab+'</h4><span>'+parts.length+' part'+(parts.length!==1?'s':'')+'</span></div>';
+    html+='<div class="cc-cab-body" id="'+bid+'">';
+    html+='<table class="cc-table"><thead><tr>';
+    html+='<th style="width:35%">Part Description</th>';
+    html+='<th style="width:24%">Part Number</th>';
+    html+='<th>Details</th>';
+    html+='<th style="width:110px"></th>';
+    html+='</tr></thead><tbody>';
+    parts.forEach(function(p){
+      var s=(p.part+' '+p.pn+' '+p.detail+' '+cab+' '+d.label).toLowerCase();
+      var ps=p.part.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+      var pns=p.pn.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+      html+='<tr class="cc-row" data-s="'+s.replace(/"/g,'&quot;')+'">';
+      html+='<td style="font-weight:600;color:#111">'+p.part+'</td>';
+      html+='<td><span class="cc-pn">'+p.pn+'</span></td>';
+      html+='<td style="color:#999;font-size:.78rem">'+p.detail+'</td>';
+      html+='<td><button class="cc-req" onclick="ccOpenReq(\''+ps+'\',\''+pns+'\',\''+d.label+'\',\''+cab+'\')">Request Part</button></td>';
+      html+='</tr>';
+    });
+    html+='</tbody></table></div></div>';
+  });
+  results.innerHTML=html;
+  results.style.display='block';
+}
+
+function ccSearch(){
+  var q=(document.getElementById('cc-search').value||'').trim().toLowerCase();
+  document.querySelectorAll('.cc-row').forEach(function(r){
+    r.style.display=(!q||(r.getAttribute('data-s')||'').indexOf(q)!==-1)?'':'none';
+  });
+  document.querySelectorAll('#cc-results>div').forEach(function(sec){
+    var vis=Array.from(sec.querySelectorAll('.cc-row')).some(function(r){return r.style.display!=='none';});
+    sec.style.display=vis?'':'none';
+    if(vis&&q){var b=sec.querySelector('.cc-cab-body');if(b)b.classList.add('open');}
+  });
+}
+
+function ccClear(){
+  document.getElementById('cc-mfg').value='';
+  document.getElementById('cc-search').value='';
+  ccSelectMfg();
+}
+
+function ccOpenReq(part,pn,mfg,cab){
+  ccCurrentPart={part:part,pn:pn,mfg:mfg,cab:cab};
+  document.getElementById('req-title').textContent=part;
+  document.getElementById('req-pn').textContent=pn;
+  document.getElementById('req-name').value='';
+  document.getElementById('req-email').value='';
+  document.getElementById('req-qty').value='1';
+  document.getElementById('req-notes').value='';
+  document.getElementById('req-err').style.display='none';
+  document.getElementById('req-ok').style.display='none';
+  document.getElementById('req-submit').style.display='block';
+  document.getElementById('req-modal').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeReq(){
+  document.getElementById('req-modal').classList.remove('open');
+  document.body.style.overflow='';
+}
+function submitReq(){
+  var name=document.getElementById('req-name').value.trim();
+  var email=document.getElementById('req-email').value.trim();
+  var err=document.getElementById('req-err');
+  if(!name||!email){err.textContent='Please enter your name and email address.';err.style.display='block';return;}
+  if(!/\S+@\S+\.\S+/.test(email)){err.textContent='Please enter a valid email address.';err.style.display='block';return;}
+  err.style.display='none';
+  var qty=document.getElementById('req-qty').value||'1';
+  var notes=document.getElementById('req-notes').value.trim();
+  var subj='Parts Request: '+ccCurrentPart.pn+' ('+ccCurrentPart.mfg+' — '+ccCurrentPart.cab+')';
+  var body='PARTS REQUEST\n\nPart: '+ccCurrentPart.part+'\nPart Number: '+ccCurrentPart.pn+'\nManufacturer: '+ccCurrentPart.mfg+'\nCabinet: '+ccCurrentPart.cab+'\nQuantity: '+qty+'\n\nRequested By: '+name+'\nEmail: '+email+(notes?'\n\nNotes: '+notes:'');
+  window.location.href='mailto:sales@r2gaming.com?subject='+encodeURIComponent(subj)+'&body='+encodeURIComponent(body)+'&cc='+encodeURIComponent(email);
+  document.getElementById('req-ok').style.display='block';
+  document.getElementById('req-submit').style.display='none';
+}
+
+/* ── SEARCH ── */
+var SD=[
+  {page:'home',label:'Home',title:'R2 Gaming — Full Service Gaming Company',snippet:'Established 2005. Operations covering every Canadian province.'},
+  {page:'about',label:'About',title:'About R2 Gaming',snippet:'R2 Gaming, Lang\'s Ventures Inc, R2 Technology Solutions.'},
+  {page:'products',label:'Products',title:'Slot Machines & ETGs',snippet:'Genesis Atmos, Genesis Crest, PANTHERA Curve, DIAMOND X, LOTUS ROULETTE.'},
+  {page:'services',label:'Services',title:'Technical Services',snippet:'Field installation, preventative maintenance, emergency response, repair.'},
+  {page:'parts',label:'Parts',title:'Parts & Components',snippet:'Bill validators, ticket printers, PCBs, displays, cabinet parts.'},
+  {page:'contact',label:'Contact',title:'Contact R2 Gaming',snippet:'Phone: (905) 901-3108 · Email: info@r2gaming.com'}
+];
+function doSearch(q){
+  var dd=document.getElementById('sdrop');
+  q=q.trim();if(!q){closeSearch();return;}
+  var ql=q.toLowerCase();
+  var res=SD.filter(function(d){return d.title.toLowerCase().indexOf(ql)!==-1||d.snippet.toLowerCase().indexOf(ql)!==-1||d.label.toLowerCase().indexOf(ql)!==-1;});
+  dd.innerHTML=!res.length?'<div class="sdrop-empty">No results for "'+q+'"</div>':'<div class="sdrop-hd">'+res.length+' result'+(res.length!==1?'s':'')+' found</div>'+res.map(function(r){return '<div class="sdrop-item" onclick="showPage(\''+r.page+'\')"><div class="sdrop-lbl">'+r.label+'</div><div class="sdrop-title">'+r.title+'</div><div class="sdrop-snip">'+r.snippet+'</div></div>';}).join('');
+  dd.classList.add('open');
+}
+function closeSearch(){document.getElementById('sdrop').classList.remove('open');}
+document.addEventListener('click',function(e){if(!document.querySelector('.nav-search').contains(e.target))closeSearch();});
+
+/* auto-wrap all buttons with placeholder indicator on load */
+document.addEventListener('DOMContentLoaded',function(){
+  var sel='.btn-wh,.btn-red,.lm-btn,.broch,.f-submit,.req-submit,.modal-cta,.cc-req';
+  document.querySelectorAll(sel).forEach(function(btn){
+    if(btn.closest('.btn-ph-wrap'))return;
+    var w=document.createElement('span');
+    w.className='btn-ph-wrap';
+    btn.parentNode.insertBefore(w,btn);
+    w.appendChild(btn);
+  });
+});
+function submitForm(){
+  var fn=document.getElementById('f-fname').value.trim(),em=document.getElementById('f-email').value.trim();
+  if(!fn||!em){var el=document.getElementById(!fn?'f-fname':'f-email');el.style.borderColor='var(--red)';el.focus();setTimeout(function(){el.style.borderColor='';},2000);return;}
+  document.getElementById('f-inner').style.display='none';
+  document.getElementById('f-success').classList.add('show');
+}
+function resetForm(){
+  ['f-fname','f-lname','f-email','f-phone','f-company','f-message'].forEach(function(id){document.getElementById(id).value='';});
+  document.getElementById('f-province').selectedIndex=0;
+  document.getElementById('f-interest').selectedIndex=0;
+  document.getElementById('f-success').classList.remove('show');
+  document.getElementById('f-inner').style.display='block';
+}
+</script>
+</body>
+</html>
