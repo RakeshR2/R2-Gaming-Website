@@ -1179,7 +1179,7 @@ function ccSelectMfg(){
   var total=0;cabs.forEach(function(c){total+=d.cabs[c].length;});
   cnt.textContent=d.label+' — '+total+' Parts · '+cabs.length+' Cabinet'+(cabs.length!==1?'s':'');
   var html='';
-  ccPartsIndex=[];
+  var startIdx=ccPartsIndex.length;
   cabs.forEach(function(cab){
     var parts=d.cabs[cab];
     var bid='ccb-'+mfg+'-'+cab.replace(/\W/g,'-');
