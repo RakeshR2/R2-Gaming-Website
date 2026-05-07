@@ -965,6 +965,16 @@ function switchBrand(brand){
 
 /* ── PARTS CART ── */
 var partsCart=[];
+var ccPartsIndex=[];
+
+function addToCartByIndex(idx){
+  var p=ccPartsIndex[idx];
+  if(!p)return;
+  var existing=partsCart.find(function(i){return i.pn===p.pn;});
+  if(existing){existing.qty++;}else{partsCart.push({part:p.part,pn:p.pn,mfg:p.mfg,cab:p.cab,qty:1});}
+  renderCart();
+  showToast();
+}
 
 function addToCart(part,pn,mfg,cab){
   var existing=partsCart.find(function(i){return i.pn===pn;});
@@ -1169,6 +1179,7 @@ function ccSelectMfg(){
   var total=0;cabs.forEach(function(c){total+=d.cabs[c].length;});
   cnt.textContent=d.label+' — '+total+' Parts · '+cabs.length+' Cabinet'+(cabs.length!==1?'s':'');
   var html='';
+  ccPartsIndex=[];
   cabs.forEach(function(cab){
     var parts=d.cabs[cab];
     var bid='ccb-'+mfg+'-'+cab.replace(/\W/g,'-');
@@ -1184,15 +1195,13 @@ function ccSelectMfg(){
     html+='</tr></thead><tbody>';
     parts.forEach(function(p){
       var s=(p.part+' '+p.pn+' '+p.detail+' '+cab+' '+d.label).toLowerCase();
-      var ps=encodeURIComponent(p.part);
-      var pns=encodeURIComponent(p.pn);
-      var cabs=encodeURIComponent(cab);
-      var mfgs=encodeURIComponent(d.label);
+      var idx=ccPartsIndex.length;
+      ccPartsIndex.push({part:p.part,pn:p.pn,mfg:d.label,cab:cab});
       html+='<tr class="cc-row" data-s="'+s.replace(/"/g,'&quot;')+'">';
       html+='<td style="font-weight:600;color:#111">'+p.part+'</td>';
       html+='<td><span class="cc-pn">'+p.pn+'</span></td>';
       html+='<td style="color:#999;font-size:.78rem">'+p.detail+'</td>';
-      html+='<td><button class="cc-req" onclick="addToCart(decodeURIComponent(\''+ps+'\'),decodeURIComponent(\''+pns+'\'),decodeURIComponent(\''+mfgs+'\'),decodeURIComponent(\''+cabs+'\'))">+ Add to Cart</button></td>';
+      html+='<td><button class="cc-req" onclick="addToCartByIndex('+idx+')">+ Add to Cart</button></td>';
       html+='</tr>';
     });
     html+='</tbody></table></div></div>';
