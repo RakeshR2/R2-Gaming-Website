@@ -646,11 +646,19 @@ footer{background:#111;padding:44px 40px 0}
       </div>
       <!-- Brand Tabs -->
       <div style="display:flex;gap:0;border:1.5px solid #e0e0e0;border-radius:4px;overflow:hidden;max-width:400px;margin-bottom:44px">
-        <div id="tab-novomatic" onclick="switchBrand('novomatic')" style="flex:1;padding:13px 20px;text-align:center;font-family:'Montserrat',sans-serif;font-size:.82rem;font-weight:700;cursor:pointer;background:var(--red);color:#fff;border-right:1.5px solid #e0e0e0;transition:all .2s">Novomatic</div>
-        <div id="tab-segasammy" onclick="switchBrand('segasammy')" style="flex:1;padding:13px 20px;text-align:center;font-family:'Montserrat',sans-serif;font-size:.82rem;font-weight:700;cursor:pointer;background:#fff;color:#111;transition:all .2s">SegaSammy</div>
+        <div id="tab-segasammy" onclick="switchBrand('segasammy')" style="flex:1;padding:13px 20px;text-align:center;font-family:'Montserrat',sans-serif;font-size:.82rem;font-weight:700;cursor:pointer;background:var(--red);color:#fff;border-right:1.5px solid #e0e0e0;transition:all .2s">SegaSammy</div>
+        <div id="tab-novomatic" onclick="switchBrand('novomatic')" style="flex:1;padding:13px 20px;text-align:center;font-family:'Montserrat',sans-serif;font-size:.82rem;font-weight:700;cursor:pointer;background:#fff;color:#111;transition:all .2s">Novomatic</div>
+      </div>
+      <!-- SegaSammy -->
+      <div id="brand-segasammy">
+        <p style="font-family:'Montserrat',sans-serif;font-size:1.4rem;font-weight:900;color:#111;letter-spacing:2px;text-transform:uppercase;text-align:center;margin-bottom:36px"><img src="SegaSammylogo.png" alt="Sega Sammy" style="height:70px;width:220px;object-fit:contain"></p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:28px">
+          <div style="text-align:center;cursor:pointer" onclick="openModal('genesis-atmos')"><div style="height:250px;background:#fff;border-radius:4px;overflow:hidden;margin-bottom:12px;border:1px solid #e0e0e0"><img src="genesisatmos.png" style="width:100%;height:100%;object-fit:contain;display:block"></div><p style="font-family:'Montserrat',sans-serif;font-size:.88rem;font-weight:700;color:#111">Genesis Atmos</p></div>
+          <div style="text-align:center;cursor:pointer" onclick="openModal('genesis-crest')"><div style="height:250px;background:#fff;border-radius:4px;overflow:hidden;margin-bottom:12px;border:1px solid #e0e0e0"><img src="Genesiscrest.jpg" style="width:100%;height:100%;object-fit:contain;display:block"></div><p style="font-family:'Montserrat',sans-serif;font-size:.88rem;font-weight:700;color:#111">Genesis Crest</p></div>
+        </div>
       </div>
       <!-- Novomatic -->
-      <div id="brand-novomatic">
+      <div id="brand-novomatic" style="display:none">
         <p style="text-align:center;margin-bottom:36px"><img src="NovomaticLogo.png" alt="Novomatic" style="height:90px;width:260px;object-fit:contain;background:#fff;padding:4px;border-radius:4px"></p>
         <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:28px">
           <div style="text-align:center;cursor:pointer" onclick="openModal('panthera-curve')"><div style="height:250px;background:#fff;border-radius:4px;overflow:hidden;margin-bottom:12px;border:1px solid #e0e0e0"><img src="Pantheracurve1.43.jpg" style="width:100%;height:100%;object-fit:contain"></div><p style="font-family:'Montserrat',sans-serif;font-size:.88rem;font-weight:700;color:#111">PANTHERA Curve 1.43</p></div>
@@ -660,8 +668,8 @@ footer{background:#111;padding:44px 40px 0}
           <div style="text-align:center;cursor:pointer" onclick="openModal('diamond-x-232')"><div style="height:250px;background:#fff;border-radius:4px;overflow:hidden;margin-bottom:12px;border:1px solid #e0e0e0"><img src="novomaticdiamond2.32.jpg" style="width:100%;height:100%;object-fit:contain"></div><p style="font-family:'Montserrat',sans-serif;font-size:.88rem;font-weight:700;color:#111">DIAMOND X™ 2.32</p></div>
         </div>
       </div>
-      <!-- SegaSammy -->
-      <div id="brand-segasammy" style="display:none">
+      <!-- SegaSammy panel moved above -->
+      <div id="brand-segasammy-old" style="display:none">
         <p style="text-align:center;margin-bottom:36px"><img src="SegaSammylogo.png" alt="Sega Sammy" style="height:70px;width:220px;object-fit:contain"></p>
         <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:28px">
           <div style="text-align:center;cursor:pointer" onclick="openModal('genesis-atmos')"><div style="height:250px;background:#fff;border-radius:4px;overflow:hidden;margin-bottom:12px;border:1px solid #e0e0e0"><img src="genesisatmos.png" style="width:100%;height:100%;object-fit:contain"></div><p style="font-family:'Montserrat',sans-serif;font-size:.88rem;font-weight:700;color:#111">Genesis Atmos</p></div>
@@ -969,19 +977,19 @@ footer{background:#111;padding:44px 40px 0}
     <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:48px 32px;align-items:center;justify-items:center">
 
       <div style="display:flex;align-items:center;justify-content:center;padding:20px;width:100%">
-        <img src="JCMlogo.png" alt="JCM Global" style="max-height:70px;max-width:180px;object-fit:contain">
+        <img src="JCMlogo.png" alt="JCM Global" style="height:60px;width:180px;object-fit:contain">
       </div>
       <div style="display:flex;align-items:center;justify-content:center;padding:20px;width:100%">
-        <img src="NovomaticLogo.png" alt="Novomatic" style="max-height:80px;max-width:180px;object-fit:contain;background:#fff;padding:4px;border-radius:4px">
+        <img src="NovomaticLogo.png" alt="Novomatic" style="height:60px;width:180px;object-fit:contain;background:#fff;padding:4px;border-radius:4px">
       </div>
       <div style="display:flex;align-items:center;justify-content:center;padding:20px;width:100%">
-        <img src="SegaSammylogo.png" alt="Sega Sammy" style="max-height:70px;max-width:180px;object-fit:contain">
+        <img src="SegaSammylogo.png" alt="Sega Sammy" style="height:60px;width:180px;object-fit:contain">
       </div>
       <div style="display:flex;align-items:center;justify-content:center;padding:20px;width:100%">
-        <img src="CountRlogo.png" alt="CountR" style="max-height:70px;max-width:180px;object-fit:contain">
+        <img src="CountRlogo.png" alt="CountR" style="height:60px;width:180px;object-fit:contain">
       </div>
       <div style="display:flex;align-items:center;justify-content:center;padding:20px;width:100%">
-        <img src="patierlogo.webp" alt="Patir Seating" style="max-height:70px;max-width:180px;object-fit:contain">
+        <img src="patierlogo.webp" alt="Patir Seating" style="height:60px;width:180px;object-fit:contain">
       </div>
 
     </div>
@@ -1059,6 +1067,7 @@ function switchBrand(brand){
   document.getElementById('tab-segasammy').style.background = brand==='segasammy' ? 'var(--red)' : '#fff';
   document.getElementById('tab-segasammy').style.color = brand==='segasammy' ? '#fff' : '#111';
 }
+document.addEventListener('DOMContentLoaded',function(){switchBrand('segasammy');});
 
 /* ── PARTS CART ── */
 var partsCart=[];
