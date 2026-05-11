@@ -620,7 +620,7 @@ footer{background:#111;padding:44px 40px 0}
 
       <!-- Peripherals & Systems -->
       <div style="background:#fff;border-radius:8px;overflow:hidden;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.08);transition:transform .2s,box-shadow .2s" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 8px 24px rgba(0,0,0,.15)'" onmouseout="this.style.transform='';this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onclick="showProdDetail('peripherals')">
-        <div style="height:200px;overflow:hidden"><img src="Peripheralsandsystems.png" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+        <div style="height:140px;overflow:hidden"><img src="Peripheralsandsystems.png" style="width:100%;height:100%;object-fit:cover;display:block"></div>
         <div style="padding:18px 20px"><h3 style="font-family:'Montserrat',sans-serif;font-size:1.05rem;font-weight:800;color:#111">Peripherals &amp; Systems</h3></div>
       </div>
 
@@ -698,32 +698,32 @@ footer{background:#111;padding:44px 40px 0}
         <a href="https://jcmglobal.com/" target="_blank" style="display:inline-block;margin-top:14px;padding:8px 20px;border:2px solid var(--red);color:var(--red);border-radius:2px;font-family:'Montserrat',sans-serif;font-size:.7rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none" onmouseover="this.style.background='var(--red)';this.style.color='#fff'" onmouseout="this.style.background='transparent';this.style.color='var(--red)'">Visit JCM Global Website →</a>
       </div>
       <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:28px">
-        <div style="text-align:center;cursor:pointer">
+        <div style="text-align:center;cursor:pointer" onclick="openModal('ivizion')">
           <div style="height:220px;background:#fff;border-radius:4px;overflow:hidden;margin-bottom:12px;border:1px solid #e0e0e0;display:flex;align-items:center;justify-content:center"><p style="font-size:.68rem;color:#bbb;font-family:'Montserrat',sans-serif">📷 Photo</p></div>
           <p style="font-family:'Montserrat',sans-serif;font-size:.88rem;font-weight:700;color:#111">IVIZION Bill Validator</p>
           <p style="font-family:'Open Sans',sans-serif;font-size:.78rem;color:#888;margin-top:4px">Foundation of Intelligent Validation</p>
         </div>
-        <div style="text-align:center;cursor:pointer">
+        <div style="text-align:center;cursor:pointer" onclick="openModal('gen5-printer')">
           <div style="height:220px;background:#fff;border-radius:4px;overflow:hidden;margin-bottom:12px;border:1px solid #e0e0e0;display:flex;align-items:center;justify-content:center"><p style="font-size:.68rem;color:#bbb;font-family:'Montserrat',sans-serif">📷 Photo</p></div>
           <p style="font-family:'Montserrat',sans-serif;font-size:.88rem;font-weight:700;color:#111">GEN5 Thermal Printer</p>
           <p style="font-family:'Open Sans',sans-serif;font-size:.78rem;color:#888;margin-top:4px">High-speed TITO ticket printer</p>
         </div>
-        <div style="text-align:center;cursor:pointer">
+        <div style="text-align:center;cursor:pointer" onclick="openModal('bluewaved')">
           <div style="height:220px;background:#fff;border-radius:4px;overflow:hidden;margin-bottom:12px;border:1px solid #e0e0e0;display:flex;align-items:center;justify-content:center"><p style="font-size:.68rem;color:#bbb;font-family:'Montserrat',sans-serif">📷 Photo</p></div>
           <p style="font-family:'Montserrat',sans-serif;font-size:.88rem;font-weight:700;color:#111">BlueWaveDX</p>
           <p style="font-family:'Open Sans',sans-serif;font-size:.78rem;color:#888;margin-top:4px">Wireless data management system</p>
         </div>
-        <div style="text-align:center;cursor:pointer">
+        <div style="text-align:center;cursor:pointer" onclick="openModal('couponxpress')">
           <div style="height:220px;background:#fff;border-radius:4px;overflow:hidden;margin-bottom:12px;border:1px solid #e0e0e0;display:flex;align-items:center;justify-content:center"><p style="font-size:.68rem;color:#bbb;font-family:'Montserrat',sans-serif">📷 Photo</p></div>
           <p style="font-family:'Montserrat',sans-serif;font-size:.88rem;font-weight:700;color:#111">CouponXpress Printer</p>
           <p style="font-family:'Open Sans',sans-serif;font-size:.78rem;color:#888;margin-top:4px">Compact coupon & ticket printer</p>
         </div>
-        <div style="text-align:center;cursor:pointer">
+        <div style="text-align:center;cursor:pointer" onclick="openModal('fuzion')">
           <div style="height:220px;background:#fff;border-radius:4px;overflow:hidden;margin-bottom:12px;border:1px solid #e0e0e0;display:flex;align-items:center;justify-content:center"><p style="font-size:.68rem;color:#bbb;font-family:'Montserrat',sans-serif">📷 Photo</p></div>
           <p style="font-family:'Montserrat',sans-serif;font-size:.88rem;font-weight:700;color:#111">FUZION Technology</p>
           <p style="font-family:'Open Sans',sans-serif;font-size:.78rem;color:#888;margin-top:4px">Intelligent cash management system</p>
         </div>
-        <div style="text-align:center;cursor:pointer">
+        <div style="text-align:center;cursor:pointer" onclick="openModal('cashbox')">
           <div style="height:220px;background:#fff;border-radius:4px;overflow:hidden;margin-bottom:12px;border:1px solid #e0e0e0;display:flex;align-items:center;justify-content:center"><p style="font-size:.68rem;color:#bbb;font-family:'Montserrat',sans-serif">📷 Photo</p></div>
           <p style="font-family:'Montserrat',sans-serif;font-size:.88rem;font-weight:700;color:#111">Intelligent Cash Box</p>
           <p style="font-family:'Open Sans',sans-serif;font-size:.78rem;color:#888;margin-top:4px">Smart cash box with real-time tracking</p>
@@ -1325,7 +1325,13 @@ var PRODS={
   'diamond-x-155j':{oem:'Novomatic',img:'novomaticdiamond1.5j.jpg',title:'DIAMOND X™ 1.55J',desc:'The DIAMOND X™ 1.55J is a vertical format gaming cabinet with a large portrait display and a bold, eye-catching design. Engineered for high performance and maximum game variety.',specs:[{k:'Display',v:'Portrait Vertical Screen'},{k:'Form Factor',v:'Upright Vertical'},{k:'Design',v:'Bold Diamond Series'},{k:'Manufacturer',v:'Novomatic'},{k:'Market',v:'All Provinces'}],tags:['Vertical Display','Diamond Series','High Performance']},
   'diamond-x-232':{oem:'Novomatic',img:'novomaticdiamond2.32.jpg',title:'DIAMOND X™ 2.32',desc:'The DIAMOND X™ 2.32 features an expansive 2.32-metre display surface delivering stunning visuals and game content. Part of Novomatic\'s premium Diamond X series designed for maximum player engagement.',specs:[{k:'Display',v:'2.32m Display Surface'},{k:'Form Factor',v:'Large Format Upright'},{k:'Design',v:'Diamond Series Premium'},{k:'Manufacturer',v:'Novomatic'},{k:'Market',v:'All Provinces'}],tags:['2.32m Display','Diamond Series','Large Format']},
   'lotus-genius-8':{oem:'Novomatic',img:'LOTUSROULETTEGenius8.png',title:'LOTUS ROULETTE™ Genius 8',desc:'The LOTUS ROULETTE™ Genius 8 is a fully electronic multi-player roulette system with 8 individual player touchscreen terminals and a central automated roulette wheel. Supports both automated (RNG) and live ball operation.',specs:[{k:'Players',v:'Up to 8'},{k:'Wheel Type',v:'Auto / Live Ball'},{k:'Display',v:'Touchscreen Terminals'},{k:'Manufacturer',v:'Novomatic'},{k:'Market',v:'All Provinces'}],tags:['8 Player Terminals','RNG Certified','Live Ball Option','ETG']},
-  'lotus-genius':{oem:'Novomatic',img:'LOTUSROULETTGenius.png',title:'LOTUS ROULETTE™ Genius',desc:'The LOTUS ROULETTE™ Genius is Novomatic\'s flagship scalable multi-station electronic roulette platform with an elegant central automated wheel and premium player terminals.',specs:[{k:'Configuration',v:'Scalable'},{k:'Wheel Type',v:'Automated'},{k:'Operation',v:'Staff-Light'},{k:'Manufacturer',v:'Novomatic'},{k:'Market',v:'All Provinces'}],tags:['Flagship Model','Scalable Layout','High Throughput','ETG']}
+  'lotus-genius':{oem:'Novomatic',img:'LOTUSROULETTGenius.png',title:'LOTUS ROULETTE™ Genius',desc:'The LOTUS ROULETTE™ Genius is Novomatic\'s flagship scalable multi-station electronic roulette platform with an elegant central automated wheel and premium player terminals.',specs:[{k:'Configuration',v:'Scalable'},{k:'Wheel Type',v:'Automated'},{k:'Operation',v:'Staff-Light'},{k:'Manufacturer',v:'Novomatic'},{k:'Market',v:'All Provinces'}],tags:['Flagship Model','Scalable Layout','High Throughput','ETG']},
+  'ivizion':{oem:'JCM Global',title:'IVIZION Bill Validator',desc:'The IVIZION Bill Validator is the foundation of intelligent validation from JCM Global. Features advanced note recognition, high-speed processing and industry-leading reliability for casino and lottery environments.',specs:[{k:'Type',v:'Bill Validator'},{k:'Technology',v:'Intelligent Validation'},{k:'Manufacturer',v:'JCM Global'},{k:'Market',v:'All Provinces'}],tags:['Bill Validator','High Speed','Casino Grade']},
+  'gen5-printer':{oem:'JCM Global',title:'GEN5 Thermal Printer',desc:'The GEN5 Thermal Printer is JCM\'s high-speed TITO ticket printer designed for demanding casino environments. Delivers fast, reliable ticket printing with minimal maintenance.',specs:[{k:'Type',v:'Thermal Printer'},{k:'Application',v:'TITO Tickets'},{k:'Speed',v:'High Speed'},{k:'Manufacturer',v:'JCM Global'},{k:'Market',v:'All Provinces'}],tags:['TITO','Thermal Print','High Speed']},
+  'bluewaved':{oem:'JCM Global',title:'BlueWaveDX',desc:'BlueWaveDX is JCM\'s wireless data management system providing real-time monitoring and control of validators and printers across the gaming floor.',specs:[{k:'Type',v:'Data Management'},{k:'Connectivity',v:'Wireless'},{k:'Application',v:'Floor Monitoring'},{k:'Manufacturer',v:'JCM Global'},{k:'Market',v:'All Provinces'}],tags:['Wireless','Real-Time','Floor Management']},
+  'couponxpress':{oem:'JCM Global',title:'CouponXpress Printer',desc:'The CouponXpress Printer is a compact, high-performance printer for coupons and tickets. Ideal for promotions, rewards programs and loyalty applications in casino environments.',specs:[{k:'Type',v:'Coupon Printer'},{k:'Application',v:'Promotions & Loyalty'},{k:'Form Factor',v:'Compact'},{k:'Manufacturer',v:'JCM Global'},{k:'Market',v:'All Provinces'}],tags:['Coupon Printing','Compact','Promotions']},
+  'fuzion':{oem:'JCM Global',title:'FUZION Technology',desc:'FUZION Technology is JCM\'s intelligent cash management system combining bill validation and cash handling in one integrated solution for streamlined casino operations.',specs:[{k:'Type',v:'Cash Management'},{k:'Integration',v:'Bill Validation + Cash'},{k:'Application',v:'Casino Operations'},{k:'Manufacturer',v:'JCM Global'},{k:'Market',v:'All Provinces'}],tags:['Cash Management','Integrated','Smart System']},
+  'cashbox':{oem:'JCM Global',title:'Intelligent Cash Box',desc:'The Intelligent Cash Box from JCM Global provides smart cash storage with real-time tracking and reporting. Designed for secure, efficient cash management on the gaming floor.',specs:[{k:'Type',v:'Cash Box'},{k:'Features',v:'Real-Time Tracking'},{k:'Security',v:'Intelligent Monitoring'},{k:'Manufacturer',v:'JCM Global'},{k:'Market',v:'All Provinces'}],tags:['Cash Box','Smart Tracking','Secure']}
 };
 function openModal(key){
   var p=PRODS[key];if(!p)return;
