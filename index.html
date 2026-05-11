@@ -618,6 +618,14 @@ footer{background:#111;padding:44px 40px 0}
         <div style="padding:18px 20px"><h3 style="font-family:'Montserrat',sans-serif;font-size:1.05rem;font-weight:800;color:#111">Electronic Table Games</h3></div>
       </div>
 
+      <!-- Peripherals & Systems -->
+      <div style="background:#fff;border-radius:8px;overflow:hidden;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.08);transition:transform .2s,box-shadow .2s" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 8px 24px rgba(0,0,0,.15)'" onmouseout="this.style.transform='';this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onclick="showProdDetail('peripherals')">
+        <div style="height:200px;background:#222;display:flex;align-items:center;justify-content:center">
+          <p style="font-family:'Montserrat',sans-serif;font-size:.7rem;color:rgba(255,255,255,.4);letter-spacing:2px">📷 Peripherals Photo</p>
+        </div>
+        <div style="padding:18px 20px"><h3 style="font-family:'Montserrat',sans-serif;font-size:1.05rem;font-weight:800;color:#111">Peripherals &amp; Systems</h3></div>
+      </div>
+
       <!-- Casino Seating -->
       <div style="background:#fff;border-radius:8px;overflow:hidden;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.08);transition:transform .2s,box-shadow .2s" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 8px 24px rgba(0,0,0,.15)'" onmouseout="this.style.transform='';this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onclick="showProdDetail('seating')">
         <div style="height:200px;overflow:hidden">
@@ -674,6 +682,53 @@ footer{background:#111;padding:44px 40px 0}
         <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:28px">
           <div style="text-align:center;cursor:pointer" onclick="openModal('genesis-atmos')"><div style="height:250px;background:#fff;border-radius:4px;overflow:hidden;margin-bottom:12px;border:1px solid #e0e0e0"><img src="genesisatmos.png" style="width:100%;height:100%;object-fit:contain"></div><p style="font-family:'Montserrat',sans-serif;font-size:.88rem;font-weight:700;color:#111">Genesis Atmos</p></div>
           <div style="text-align:center;cursor:pointer" onclick="openModal('genesis-crest')"><div style="height:250px;background:#fff;border-radius:4px;overflow:hidden;margin-bottom:12px;border:1px solid #e0e0e0"><img src="Genesiscrest.jpg" style="width:100%;height:100%;object-fit:contain"></div><p style="font-family:'Montserrat',sans-serif;font-size:.88rem;font-weight:700;color:#111">Genesis Crest</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PERIPHERALS DETAIL -->
+  <div id="prod-detail-peripherals" style="display:none;background:#fff;padding:52px 40px;border-top:3px solid var(--red)">
+    <div style="max-width:1100px;margin:0 auto">
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:36px">
+        <button onclick="hideProdDetail()" style="background:none;border:2px solid #e0e0e0;border-radius:2px;padding:6px 14px;font-family:'Montserrat',sans-serif;font-size:.7rem;font-weight:700;cursor:pointer;color:#888">← Back</button>
+        <h2 style="font-family:'Montserrat',sans-serif;font-size:1.6rem;font-weight:900;color:#111;text-transform:uppercase">Peripherals &amp; Systems</h2>
+      </div>
+      <div style="text-align:center;margin-bottom:44px">
+        <img src="JCMlogo.png" alt="JCM Global" style="height:70px;width:220px;object-fit:contain;margin-bottom:16px">
+        <p style="color:#888;font-size:.9rem;max-width:580px;margin:0 auto;line-height:1.75">JCM Global delivers industry-leading bill validators, thermal printers and cash management systems for casino and lottery environments worldwide.</p>
+        <a href="https://jcmglobal.com/" target="_blank" style="display:inline-block;margin-top:14px;padding:8px 20px;border:2px solid var(--red);color:var(--red);border-radius:2px;font-family:'Montserrat',sans-serif;font-size:.7rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none" onmouseover="this.style.background='var(--red)';this.style.color='#fff'" onmouseout="this.style.background='transparent';this.style.color='var(--red)'">Visit JCM Global Website →</a>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:28px">
+        <div style="text-align:center;cursor:pointer">
+          <div style="height:220px;background:#fff;border-radius:4px;overflow:hidden;margin-bottom:12px;border:1px solid #e0e0e0;display:flex;align-items:center;justify-content:center"><p style="font-size:.68rem;color:#bbb;font-family:'Montserrat',sans-serif">📷 Photo</p></div>
+          <p style="font-family:'Montserrat',sans-serif;font-size:.88rem;font-weight:700;color:#111">IVIZION Bill Validator</p>
+          <p style="font-family:'Open Sans',sans-serif;font-size:.78rem;color:#888;margin-top:4px">Foundation of Intelligent Validation</p>
+        </div>
+        <div style="text-align:center;cursor:pointer">
+          <div style="height:220px;background:#fff;border-radius:4px;overflow:hidden;margin-bottom:12px;border:1px solid #e0e0e0;display:flex;align-items:center;justify-content:center"><p style="font-size:.68rem;color:#bbb;font-family:'Montserrat',sans-serif">📷 Photo</p></div>
+          <p style="font-family:'Montserrat',sans-serif;font-size:.88rem;font-weight:700;color:#111">GEN5 Thermal Printer</p>
+          <p style="font-family:'Open Sans',sans-serif;font-size:.78rem;color:#888;margin-top:4px">High-speed TITO ticket printer</p>
+        </div>
+        <div style="text-align:center;cursor:pointer">
+          <div style="height:220px;background:#fff;border-radius:4px;overflow:hidden;margin-bottom:12px;border:1px solid #e0e0e0;display:flex;align-items:center;justify-content:center"><p style="font-size:.68rem;color:#bbb;font-family:'Montserrat',sans-serif">📷 Photo</p></div>
+          <p style="font-family:'Montserrat',sans-serif;font-size:.88rem;font-weight:700;color:#111">BlueWaveDX</p>
+          <p style="font-family:'Open Sans',sans-serif;font-size:.78rem;color:#888;margin-top:4px">Wireless data management system</p>
+        </div>
+        <div style="text-align:center;cursor:pointer">
+          <div style="height:220px;background:#fff;border-radius:4px;overflow:hidden;margin-bottom:12px;border:1px solid #e0e0e0;display:flex;align-items:center;justify-content:center"><p style="font-size:.68rem;color:#bbb;font-family:'Montserrat',sans-serif">📷 Photo</p></div>
+          <p style="font-family:'Montserrat',sans-serif;font-size:.88rem;font-weight:700;color:#111">CouponXpress Printer</p>
+          <p style="font-family:'Open Sans',sans-serif;font-size:.78rem;color:#888;margin-top:4px">Compact coupon & ticket printer</p>
+        </div>
+        <div style="text-align:center;cursor:pointer">
+          <div style="height:220px;background:#fff;border-radius:4px;overflow:hidden;margin-bottom:12px;border:1px solid #e0e0e0;display:flex;align-items:center;justify-content:center"><p style="font-size:.68rem;color:#bbb;font-family:'Montserrat',sans-serif">📷 Photo</p></div>
+          <p style="font-family:'Montserrat',sans-serif;font-size:.88rem;font-weight:700;color:#111">FUZION Technology</p>
+          <p style="font-family:'Open Sans',sans-serif;font-size:.78rem;color:#888;margin-top:4px">Intelligent cash management system</p>
+        </div>
+        <div style="text-align:center;cursor:pointer">
+          <div style="height:220px;background:#fff;border-radius:4px;overflow:hidden;margin-bottom:12px;border:1px solid #e0e0e0;display:flex;align-items:center;justify-content:center"><p style="font-size:.68rem;color:#bbb;font-family:'Montserrat',sans-serif">📷 Photo</p></div>
+          <p style="font-family:'Montserrat',sans-serif;font-size:.88rem;font-weight:700;color:#111">Intelligent Cash Box</p>
+          <p style="font-family:'Open Sans',sans-serif;font-size:.78rem;color:#888;margin-top:4px">Smart cash box with real-time tracking</p>
         </div>
       </div>
     </div>
@@ -1049,12 +1104,12 @@ footer{background:#111;padding:44px 40px 0}
 <script>
 /* ── PRODUCT DETAIL ── */
 function showProdDetail(id){
-  ['slots','etg','seating','signage'].forEach(function(p){document.getElementById('prod-detail-'+p).style.display='none';});
+  ['slots','etg','seating','signage','peripherals'].forEach(function(p){document.getElementById('prod-detail-'+p).style.display='none';});
   document.getElementById('prod-detail-'+id).style.display='block';
   document.getElementById('prod-detail-'+id).scrollIntoView({behavior:'smooth'});
 }
 function hideProdDetail(){
-  ['slots','etg','seating','signage'].forEach(function(p){document.getElementById('prod-detail-'+p).style.display='none';});
+  ['slots','etg','seating','signage','peripherals'].forEach(function(p){document.getElementById('prod-detail-'+p).style.display='none';});
   window.scrollTo(0,0);
 }
 
