@@ -1205,7 +1205,7 @@ function openModal(key){
   var specs=p.specs.map(function(s){return '<div class="spec-box"><div class="sk">'+s.k+'</div><div class="sv">'+s.v+'</div></div>';}).join('');
   var tags=p.tags.map(function(t){return '<span class="tag">'+t+'</span>';}).join('');
   var imgHtml=p.img
-    ? '<div style="width:100%;height:380px;background:#f5f5f5;display:flex;align-items:center;justify-content:center;margin-bottom:20px;border-radius:4px;overflow:hidden"><img src="'+p.img+'" style="height:100%;width:100%;object-fit:contain;padding:16px;box-sizing:border-box"></div>'
+    ? '<div style="width:100%;height:380px;background:#fff;display:flex;align-items:center;justify-content:center;margin-bottom:20px;border-radius:4px;overflow:hidden;border:1px solid #e0e0e0"><img src="'+p.img+'" style="height:100%;width:100%;object-fit:contain;padding:16px;box-sizing:border-box"></div>'
     : '<div class="modal-banner"><span class="big">🎰</span><span class="sub">'+p.title+'</span></div>';
   document.getElementById('m-inner').innerHTML=imgHtml+'<div class="modal-desc">'+p.desc+'</div><div class="modal-specs">'+specs+'</div><div class="modal-tags">'+tags+'</div><button class="modal-cta" onclick="closeModal();showContact()">Enquire About This Product →</button>';
   document.getElementById('prod-modal').classList.add('open');
