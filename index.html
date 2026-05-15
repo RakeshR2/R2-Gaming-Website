@@ -804,41 +804,99 @@ footer{background:#111;padding:44px 40px 0}
         <!-- Category grid -->
         <div id="seat-category-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:28px">
           <div style="text-align:center;cursor:pointer" onclick="openCasinoSeries()">
-            <div style="width:100%;border-radius:4px;overflow:hidden;margin-bottom:12px;border:1px solid #e0e0e0"><img src="casinochairs.webp" style="width:100%;height:auto;display:block"></div>
+            <div style="height:200px;background:#f5f5f5;border-radius:4px;overflow:hidden;margin-bottom:12px;border:1px solid #e0e0e0"><img src="casinochairs.webp" style="width:100%;height:100%;object-fit:cover;display:block"></div>
             <p style="font-family:'Montserrat',sans-serif;font-size:.88rem;font-weight:700;color:#111">Casino Chairs</p>
           </div>
-          <div style="text-align:center;cursor:pointer" onclick="openModal('seat-highlimit')">
-            <div style="width:100%;border-radius:4px;overflow:hidden;margin-bottom:12px;border:1px solid #e0e0e0"><img src="highlimits.webp" style="width:100%;height:auto;display:block"></div>
+          <div style="text-align:center;cursor:pointer" onclick="openHighLimitSeries()">
+            <div style="height:200px;background:#f5f5f5;border-radius:4px;overflow:hidden;margin-bottom:12px;border:1px solid #e0e0e0"><img src="highlimits.webp" style="width:100%;height:100%;object-fit:cover;display:block"></div>
             <p style="font-family:'Montserrat',sans-serif;font-size:.88rem;font-weight:700;color:#111">High Limit Chairs</p>
           </div>
-          <div style="text-align:center;cursor:pointer" onclick="openModal('seat-sportsbook')">
-            <div style="width:100%;border-radius:4px;overflow:hidden;margin-bottom:12px;border:1px solid #e0e0e0"><img src="sportsbookseries.webp" style="width:100%;height:auto;display:block"></div>
+          <div style="text-align:center;cursor:pointer" onclick="openSportsbookSeries()">
+            <div style="height:200px;background:#f5f5f5;border-radius:4px;overflow:hidden;margin-bottom:12px;border:1px solid #e0e0e0"><img src="sportsbookseries.webp" style="width:100%;height:100%;object-fit:cover;display:block"></div>
             <p style="font-family:'Montserrat',sans-serif;font-size:.88rem;font-weight:700;color:#111">Sportsbook Chairs</p>
           </div>
-          <div style="text-align:center;cursor:pointer" onclick="openModal('seat-poker')">
-            <div style="width:100%;border-radius:4px;overflow:hidden;margin-bottom:12px;border:1px solid #e0e0e0"><img src="pokerdealerchairs.webp" style="width:100%;height:auto;display:block"></div>
+          <div style="text-align:center;cursor:pointer" onclick="openPokerSeries()">
+            <div style="height:200px;background:#f5f5f5;border-radius:4px;overflow:hidden;margin-bottom:12px;border:1px solid #e0e0e0"><img src="pokerdealerchairs.webp" style="width:100%;height:100%;object-fit:cover;display:block"></div>
             <p style="font-family:'Montserrat',sans-serif;font-size:.88rem;font-weight:700;color:#111">Poker &amp; Dealer Chairs</p>
           </div>
         </div>
 
-        <!-- Casino Chairs series sub-panel (shown when Casino Chairs clicked) -->
+        <!-- Casino Chairs series sub-panel -->
         <div id="seat-casino-series" style="display:none">
           <div style="display:flex;align-items:center;gap:14px;margin-bottom:36px">
             <button onclick="closeCasinoSeries()" style="background:none;border:2px solid #e0e0e0;border-radius:2px;padding:6px 14px;font-family:'Montserrat',sans-serif;font-size:.7rem;font-weight:700;cursor:pointer;color:#888">← Back</button>
             <span style="font-family:'Montserrat',sans-serif;font-size:1rem;font-weight:800;color:#111;text-transform:uppercase;letter-spacing:.5px">Casino Chairs</span>
           </div>
-          <div style="display:grid;grid-template-columns:1fr;gap:28px">
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:28px">
             <div style="text-align:center">
-              <div style="width:100%;border-radius:4px;overflow:hidden;margin-bottom:12px;border:1px solid #e0e0e0"><img src="angela.webp" style="width:100%;height:auto;display:block"></div>
+              <div style="border-radius:4px;overflow:hidden;margin-bottom:12px;border:1px solid #e0e0e0"><img src="angela.webp" style="width:100%;height:auto;display:block"></div>
               <p style="font-family:'Montserrat',sans-serif;font-size:.88rem;font-weight:700;color:#111">Angela Series</p>
             </div>
             <div style="text-align:center">
-              <div style="width:100%;border-radius:4px;overflow:hidden;margin-bottom:12px;border:1px solid #e0e0e0"><img src="troya.webp" style="width:100%;height:auto;display:block"></div>
+              <div style="border-radius:4px;overflow:hidden;margin-bottom:12px;border:1px solid #e0e0e0"><img src="troya.webp" style="width:100%;height:auto;display:block"></div>
               <p style="font-family:'Montserrat',sans-serif;font-size:.88rem;font-weight:700;color:#111">Troya Series</p>
             </div>
             <div style="text-align:center">
-              <div style="width:100%;border-radius:4px;overflow:hidden;margin-bottom:12px;border:1px solid #e0e0e0"><img src="helena.webp" style="width:100%;height:auto;display:block"></div>
+              <div style="border-radius:4px;overflow:hidden;margin-bottom:12px;border:1px solid #e0e0e0"><img src="helena.webp" style="width:100%;height:auto;display:block"></div>
               <p style="font-family:'Montserrat',sans-serif;font-size:.88rem;font-weight:700;color:#111">Helena Series</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- High Limit Chairs series sub-panel -->
+        <div id="seat-highlimit-series" style="display:none">
+          <div style="display:flex;align-items:center;gap:14px;margin-bottom:36px">
+            <button onclick="closeHighLimitSeries()" style="background:none;border:2px solid #e0e0e0;border-radius:2px;padding:6px 14px;font-family:'Montserrat',sans-serif;font-size:.7rem;font-weight:700;cursor:pointer;color:#888">← Back</button>
+            <span style="font-family:'Montserrat',sans-serif;font-size:1rem;font-weight:800;color:#111;text-transform:uppercase;letter-spacing:.5px">High Limit Chairs</span>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:28px">
+            <div style="text-align:center">
+              <div style="border-radius:4px;overflow:hidden;margin-bottom:12px;border:1px solid #e0e0e0"><img src="elexa.webp" style="width:100%;height:auto;display:block"></div>
+              <p style="font-family:'Montserrat',sans-serif;font-size:.88rem;font-weight:700;color:#111">Elexa Series</p>
+            </div>
+            <div style="text-align:center">
+              <div style="border-radius:4px;overflow:hidden;margin-bottom:12px;border:1px solid #e0e0e0"><img src="sochi.webp" style="width:100%;height:auto;display:block"></div>
+              <p style="font-family:'Montserrat',sans-serif;font-size:.88rem;font-weight:700;color:#111">Sochi Series</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sportsbook Chairs series sub-panel -->
+        <div id="seat-sportsbook-series" style="display:none">
+          <div style="display:flex;align-items:center;gap:14px;margin-bottom:36px">
+            <button onclick="closeSportsbookSeries()" style="background:none;border:2px solid #e0e0e0;border-radius:2px;padding:6px 14px;font-family:'Montserrat',sans-serif;font-size:.7rem;font-weight:700;cursor:pointer;color:#888">← Back</button>
+            <span style="font-family:'Montserrat',sans-serif;font-size:1rem;font-weight:800;color:#111;text-transform:uppercase;letter-spacing:.5px">Sportsbook Chairs</span>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:28px">
+            <div style="text-align:center">
+              <div style="border-radius:4px;overflow:hidden;margin-bottom:12px;border:1px solid #e0e0e0"><img src="troy.webp" style="width:100%;height:auto;display:block"></div>
+              <p style="font-family:'Montserrat',sans-serif;font-size:.88rem;font-weight:700;color:#111">Troy Series</p>
+            </div>
+            <div style="text-align:center">
+              <div style="border-radius:4px;overflow:hidden;margin-bottom:12px;border:1px solid #e0e0e0"><img src="cobra.webp" style="width:100%;height:auto;display:block"></div>
+              <p style="font-family:'Montserrat',sans-serif;font-size:.88rem;font-weight:700;color:#111">Cobra Series</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Poker & Dealer Chairs series sub-panel -->
+        <div id="seat-poker-series" style="display:none">
+          <div style="display:flex;align-items:center;gap:14px;margin-bottom:36px">
+            <button onclick="closePokerSeries()" style="background:none;border:2px solid #e0e0e0;border-radius:2px;padding:6px 14px;font-family:'Montserrat',sans-serif;font-size:.7rem;font-weight:700;cursor:pointer;color:#888">← Back</button>
+            <span style="font-family:'Montserrat',sans-serif;font-size:1rem;font-weight:800;color:#111;text-transform:uppercase;letter-spacing:.5px">Poker &amp; Dealer Chairs</span>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:28px">
+            <div style="text-align:center">
+              <div style="border-radius:4px;overflow:hidden;margin-bottom:12px;border:1px solid #e0e0e0"><img src="elexadeluxe.webp" style="width:100%;height:auto;display:block"></div>
+              <p style="font-family:'Montserrat',sans-serif;font-size:.88rem;font-weight:700;color:#111">Elexa Deluxe Series</p>
+            </div>
+            <div style="text-align:center">
+              <div style="border-radius:4px;overflow:hidden;margin-bottom:12px;border:1px solid #e0e0e0"><img src="viper.webp" style="width:100%;height:auto;display:block"></div>
+              <p style="font-family:'Montserrat',sans-serif;font-size:.88rem;font-weight:700;color:#111">Viper Series</p>
+            </div>
+            <div style="text-align:center">
+              <div style="border-radius:4px;overflow:hidden;margin-bottom:12px;border:1px solid #e0e0e0"><img src="texas.webp" style="width:100%;height:auto;display:block"></div>
+              <p style="font-family:'Montserrat',sans-serif;font-size:.88rem;font-weight:700;color:#111">Texas Series</p>
             </div>
           </div>
         </div>
@@ -1144,6 +1202,30 @@ function openCasinoSeries(){
 }
 function closeCasinoSeries(){
   document.getElementById('seat-casino-series').style.display='none';
+  document.getElementById('seat-category-grid').style.display='grid';
+}
+function openHighLimitSeries(){
+  document.getElementById('seat-category-grid').style.display='none';
+  document.getElementById('seat-highlimit-series').style.display='block';
+}
+function closeHighLimitSeries(){
+  document.getElementById('seat-highlimit-series').style.display='none';
+  document.getElementById('seat-category-grid').style.display='grid';
+}
+function openSportsbookSeries(){
+  document.getElementById('seat-category-grid').style.display='none';
+  document.getElementById('seat-sportsbook-series').style.display='block';
+}
+function closeSportsbookSeries(){
+  document.getElementById('seat-sportsbook-series').style.display='none';
+  document.getElementById('seat-category-grid').style.display='grid';
+}
+function openPokerSeries(){
+  document.getElementById('seat-category-grid').style.display='none';
+  document.getElementById('seat-poker-series').style.display='block';
+}
+function closePokerSeries(){
+  document.getElementById('seat-poker-series').style.display='none';
   document.getElementById('seat-category-grid').style.display='grid';
 }
 
