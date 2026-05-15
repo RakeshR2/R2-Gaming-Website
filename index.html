@@ -783,34 +783,66 @@ footer{background:#111;padding:44px 40px 0}
   </div>
 
   <!-- SEATING DETAIL -->
-  <div id="prod-detail-seating" style="display:none;background:#f0f0f0;padding:52px 40px;border-top:3px solid var(--red)">
+  <div id="prod-detail-seating" style="display:none;background:#fff;padding:52px 40px;border-top:3px solid var(--red)">
     <div style="max-width:1100px;margin:0 auto">
       <div style="display:flex;align-items:center;gap:14px;margin-bottom:36px">
         <button onclick="hideProdDetail()" style="background:none;border:2px solid #e0e0e0;border-radius:2px;padding:6px 14px;font-family:'Montserrat',sans-serif;font-size:.7rem;font-weight:700;cursor:pointer;color:#888">← Back</button>
         <h2 style="font-family:'Montserrat',sans-serif;font-size:1.6rem;font-weight:900;color:#111;text-transform:uppercase">Casino Performance Seating</h2>
       </div>
-      <div style="text-align:center;margin-bottom:44px">
-        <img src="patierlogo.webp" alt="Patir Seating" style="height:80px;width:auto;object-fit:contain;margin-bottom:16px">
-        <p style="color:#888;font-size:.9rem;max-width:580px;margin:0 auto;line-height:1.75">Premium ergonomic seating solutions designed specifically for casino environments — built for comfort, durability and performance.</p>
-        <a href="https://patirseating.com/products-overview/" target="_blank" style="display:inline-block;margin-top:14px;padding:8px 20px;border:2px solid var(--red);color:var(--red);border-radius:2px;font-family:'Montserrat',sans-serif;font-size:.7rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none" onmouseover="this.style.background='var(--red)';this.style.color='#fff'" onmouseout="this.style.background='transparent';this.style.color='var(--red)'">View Full Collection at patirseating.com →</a>
+      <!-- Brand Tab -->
+      <div style="display:flex;gap:0;border:1.5px solid #e0e0e0;border-radius:4px;overflow:hidden;max-width:220px;margin-bottom:44px">
+        <div id="tab-seat-patir" onclick="switchSeatBrand('patir')" style="flex:1;padding:13px 20px;text-align:center;font-family:'Montserrat',sans-serif;font-size:.82rem;font-weight:700;cursor:pointer;background:var(--red);color:#fff;transition:all .2s">Patir</div>
       </div>
-      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:20px">
-        <div style="background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.08)">
-          <div style="padding:22px 20px 10px;text-align:center"><h3 style="font-family:'Montserrat',sans-serif;font-size:1.1rem;font-weight:800;color:#111;margin-bottom:6px">Casino Chairs</h3><div style="width:40px;height:3px;background:#c8a84b;margin:0 auto"></div></div>
-          <div style="height:220px;overflow:hidden"><img src="casinochairs.webp" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+      <!-- Patir Brand Panel -->
+      <div id="brand-seat-patir">
+        <div style="text-align:center;margin-bottom:36px">
+          <img src="patierlogo.webp" alt="Patir Seating" style="height:80px;width:auto;object-fit:contain;margin-bottom:16px">
+          <p style="color:#888;font-size:.9rem;max-width:580px;margin:0 auto;line-height:1.75">Premium ergonomic seating solutions designed specifically for casino environments — built for comfort, durability and performance.</p>
+          <a href="https://patirseating.com/products-overview/" target="_blank" style="display:inline-block;margin-top:14px;padding:8px 20px;border:2px solid var(--red);color:var(--red);border-radius:2px;font-family:'Montserrat',sans-serif;font-size:.7rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none" onmouseover="this.style.background='var(--red)';this.style.color='#fff'" onmouseout="this.style.background='transparent';this.style.color='var(--red)'">View Full Collection at patirseating.com →</a>
         </div>
-        <div style="background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.08)">
-          <div style="padding:22px 20px 10px;text-align:center"><h3 style="font-family:'Montserrat',sans-serif;font-size:1.1rem;font-weight:800;color:#111;margin-bottom:6px">High Limit Chairs</h3><div style="width:40px;height:3px;background:#c8a84b;margin:0 auto"></div></div>
-          <div style="height:220px;overflow:hidden"><img src="highlimits.webp" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+
+        <!-- Category grid -->
+        <div id="seat-category-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:28px">
+          <div style="text-align:center;cursor:pointer" onclick="openCasinoSeries()">
+            <div style="height:250px;background:#fff;border-radius:4px;overflow:hidden;margin-bottom:12px;border:1px solid #e0e0e0"><img src="casinochairs.webp" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+            <p style="font-family:'Montserrat',sans-serif;font-size:.88rem;font-weight:700;color:#111">Casino Chairs</p>
+          </div>
+          <div style="text-align:center;cursor:pointer" onclick="openModal('seat-highlimit')">
+            <div style="height:250px;background:#fff;border-radius:4px;overflow:hidden;margin-bottom:12px;border:1px solid #e0e0e0"><img src="highlimits.webp" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+            <p style="font-family:'Montserrat',sans-serif;font-size:.88rem;font-weight:700;color:#111">High Limit Chairs</p>
+          </div>
+          <div style="text-align:center;cursor:pointer" onclick="openModal('seat-sportsbook')">
+            <div style="height:250px;background:#fff;border-radius:4px;overflow:hidden;margin-bottom:12px;border:1px solid #e0e0e0"><img src="sportsbookseries.webp" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+            <p style="font-family:'Montserrat',sans-serif;font-size:.88rem;font-weight:700;color:#111">Sportsbook Chairs</p>
+          </div>
+          <div style="text-align:center;cursor:pointer" onclick="openModal('seat-poker')">
+            <div style="height:250px;background:#fff;border-radius:4px;overflow:hidden;margin-bottom:12px;border:1px solid #e0e0e0"><img src="pokerdealerchairs.webp" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+            <p style="font-family:'Montserrat',sans-serif;font-size:.88rem;font-weight:700;color:#111">Poker &amp; Dealer Chairs</p>
+          </div>
         </div>
-        <div style="background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.08)">
-          <div style="padding:22px 20px 10px;text-align:center"><h3 style="font-family:'Montserrat',sans-serif;font-size:1.1rem;font-weight:800;color:#111;margin-bottom:6px">Sportsbook Chairs</h3><div style="width:40px;height:3px;background:#c8a84b;margin:0 auto"></div></div>
-          <div style="height:220px;overflow:hidden"><img src="sportsbookseries.webp" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+
+        <!-- Casino Chairs series sub-panel (shown when Casino Chairs clicked) -->
+        <div id="seat-casino-series" style="display:none">
+          <div style="display:flex;align-items:center;gap:14px;margin-bottom:36px">
+            <button onclick="closeCasinoSeries()" style="background:none;border:2px solid #e0e0e0;border-radius:2px;padding:6px 14px;font-family:'Montserrat',sans-serif;font-size:.7rem;font-weight:700;cursor:pointer;color:#888">← Back</button>
+            <span style="font-family:'Montserrat',sans-serif;font-size:1rem;font-weight:800;color:#111;text-transform:uppercase;letter-spacing:.5px">Casino Chairs</span>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:28px">
+            <div style="text-align:center">
+              <div style="height:250px;background:#fff;border-radius:4px;overflow:hidden;margin-bottom:12px;border:1px solid #e0e0e0"><img src="angela.webp" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+              <p style="font-family:'Montserrat',sans-serif;font-size:.88rem;font-weight:700;color:#111">Angela Series</p>
+            </div>
+            <div style="text-align:center">
+              <div style="height:250px;background:#fff;border-radius:4px;overflow:hidden;margin-bottom:12px;border:1px solid #e0e0e0"><img src="troya.webp" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+              <p style="font-family:'Montserrat',sans-serif;font-size:.88rem;font-weight:700;color:#111">Troya Series</p>
+            </div>
+            <div style="text-align:center">
+              <div style="height:250px;background:#fff;border-radius:4px;overflow:hidden;margin-bottom:12px;border:1px solid #e0e0e0"><img src="helena.webp" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+              <p style="font-family:'Montserrat',sans-serif;font-size:.88rem;font-weight:700;color:#111">Helena Series</p>
+            </div>
+          </div>
         </div>
-        <div style="background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.08)">
-          <div style="padding:22px 20px 10px;text-align:center"><h3 style="font-family:'Montserrat',sans-serif;font-size:1.1rem;font-weight:800;color:#111;margin-bottom:6px">Poker &amp; Dealer Chairs</h3><div style="width:40px;height:3px;background:#c8a84b;margin:0 auto"></div></div>
-          <div style="height:220px;overflow:hidden"><img src="pokerdealerchairs.webp" style="width:100%;height:100%;object-fit:cover;display:block"></div>
-        </div>
+
       </div>
     </div>
   </div>
@@ -1094,6 +1126,27 @@ function switchBrand(brand){
 }
 document.addEventListener('DOMContentLoaded',function(){switchBrand('segasammy');});
 
+/* ── SEATING BRAND TABS ── */
+function switchSeatBrand(brand){
+  document.querySelectorAll('[id^="brand-seat-"]').forEach(function(el){el.style.display='none';});
+  document.querySelectorAll('[id^="tab-seat-"]').forEach(function(el){el.style.background='#fff';el.style.color='#111';});
+  var panel=document.getElementById('brand-seat-'+brand);
+  var tab=document.getElementById('tab-seat-'+brand);
+  if(panel)panel.style.display='block';
+  if(tab){tab.style.background='var(--red)';tab.style.color='#fff';}
+}
+document.addEventListener('DOMContentLoaded',function(){switchSeatBrand('patir');});
+
+/* ── CASINO CHAIRS SERIES ── */
+function openCasinoSeries(){
+  document.getElementById('seat-category-grid').style.display='none';
+  document.getElementById('seat-casino-series').style.display='block';
+}
+function closeCasinoSeries(){
+  document.getElementById('seat-casino-series').style.display='none';
+  document.getElementById('seat-category-grid').style.display='grid';
+}
+
 /* ── PARTS CART ── */
 var partsCart=[];
 var ccPartsIndex=[];
@@ -1303,7 +1356,11 @@ var PRODS={
   'bluewaved':{oem:'JCM Global',img:'bluewavedx.jpg',title:'BlueWaveDX',desc:'BlueWaveDX is JCM\'s wireless data management system providing real-time monitoring and control of validators and printers across the gaming floor.',specs:[{k:'Type',v:'Data Management'},{k:'Connectivity',v:'Wireless'},{k:'Application',v:'Floor Monitoring'},{k:'Manufacturer',v:'JCM Global'},{k:'Market',v:'All Provinces'}],tags:['Wireless','Real-Time','Floor Management']},
   'couponxpress':{oem:'JCM Global',img:'CouponXpress (2).png',title:'CouponXpress Printer',desc:'The CouponXpress Printer is a compact, high-performance printer for coupons and tickets. Ideal for promotions, rewards programs and loyalty applications in casino environments.',specs:[{k:'Type',v:'Coupon Printer'},{k:'Application',v:'Promotions & Loyalty'},{k:'Form Factor',v:'Compact'},{k:'Manufacturer',v:'JCM Global'},{k:'Market',v:'All Provinces'}],tags:['Coupon Printing','Compact','Promotions']},
   'fuzion':{oem:'JCM Global',img:'FUZION.jpg',title:'FUZION Technology',desc:'FUZION Technology is JCM\'s intelligent cash management system combining bill validation and cash handling in one integrated solution for streamlined casino operations.',specs:[{k:'Type',v:'Cash Management'},{k:'Integration',v:'Bill Validation + Cash'},{k:'Application',v:'Casino Operations'},{k:'Manufacturer',v:'JCM Global'},{k:'Market',v:'All Provinces'}],tags:['Cash Management','Integrated','Smart System']},
-  'cashbox':{oem:'JCM Global',img:'ICB 3.png',title:'Intelligent Cash Box',desc:'The Intelligent Cash Box from JCM Global provides smart cash storage with real-time tracking and reporting. Designed for secure, efficient cash management on the gaming floor.',specs:[{k:'Type',v:'Cash Box'},{k:'Features',v:'Real-Time Tracking'},{k:'Security',v:'Intelligent Monitoring'},{k:'Manufacturer',v:'JCM Global'},{k:'Market',v:'All Provinces'}],tags:['Cash Box','Smart Tracking','Secure']}
+  'cashbox':{oem:'JCM Global',img:'ICB 3.png',title:'Intelligent Cash Box',desc:'The Intelligent Cash Box from JCM Global provides smart cash storage with real-time tracking and reporting. Designed for secure, efficient cash management on the gaming floor.',specs:[{k:'Type',v:'Cash Box'},{k:'Features',v:'Real-Time Tracking'},{k:'Security',v:'Intelligent Monitoring'},{k:'Manufacturer',v:'JCM Global'},{k:'Market',v:'All Provinces'}],tags:['Cash Box','Smart Tracking','Secure']},
+  'seat-casino':{oem:'Patir Seating',img:'casinochairs.webp',title:'Casino Chairs',desc:'Patir\'s Casino Chair collection is engineered specifically for the demands of the casino floor. Available in three distinct series — Angela, Troya, and Helena — each offering a unique balance of ergonomic support, premium upholstery, and long-lasting durability. Customisable in a wide range of fabrics, leathers, and finishes to match any casino interior.',specs:[{k:'Series',v:'Angela · Troya · Helena'},{k:'Application',v:'Casino Floor'},{k:'Upholstery',v:'Custom Fabric / Leather'},{k:'Manufacturer',v:'Patir Seating'},{k:'Market',v:'All Provinces'}],tags:['Angela Series','Troya Series','Helena Series','Casino Floor','Custom Finish']},
+  'seat-highlimit':{oem:'Patir Seating',img:'highlimits.webp',title:'High Limit Chairs',desc:'Patir\'s High Limit Chair collection delivers a premium VIP experience for high-stakes gaming areas. Crafted with luxurious materials, superior cushioning, and refined detailing to complement the exclusivity of high limit rooms.',specs:[{k:'Application',v:'High Limit / VIP Rooms'},{k:'Upholstery',v:'Premium Leather / Fabric'},{k:'Design',v:'Luxury Refined'},{k:'Manufacturer',v:'Patir Seating'},{k:'Market',v:'All Provinces'}],tags:['High Limit','VIP','Premium Leather','Luxury']},
+  'seat-sportsbook':{oem:'Patir Seating',img:'sportsbookseries.webp',title:'Sportsbook Chairs',desc:'Patir\'s Sportsbook Series is purpose-built for sportsbook and race-and-sports-book environments. Designed for extended comfort during long viewing sessions, with integrated tablet arms, USB charging options, and wide, supportive frames.',specs:[{k:'Application',v:'Sportsbook / Race Book'},{k:'Features',v:'Tablet Arm · USB Charging'},{k:'Comfort',v:'Extended Session Design'},{k:'Manufacturer',v:'Patir Seating'},{k:'Market',v:'All Provinces'}],tags:['Sportsbook','Extended Comfort','USB Charging','Wide Frame']},
+  'seat-poker':{oem:'Patir Seating',img:'pokerdealerchairs.webp',title:'Poker & Dealer Chairs',desc:'Patir\'s Poker and Dealer Chair range is designed for the unique demands of table games. Player chairs offer low-profile elegance and comfort for long sessions, while dealer chairs provide ergonomic back support and height adjustability for staff working extended shifts.',specs:[{k:'Application',v:'Poker Tables · Dealer Positions'},{k:'Player Chair',v:'Low Profile · Long Session Comfort'},{k:'Dealer Chair',v:'Height Adjustable · Ergonomic Back'},{k:'Manufacturer',v:'Patir Seating'},{k:'Market',v:'All Provinces'}],tags:['Poker','Dealer Chair','Table Games','Ergonomic']}
 };
 function openModal(key){
   var p=PRODS[key];if(!p)return;
