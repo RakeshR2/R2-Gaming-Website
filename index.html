@@ -190,7 +190,7 @@ nav a.active{color:var(--red);border-bottom-color:var(--red)}
 #cc-count{font-family:'Montserrat',sans-serif;font-size:.64rem;font-weight:600;color:rgba(255,255,255,.3);letter-spacing:1px;text-transform:uppercase}
 .cc-filters{padding:11px 18px;background:#f5f5f5;border-bottom:1px solid #e0e0e0;display:flex;gap:9px;flex-wrap:wrap;align-items:center}
 .cc-select{height:34px;padding:0 28px 0 11px;border:1.5px solid #e0e0e0;border-radius:2px;font-family:'Montserrat',sans-serif;font-size:.68rem;font-weight:700;color:#222;background:#fff;outline:none;cursor:pointer;appearance:none;min-width:190px;background-image:url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2210%22 height=%2210%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23c8102e%22 stroke-width=%222.5%22%3E%3Cpolyline points=%226 9 12 15 18 9%22/%3E%3C/svg%3E');background-repeat:no-repeat;background-position:right 9px center;text-transform:uppercase;letter-spacing:.5px}
-.cc-search-wrap{display:none;position:relative;flex:1;min-width:170px;max-width:340px}
+.cc-search-wrap{display:flex;position:relative;flex:1;min-width:170px;max-width:340px}
 .cc-search-wrap svg{position:absolute;left:8px;top:50%;transform:translateY(-50%);width:12px;height:12px;stroke:#bbb;fill:none;stroke-width:2;stroke-linecap:round;pointer-events:none}
 .cc-search{width:100%;height:34px;padding:0 11px 0 28px;border:1.5px solid #e0e0e0;border-radius:2px;font-size:.8rem;font-family:'Open Sans',sans-serif;background:#fff;color:#222;outline:none}
 .cc-clear{display:none;height:34px;padding:0 13px;border:1.5px solid #e0e0e0;border-radius:2px;background:#fff;font-family:'Montserrat',sans-serif;font-size:.64rem;font-weight:700;color:#bbb;cursor:pointer;text-transform:uppercase;letter-spacing:.5px}
@@ -972,7 +972,7 @@ footer{background:#111;padding:44px 40px 0}
           <option value="ags">AGS</option>
           <option value="aruze">Aruze</option>
         </select>
-        <div class="cc-search-wrap" id="cc-sw">
+        <div class="cc-search-wrap" id="cc-sw" style="display:flex">
           <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/></svg>
           <input class="cc-search" id="cc-search" type="text" placeholder="Search part name or number…" oninput="ccSearch()">
         </div>
@@ -1432,12 +1432,12 @@ function ccSelectMfg(){
   var cnt=document.getElementById('cc-count');
   if(!mfg){
     prompt.style.display='block';results.style.display='none';
-    sw.style.display='none';clr.style.display='none';
+    clr.style.display='none';
     cnt.textContent='Select a manufacturer to view parts';return;
   }
   var d=CC_DATA[mfg];if(!d)return;
   prompt.style.display='none';
-  sw.style.display='flex';clr.style.display='block';
+  clr.style.display='block';
   document.getElementById('cc-search').value='';
   var cabs=Object.keys(d.cabs);
   var total=0;cabs.forEach(function(c){total+=d.cabs[c].length;});
@@ -1476,20 +1476,65 @@ function ccSelectMfg(){
 
 function ccSearch(){
   var q=(document.getElementById('cc-search').value||'').trim().toLowerCase();
+  if(!q){
+    document.querySelectorAll('.cc-row').forEach(function(r){r.style.display='';});
+    document.querySelectorAll('#cc-results>div').forEach(function(sec){sec.style.display='';});
+    return;
+  }
+  var mfg=document.getElementById('cc-mfg').value;
+  if(!mfg){
+    var allMfgs=Object.keys(CC_DATA);
+    var html='';
+    allMfgs.forEach(function(m){
+      var d=CC_DATA[m];
+      Object.keys(d.cabs).forEach(function(cab){
+        d.cabs[cab].forEach(function(p){
+          var s=(p.part+' '+p.pn+' '+p.detail+' '+cab+' '+d.label).toLowerCase();
+          if(s.indexOf(q)!==-1){
+            var idx=ccPartsIndex.length;
+            ccPartsIndex.push({part:p.part,pn:p.pn,mfg:d.label,cab:cab});
+            html+='<table class="cc-table" style="border-bottom:1px solid #f0f0f0"><tbody>';
+            html+='<tr class="cc-row"><td style="font-weight:600;color:#111">'+p.part+'</td>';
+            html+='<td><span class="cc-pn">'+p.pn+'</span></td>';
+            html+='<td style="color:#999;font-size:.78rem">'+p.detail+' <span style="color:#bbb">— '+d.label+', '+cab+'</span></td>';
+            html+='<td><button class="cc-req" onclick="addToCartByIndex('+idx+')">+ Add to Cart</button></td>';
+            html+='</tr></tbody></table>';
+          }
+        });
+      });
+    });
+    var results=document.getElementById('cc-results');
+    var prompt=document.getElementById('cc-prompt');
+    if(html){
+      results.innerHTML='<div style="border-bottom:1px solid #e0e0e0"><div class="cc-cab-hdr"><h4>Search Results</h4><span>across all manufacturers</span></div><div class="cc-cab-body open">'+html+'</div></div>';
+      results.style.display='block';
+      prompt.style.display='none';
+    } else {
+      results.innerHTML='<div style="padding:28px;text-align:center;color:#bbb;font-family:\'Montserrat\',sans-serif;font-size:.72rem;text-transform:uppercase;letter-spacing:1px">No parts found for "'+q+'"</div>';
+      results.style.display='block';
+      prompt.style.display='none';
+    }
+    document.getElementById('cc-count').textContent='Searching all manufacturers…';
+    return;
+  }
   document.querySelectorAll('.cc-row').forEach(function(r){
-    r.style.display=(!q||(r.getAttribute('data-s')||'').indexOf(q)!==-1)?'':'none';
+    r.style.display=((r.getAttribute('data-s')||'').indexOf(q)!==-1)?'':'none';
   });
   document.querySelectorAll('#cc-results>div').forEach(function(sec){
     var vis=Array.from(sec.querySelectorAll('.cc-row')).some(function(r){return r.style.display!=='none';});
     sec.style.display=vis?'':'none';
-    if(vis&&q){var b=sec.querySelector('.cc-cab-body');if(b)b.classList.add('open');}
+    if(vis){var b=sec.querySelector('.cc-cab-body');if(b)b.classList.add('open');}
   });
 }
 
 function ccClear(){
   document.getElementById('cc-mfg').value='';
   document.getElementById('cc-search').value='';
-  ccSelectMfg();
+  document.getElementById('cc-results').style.display='none';
+  document.getElementById('cc-results').innerHTML='';
+  document.getElementById('cc-prompt').style.display='block';
+  document.getElementById('cc-clear').style.display='none';
+  document.getElementById('cc-count').textContent='Select a manufacturer to view parts';
 }
 
 function ccOpenReq(part,pn,mfg,cab){
